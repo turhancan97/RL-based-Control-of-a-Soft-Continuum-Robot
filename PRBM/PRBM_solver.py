@@ -1,14 +1,4 @@
-
-# This code implements different approaches to model the kinematics/statics
-# of a two segment tendon driven continuum robot and is part of the following
-# publication:
-
-# How to model tendon-driven continuum robots and benchmark modelling performance
-# Priyanka Rao, Quentin Peyron, Sven Lilge, Jessica Burgner-Kahrs
-# frontiers in Robotics and AI 2021
-# DOI: 10.3389/frobt.2020.630245
-
-# Copyright (C) 2021 Continuum Robotics Laboratory, University of Toronto Mississauga
+from cross_product import cross_product
 
 # function [var,exitflag,res] = prbm_solver(n,nrb,gamma,l,F,p_tendon,m_disk,m_bb,E,I,G,Ftex,Mtex,var0)
 
@@ -18,7 +8,7 @@ def prbm_solver(n,nrb,gamma,l,F,p_tendon,m_disk,m_bb,E,I,G,Ftex,Mtex,var0):
     #options1 = optimset('Display','iter','TolFun',1e-6,'MaxFunEvals',1500,'TolX',1e-6,'Algorithm','trust-region-dogleg'); 
 
     #tic
-    var,infodict = fsolve(optim_f,var0);
+    #var,infodict = fsolve(optim_f,var0);
     #toc
 
 ## solver
@@ -26,14 +16,15 @@ def prbm_solver(n,nrb,gamma,l,F,p_tendon,m_disk,m_bb,E,I,G,Ftex,Mtex,var0):
     #function [res] = optim_f(var)
     def optim_f(var):
         
-        res=zeros(n_disk*(nrb+1),1); #nrb-1 revolute joints, 1 bending plane angle and 1 torsion angle
-        F_prev = zeros(3,1);
-        M_prev = zeros(3,1);
-        for ss_i=n_disk:-1:1 #iterating over each subsegment
+        res=np.zeros((n_disk*(nrb+1),1)); #nrb-1 revolute joints, 1 bending plane angle and 1 torsion angle
+        F_prev = np.zeros((3,1));
+        M_prev = np.zeros((3,1));
+        for ss_i in range(n_disk-1,-1,-1) #iterating over each subsegment
             
             # Kinematics
             [T_i,Trb] = trans_mat_prbm(var,nrb,gamma,l,ss_i,ss_i-1); #returns transformation matrix from i to i-1
-            theta=var((nrb+1)*ss_i-nrb:(nrb+1)*ss_i-nrb+2);
+            
+            theta=var[0][((nrb+1)*(ss_i+1)-nrb-1):(nrb+1)*(ss_i+1)-nrb+2];
             phi = var((nrb+1)*ss_i-nrb+3);
             ni = [cos(phi+pi/2);sin(phi+pi/2);0];
             epsi = var((nrb+1)*ss_i-nrb+4);
