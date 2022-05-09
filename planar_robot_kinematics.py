@@ -120,9 +120,6 @@ T2_cc = coupletransformations(T2,T1_cc);
 T3 = trans_mat_cc(kappa3, l3);
 T3_cc = coupletransformations(T3,T2_cc);
 
-J = jacobian_matrix(delta_kappa, kappa1, kappa2, kappa3, l1, l2, l3)
-print(J)
-
 # Plot the trunk with three sections and point the section seperation
 plt.scatter(0.000001,0,linewidths=5,color = 'black',label="Tip of each Section")
 plt.scatter(T1_cc[0,3],T1_cc[1,3],linewidths=5,color = 'black')
@@ -133,3 +130,41 @@ plt.title("2D Continuum Robot")
 plt.xlabel("X - Position")
 plt.ylabel("Y - Position")
 plt.show()
+
+### Compare the numerical differentation and partial derivative 
+# parameters
+kappa1 = 1.3; # 1/m
+l1 = 0.1000; # metre
+
+kappa2 = 1.1; # 1/m
+l2 = 0.1000; # metre
+
+kappa3 = 1.2; # 1/m
+l3 = 0.1000; # metre
+
+ 
+T1_cc = trans_mat_cc(kappa1,l1);
+
+x1 = T1_cc[0,3]
+y1 = T1_cc[1,3]
+
+T2_cc = trans_mat_cc(kappa2,l2);
+
+x2 = T2_cc[0,3]
+y2 = T2_cc[1,3]
+
+derx1 = (x1-x2)/0.2
+dery1 = (y1-y2)/0.2
+
+
+# By derrivative
+
+T1_cc_der = trans_mat_cc_der(kappa3,l3)
+
+
+derx2 = T1_cc_der[0,3]
+dery2 = T1_cc_der[1,3]
+
+
+J = jacobian_matrix(delta_kappa, kappa1, kappa2, kappa3, l1, l2, l3) # To compare transformation matrices (three_section_planar_robot vs trans_mat_cc)
+print(J)
