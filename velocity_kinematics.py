@@ -1,8 +1,9 @@
 import numpy as np
-import matplotlib.pyplot as plt
+#import time
+#import quaternion
 
 
-# Homogeneous transformation matrix
+# Homogeneous transformation matrix # TODO -> Add if else to figure out when any kappa = 0
 def three_section_planar_robot(kappa1, kappa2, kappa3, l):
 #Mapping from configuration parameters to task space for the tip of the continuum robot
 #
@@ -26,6 +27,8 @@ def three_section_planar_robot(kappa1, kappa2, kappa3, l):
     T = np.reshape(T,(4,4),order='F');
     return T
 
+
+# Calculation of jacobian matrix by numerical differentation # TODO -> figure out singularity
 def jacobian_matrix(delta_kappa, kappa1, kappa2, kappa3, l):
     
     J11 = (three_section_planar_robot(kappa1+delta_kappa,kappa2,kappa3,l)[0,3] - three_section_planar_robot(kappa1-delta_kappa,kappa2,kappa3,l))[0,3] / (2*delta_kappa);
@@ -42,51 +45,7 @@ def jacobian_matrix(delta_kappa, kappa1, kappa2, kappa3, l):
 
 
 
-# parameters
-delta_kappa = 0.1; 
-kappa1 = 1.7035; # 1/m
-l1 = 0.1000; # metre
-kappa2 = 1.0000; # 1/m
-l2 = 0.1000; # metre
-kappa3 = 2.0000; # 1/m
-l3 = 0.1000; # metre
 
-l = [l1, l2, l3] # Each section's length
-
-J = jacobian_matrix(delta_kappa, kappa1, kappa2, kappa3, l)
-
-# # parameters
-# kappa1 = 1.3; # 1/m
-# l1 = 0.1000; # metre
-
-# kappa2 = 1.1; # 1/m
-# l2 = 0.1000; # metre
-
-# kappa3 = 1.2; # 1/m
-# l3 = 0.1000; # metre
-
- 
-# T1_cc = trans_mat_cc(kappa1,l1);
-
-# x1 = T1_cc[0,3]
-# y1 = T1_cc[1,3]
-
-# T2_cc = trans_mat_cc(kappa2,l2);
-
-# x2 = T2_cc[0,3]
-# y2 = T2_cc[1,3]
-
-# derx1 = (x1-x2)/0.2
-# dery1 = (y1-y2)/0.2
-
-
-# # By derrivative
-
-# T1_cc_der = trans_mat_cc_der(kappa3,l3)
-
-
-# derx2 = T1_cc_der[0,3]
-# dery2 = T1_cc_der[1,3]
 
 
 
