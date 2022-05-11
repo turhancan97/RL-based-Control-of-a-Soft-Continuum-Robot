@@ -36,19 +36,19 @@ x_pos = np.zeros((2, time_stamp))
 x_vel = np.zeros((2, time_stamp))
 
 
-# while i <= time_stamp-1:
-#     x_pos[:,i] = tip_point
-#     x_vel[:,i] = J @ vel_kappa
-#     tip_point += x_vel[:,i] * dt
-#     plt.scatter(x_pos[0][i],x_pos[1][i],linewidths=2.5,color = 'blue')
-#     plt.pause(0.005)
-#     kappa1 += 0.0001
-#     kappa2 += 0.01
-#     kappa3 += 0.1
-#     J = jacobian_matrix(delta_kappa, kappa1, kappa2, kappa3, l)
-#     i += 1
-#     print(x_pos)
-#     #time.sleep(0.1)
+while i <= time_stamp-1:
+    x_pos[:,i] = tip_point
+    x_vel[:,i] = J @ vel_kappa
+    tip_point += x_vel[:,i] * dt
+    plt.scatter(x_pos[0][i],x_pos[1][i],linewidths=2.5,color = 'blue')
+    plt.pause(0.005)
+    kappa1 += 0.0001
+    kappa2 += 0.01
+    kappa3 += 0.1
+    J = jacobian_matrix(delta_kappa, kappa1, kappa2, kappa3, l)
+    i += 1
+    print(x_pos)
+    #time.sleep(0.1)
 
 
 kappa1 = 2.0; # 1/m
@@ -69,7 +69,7 @@ for j in range(6):
     kappa2 = kappa2 + 0.1; # 1/m
     kappa3 = kappa3 + 1; # 1/m
 
-# plt.scatter(x_pos[0][i-1],x_pos[1][i-1],linewidths=2.5,color = 'blue',label = "Velocity Kinematics Motion")
+plt.scatter(x_pos[0][i-1],x_pos[1][i-1],linewidths=2.5,color = 'blue',label = "Velocity Kinematics Motion")
 plt.scatter(tip_point[0],tip_point[1],linewidths=5,color = 'black',label="Actual Motion")
 plt.legend(loc="best")
 plt.title("2D Motion of Tip of the Continuum Robot")
