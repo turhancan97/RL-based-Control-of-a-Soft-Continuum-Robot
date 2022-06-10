@@ -147,10 +147,3 @@ def coupletransformations(T,T_tip):
         p = np.matmul(T_tip,(np.reshape(T[k,:],(4,4),order='F')))
         Tc[k,:] = np.reshape(p,(16,),order='F');
     return Tc
-
-
-
-
-
-
-
