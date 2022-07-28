@@ -29,7 +29,8 @@ print("Min Value of Action ->  {}".format(lower_bound))
 # %%
 class OUActionNoise:
     """
-    Class docstrings go here. # TODO: add nice description for the noise.
+    It creates a noise process that is correlated with the previous noise value 
+    # TODO: add nice description for the noise.
     """
     def __init__(self, mean, std_deviation, theta=0.15, dt=1e-2, x_initial=None):
         self.theta = theta
