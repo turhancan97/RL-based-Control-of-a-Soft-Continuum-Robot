@@ -268,7 +268,7 @@ actor_lr = 1e-4         # learning rate of the actor
 critic_optimizer = tf.keras.optimizers.Adam(critic_lr)
 actor_optimizer = tf.keras.optimizers.Adam(actor_lr)
 
-total_episodes = 250
+total_episodes = 500
 # Discount factor for future rewards
 gamma = 0.99            # discount factor
 # Used to update target networks
@@ -370,10 +370,15 @@ target_critic.save_weights("continuum_target_critic.h5")
 
 # %% Evaluate
 
-actor_model.load_weights("Weights\continuum_actor.h5")
-critic_model.load_weights("Weights\continuum_critic.h5")
-target_actor.load_weights("Weights\continuum_target_actor.h5")
-target_critic.load_weights("Weights\continuum_target_critic.h5")
+# actor_model.load_weights("Weights\continuum_actor.h5")
+# critic_model.load_weights("Weights\continuum_critic.h5")
+# target_actor.load_weights("Weights\continuum_target_actor.h5")
+# target_critic.load_weights("Weights\continuum_target_critic.h5")
+
+actor_model.load_weights("continuum_actor.h5")
+critic_model.load_weights("continuum_critic.h5")
+target_actor.load_weights("continuum_target_actor.h5")
+target_critic.load_weights("continuum_target_critic.h5")
 
 state = env.reset() # generate random starting point for the robot and random target point.
 env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
