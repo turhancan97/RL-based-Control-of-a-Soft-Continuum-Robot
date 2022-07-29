@@ -168,14 +168,14 @@ def get_actor():
     last_init = tf.random_uniform_initializer(minval=-0.003, maxval=0.003) # minval=-0.003, maxval=0.003
 
     inputs = layers.Input(shape=(num_states,))
-    inputs = layers.Dropout(0.2)(inputs) # delete
-    inputs = layers.BatchNormalization()(inputs)  # delete
+    # inputs = layers.Dropout(0.2)(inputs) # delete
+    # inputs = layers.BatchNormalization()(inputs)  # delete
     out = layers.Dense(512, activation="relu")(inputs) # 256
-    out = layers.BatchNormalization()(out)  # delete
+    # out = layers.BatchNormalization()(out)  # delete
     out = layers.Dense(512, activation="relu")(out) # 256
-    out = layers.BatchNormalization()(out)  # delete
+    # out = layers.BatchNormalization()(out)  # delete
     out = layers.Dense(256, activation="relu")(out) # delete
-    out = layers.BatchNormalization()(out)  # delete
+    # out = layers.BatchNormalization()(out)  # delete
     out = layers.Dense(256, activation="relu")(out) # delete
     # out = layers.BatchNormalization()(out) # delete
     # out = layers.Dense(256, activation="relu")(out) # delete
@@ -193,33 +193,33 @@ def get_actor():
 def get_critic():
     # State as input
     state_input = layers.Input(shape=(num_states))
-    state_input = layers.Dropout(0.2)(state_input) # delete
-    state_input = layers.BatchNormalization()(state_input) # delete
+    # state_input = layers.Dropout(0.2)(state_input) # delete
+    # state_input = layers.BatchNormalization()(state_input) # delete
     state_out = layers.Dense(32, activation="relu")(state_input) # 16
-    state_out = layers.BatchNormalization()(state_out) # delete
+    # state_out = layers.BatchNormalization()(state_out) # delete
     state_out = layers.Dense(64, activation="relu")(state_out) # 32
-    state_out = layers.BatchNormalization()(state_out) # delete
+    # state_out = layers.BatchNormalization()(state_out) # delete
     state_out = layers.Dense(32, activation="relu")(state_out) # delete
 
     # Action as input
     action_input = layers.Input(shape=(num_actions))
-    action_input = layers.Dropout(0.2)(action_input) # delete
-    action_input = layers.BatchNormalization()(action_input) # delete
+    # action_input = layers.Dropout(0.2)(action_input) # delete
+    # action_input = layers.BatchNormalization()(action_input) # delete
     action_out = layers.Dense(128, activation="relu")(action_input) # 32
-    action_out = layers.BatchNormalization()(action_out) # delete
+    # action_out = layers.BatchNormalization()(action_out) # delete
     action_out = layers.Dense(128, activation="relu")(action_out) # delete
-    action_out = layers.BatchNormalization()(action_out) # delete
+    # action_out = layers.BatchNormalization()(action_out) # delete
     action_out = layers.Dense(64, activation="relu")(action_out) # delete
     
     # Both are passed through seperate layer before concatenating
     concat = layers.Concatenate()([state_out, action_out])
 
     out = layers.Dense(512, activation="relu")(concat) # 256
-    out = layers.BatchNormalization()(out) # delete
+    # out = layers.BatchNormalization()(out) # delete
     out = layers.Dense(256, activation="relu")(out) # 256
-    out = layers.BatchNormalization()(out)  # delete
+    # out = layers.BatchNormalization()(out)  # delete
     out = layers.Dense(128, activation="relu")(out) # delete
-    out = layers.BatchNormalization()(out) # delete
+    # out = layers.BatchNormalization()(out) # delete
     # out = layers.Dense(256, activation="relu")(out) # delete
     # out = layers.BatchNormalization()(out)  # delete
     outputs = layers.Dense(1)(out) # outputs the Q values (layers.Dense(1)(out))
@@ -230,12 +230,13 @@ def get_critic():
     return model
 
 
-def policy(state, noise_object):
+def policy(state, noise_object,add_noise=True):
     sampled_actions = tf.squeeze(actor_model(state))
     noise = noise_object() # change to 0 to delete noise
     # Adding noise to action
-    sampled_actions = sampled_actions.numpy() + noise
-
+    if add_noise:
+        sampled_actions = sampled_actions.numpy() + noise
+    
     # We make sure action is within bounds
     legal_action = np.clip(sampled_actions, lower_bound, upper_bound)
 
@@ -368,10 +369,11 @@ target_actor.save_weights("continuum_target_actor.h5")
 target_critic.save_weights("continuum_target_critic.h5")
 
 # %% Evaluate
-actor_model.load_weights("continuum_actor.h5")
-critic_model.load_weights("continuum_critic.h5")
-target_actor.load_weights("continuum_target_actor.h5")
-target_critic.load_weights("continuum_target_critic.h5")
+
+actor_model.load_weights("Weights\continuum_actor.h5")
+critic_model.load_weights("Weights\continuum_critic.h5")
+target_actor.load_weights("Weights\continuum_target_actor.h5")
+target_critic.load_weights("Weights\continuum_target_critic.h5")
 
 state = env.reset() # generate random starting point for the robot and random target point.
 env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
@@ -379,10 +381,10 @@ x_pos = []
 y_pos = []
 i = 0
 # while True:
-for i in range(2500):
+for i in range(750):
 
     tf_prev_state = tf.expand_dims(tf.convert_to_tensor(state), 0)
-    action = policy(tf_prev_state, ou_noise) # policyde noise'i evaluate ederken 0 yap
+    action = policy(tf_prev_state, ou_noise, add_noise = False) # policyde noise'i evaluate ederken 0 yap
     # Recieve state and reward from environment.
     # state, reward, done, info = env.step_1(action) # reward is -1 or 0 or 1
     state, reward, done, info = env.step_2(action[0]) # reward is -(e^2)
@@ -405,7 +407,8 @@ for i in range(2500):
     # End this episode when `done` is True
     if done:
         break
-    
+
+time.sleep(2)
 # %% Visualization
 env.render(x_pos,y_pos)
 plt.title("Trajectory of the Continuum Robot")
