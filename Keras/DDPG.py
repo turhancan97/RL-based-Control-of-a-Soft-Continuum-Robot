@@ -1,6 +1,7 @@
 import sys
 sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Reinforcement Learning')
 sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Functions')
+sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Tests')
 
 # import gym
 import tensorflow as tf
@@ -243,8 +244,6 @@ def policy(state, noise_object,add_noise=True):
     return [np.squeeze(legal_action)]
 
 # %%
-std_dev = 0.2
-ou_noise = OUActionNoise(mean=np.zeros(num_actions), std_deviation=float(std_dev) * np.ones(num_actions))
 
 actor_model = get_actor()
 critic_model = get_critic()
@@ -276,7 +275,7 @@ tau = 1e-3              # for soft update of target parameters
 
 buffer = Buffer(int(1e6), 128) # Buffer(50000, 64)
 
-# %%
+# %% Train or Evaluate
 # To store reward history of each episode
 ep_reward_list = []
 # To store average reward history of last few episodes
@@ -284,135 +283,140 @@ avg_reward_list = []
 counter = 0
 avg_reward = 0
 
-for ep in range(total_episodes):
+TRAIN = False
+
+if TRAIN:
+    std_dev = 0.2
+    ou_noise = OUActionNoise(mean=np.zeros(num_actions), std_deviation=float(std_dev) * np.ones(num_actions))
     
-    # prev_state = env.reset_known() # starting position is always same
-    prev_state = env.reset() # starting postion is random (within task space)
-    # high = np.array([0.18, 0.3], dtype=np.float32)
-    # low = np.array([-0.25, -0.1], dtype=np.float32)
-    # env.q_goal = np.random.uniform(low=low, high=high)
-    print("Initial Position is",prev_state[0:2])
-    print("===============================================================")
-    print("Target Position is",prev_state[2:4])
-    print("===============================================================")
-    print("Initial Kappas are ",[env.kappa1,env.kappa2,env.kappa3])
-    print("===============================================================")
-    print("Goal Kappas are ",[env.target_k1,env.target_k2,env.target_k3])
-    print("===============================================================")
-    
-    time.sleep(2)
-    episodic_reward = 0
-
-    # while True:
-    for i in range(750):
-        # Uncomment this to see the Actor in action
-        # But not in a python notebook.
-        # env.render()
-
-        tf_prev_state = tf.expand_dims(tf.convert_to_tensor(prev_state), 0)
-        action = policy(tf_prev_state, ou_noise)
-
-        # Recieve state and reward from environment.
-        # state, reward, done, info = env.step_1(action) # reward is -1 or 0 or 1
-        state, reward, done, info = env.step_2(action[0]) # reward is -(e^2)
+    for ep in range(total_episodes):
         
-        buffer.record((prev_state, action, reward, state))
-        episodic_reward += reward
-
-        buffer.learn()
-        update_target(target_actor.variables, actor_model.variables, tau)
-        update_target(target_critic.variables, critic_model.variables, tau)
-
-        # End this episode when `done` is True
-        if done:
-            counter += 1
-            break
-
-        prev_state = state
-        # print(prev_state)
-        print("Episode Number {0} and {1}th action".format(ep,i))
-        print("Goal Position",prev_state[2:4])
-        # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
-        print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), prev_state)) # for step_2
-        print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
-        print("Reward is ", reward)
-        print("{0} times robot reached to the target".format(counter))
-        print("Avg Reward is {0}, Episodic Reward is {1}".format(avg_reward,episodic_reward))
-        print("--------------------------------------------------------------------------------")
-
-    ep_reward_list.append(episodic_reward)
-
-    # Mean of 50 episodes
-    avg_reward = np.mean(ep_reward_list[-50:])
-    print("Episode * {} * Avg Reward is ==> {}".format(ep, avg_reward))
-    time.sleep(1.5)
-    avg_reward_list.append(avg_reward)
-
-# %% Plotting graph
-# Episodes versus Avg. Rewards
-plt.subplot(1, 2, 1)
-plt.plot(np.arange(1, len(avg_reward_list)+1), avg_reward_list)
-plt.xlabel("Episode")
-plt.ylabel("Avg. Epsiodic Reward")
-
-# Episodes versus Rewards
-plt.subplot(1, 2, 2)
-plt.plot(np.arange(1, len(ep_reward_list)+1), ep_reward_list)
-plt.xlabel('Episode')
-plt.ylabel('Average Reward')
-plt.show()
-
-# Save Weights
-actor_model.save_weights("continuum_actor.h5")
-critic_model.save_weights("continuum_critic.h5")
-target_actor.save_weights("continuum_target_actor.h5")
-target_critic.save_weights("continuum_target_critic.h5")
-
-# %% Evaluate
-
-actor_model.load_weights("Weights\continuum_actor.h5")
-critic_model.load_weights("Weights\continuum_critic.h5")
-target_actor.load_weights("Weights\continuum_target_actor.h5")
-target_critic.load_weights("Weights\continuum_target_critic.h5")
-
-state = env.reset() # generate random starting point for the robot and random target point.
-env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
-x_pos = []
-y_pos = []
-i = 0
-# while True:
-for i in range(750):
-
-    tf_prev_state = tf.expand_dims(tf.convert_to_tensor(state), 0)
-    action = policy(tf_prev_state, ou_noise, add_noise = False) # policyde noise'i evaluate ederken 0 yap
-    # Recieve state and reward from environment.
-    # state, reward, done, info = env.step_1(action) # reward is -1 or 0 or 1
-    state, reward, done, info = env.step_2(action[0]) # reward is -(e^2)
-    x_pos.append(state[0])
-    y_pos.append(state[1])
-    # buffer.record((prev_state, action, reward, state))
-    # buffer.learn()
-    # update_target(target_actor.variables, actor_model.variables, tau)
-    # update_target(target_critic.variables, critic_model.variables, tau)
-
-    # print(prev_state)
-    print("{}th action".format(i))
-    print("Goal Position",state[2:4])
-    # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
-    print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), state)) # for step_2
-    print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
-    print("Reward is ", reward)
-    print("--------------------------------------------------------------------------------")
+        # prev_state = env.reset_known() # starting position is always same
+        prev_state = env.reset() # starting postion is random (within task space)
+        # high = np.array([0.18, 0.3], dtype=np.float32)
+        # low = np.array([-0.25, -0.1], dtype=np.float32)
+        # env.q_goal = np.random.uniform(low=low, high=high)
+        print("Initial Position is",prev_state[0:2])
+        print("===============================================================")
+        print("Target Position is",prev_state[2:4])
+        print("===============================================================")
+        print("Initial Kappas are ",[env.kappa1,env.kappa2,env.kappa3])
+        print("===============================================================")
+        print("Goal Kappas are ",[env.target_k1,env.target_k2,env.target_k3])
+        print("===============================================================")
+        
+        time.sleep(2)
+        episodic_reward = 0
     
-    # End this episode when `done` is True
-    if done:
-        break
+        # while True:
+        for i in range(750):
+            # Uncomment this to see the Actor in action
+            # But not in a python notebook.
+            # env.render()
+    
+            tf_prev_state = tf.expand_dims(tf.convert_to_tensor(prev_state), 0)
+            action = policy(tf_prev_state, ou_noise)
+    
+            # Recieve state and reward from environment.
+            # state, reward, done, info = env.step_1(action) # reward is -1 or 0 or 1
+            state, reward, done, info = env.step_2(action[0]) # reward is -(e^2)
+            
+            buffer.record((prev_state, action, reward, state))
+            episodic_reward += reward
+    
+            buffer.learn()
+            update_target(target_actor.variables, actor_model.variables, tau)
+            update_target(target_critic.variables, critic_model.variables, tau)
+    
+            # End this episode when `done` is True
+            if done:
+                counter += 1
+                break
+    
+            prev_state = state
+            # print(prev_state)
+            print("Episode Number {0} and {1}th action".format(ep,i))
+            print("Goal Position",prev_state[2:4])
+            # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
+            print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), prev_state)) # for step_2
+            print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
+            print("Reward is ", reward)
+            print("{0} times robot reached to the target".format(counter))
+            print("Avg Reward is {0}, Episodic Reward is {1}".format(avg_reward,episodic_reward))
+            print("--------------------------------------------------------------------------------")
+    
+        ep_reward_list.append(episodic_reward)
+    
+        # Mean of 50 episodes
+        avg_reward = np.mean(ep_reward_list[-50:])
+        print("Episode * {} * Avg Reward is ==> {}".format(ep, avg_reward))
+        time.sleep(1.5)
+        avg_reward_list.append(avg_reward)
+    
+    # Plotting graph
+    # Episodes versus Avg. Rewards
+    plt.subplot(1, 2, 1)
+    plt.plot(np.arange(1, len(avg_reward_list)+1), avg_reward_list)
+    plt.xlabel("Episode")
+    plt.ylabel("Avg. Epsiodic Reward")
+    
+    # Episodes versus Rewards
+    plt.subplot(1, 2, 2)
+    plt.plot(np.arange(1, len(ep_reward_list)+1), ep_reward_list)
+    plt.xlabel('Episode')
+    plt.ylabel('Average Reward')
+    plt.show()
+    
+    # Save Weights
+    actor_model.save_weights("continuum_actor.h5")
+    critic_model.save_weights("continuum_critic.h5")
+    target_actor.save_weights("continuum_target_actor.h5")
+    target_critic.save_weights("continuum_target_critic.h5")
 
-time.sleep(2)
-# %% Visualization
-env.render(x_pos,y_pos)
-plt.title("Trajectory of the Continuum Robot")
-plt.xlabel("X - Position")
-plt.ylabel("Y - Position")
-plt.show()
-env.close()
+else:
+    actor_model.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights/continuum_actor.h5")
+    critic_model.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights/continuum_critic.h5")
+    target_actor.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights/continuum_target_actor.h5")
+    target_critic.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights/continuum_target_critic.h5")
+    
+    # state = env.reset() # generate random starting point for the robot and random target point.
+    # env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
+    # x_pos = []
+    # y_pos = []
+    # i = 0
+    # # while True:
+    # for i in range(750):
+    
+    #     tf_prev_state = tf.expand_dims(tf.convert_to_tensor(state), 0)
+    #     action = policy(tf_prev_state, ou_noise, add_noise = False) # policyde noise'i evaluate ederken 0 yap
+    #     # Recieve state and reward from environment.
+    #     # state, reward, done, info = env.step_1(action) # reward is -1 or 0 or 1
+    #     state, reward, done, info = env.step_2(action[0]) # reward is -(e^2)
+    #     x_pos.append(state[0])
+    #     y_pos.append(state[1])
+    #     # buffer.record((prev_state, action, reward, state))
+    #     # buffer.learn()
+    #     # update_target(target_actor.variables, actor_model.variables, tau)
+    #     # update_target(target_critic.variables, critic_model.variables, tau)
+    
+    #     # print(prev_state)
+    #     print("{}th action".format(i))
+    #     print("Goal Position",state[2:4])
+    #     # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
+    #     print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), state)) # for step_2
+    #     print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
+    #     print("Reward is ", reward)
+    #     print("--------------------------------------------------------------------------------")
+        
+    #     # End this episode when `done` is True
+    #     if done:
+    #         break
+    
+    # time.sleep(2)
+    # # Visualization
+    # env.render(x_pos,y_pos)
+    # plt.title("Trajectory of the Continuum Robot")
+    # plt.xlabel("X - Position")
+    # plt.ylabel("Y - Position")
+    # plt.show()
+    # env.close()
