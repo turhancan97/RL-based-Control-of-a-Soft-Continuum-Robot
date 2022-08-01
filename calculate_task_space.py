@@ -1,17 +1,23 @@
-import sys
+'''
+    Author: Turhan Can KARGIN
+    Python Version: 3.9.7
+    Visualization of the task space of the robot
+'''
+# %% import necessary libraries
+import sys # to include the path of the package
 sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Functions')
-
 import numpy as np
 import matplotlib.pyplot as plt
 from forward_velocity_kinematics import trans_mat_cc, coupletransformations
 
 # from configuration space (kappa, length) to task space (x,y)
-
-# %% With known kappa values
-# parameters
+# %% Section 1: With known kappa values
+## In this section, the all curvature values will be same and change from -4 to 16 (limit for our robot).
+## The aim is to see how the robot moves in the task space.
+# parameters (kappa1, kappa2, kappa3, length1, length2, length3)
 kappa = np.arange(-4,16.1,0.1) # 1/m
 l = 0.1000 # m
-    
+
 plt.subplot(1, 2, 1)
 # simulation for seeing task space
 for kappa_val in kappa:
@@ -42,8 +48,12 @@ plt.title("Task Space of Planar Continuum Robot with Known Kappas")
 plt.xlabel("X - Position [m]")
 plt.ylabel("Y - Position [m]")
 
-# %% With random kappa values
-# parameters
+# %% Section 2: With random kappa values
+## In this section, the all curvature values will be uniformly random and beween -4 and 16 (limit for our robot).
+## The aim is to see all posible curvature values in the task space so that we can have idea of the robot's behaviour.
+## This will help us to max, min state in RL environment.
+
+# parameters (kappa1, kappa2, kappa3, length1, length2, length3)
 size = 7500 # make it bigger to get more accurate result
 kappa1 = np.random.uniform(low=-4, high=16, size=(size,)) # 1/m
 kappa2 = np.random.uniform(low=-4, high=16, size=(size,))
@@ -85,8 +95,9 @@ plt.xlabel("X - Position [m]")
 plt.ylabel("Y - Position [m]")
 plt.show()
 
-# %% 
+# %%  Section 3: Plotting the position of the robot for a given curvature
 
+# Uncommment the below code to see the position of the robot for a given curvature
 # kappa = np.array((-4.0, -4.0, 16.0)) # 1/m
 # l = 0.1000 # m
 
