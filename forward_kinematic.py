@@ -20,7 +20,7 @@ l2 = 0.1000; # metre
 kappa3 = 2.0000; # 1/m
 l3 = 0.1000; # metre
 
-# Constuct for the curveture (It shouldn't be more than 16 and less than -4 for material strength reasons)
+# Constraint for the curvature (It shouldn't be more than 16 and less than -4 for material strength reasons)
 
 if kappa1 > 16 or kappa1 < -4:
     print("Please enter the First Curvature values between -4 and 16")
