@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from ddpg_agent import Agent
 from env import continuumEnv
 import math
+import time
 
 env = continuumEnv()
 env.seed(10)
@@ -20,15 +21,17 @@ agent.critic_local.load_state_dict(torch.load('C:/Users/Asus/Desktop/Master-Lect
  
 state = env.reset() # generate random starting point for the robot and random target point.
 env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
-
+initial_state = state[0:2]
 x_pos = []
 y_pos = []
 
 for t in range(750):
+    start = time.time()
     action = agent.act(state, add_noise=False)
     state, reward, done, _ = env.step_2(action)
     x_pos.append(state[0])
     y_pos.append(state[1])
+    env.render()
     print("{}th action".format(t))
     print("Goal Position",state[2:4])
     print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), state)) # for step_2
@@ -36,13 +39,15 @@ for t in range(750):
     print("Reward is ", reward)
     print("Episodic Reward is {}".format(reward))
     print("--------------------------------------------------------------------------------")
+    stop = time.time()
+    env.time += (stop - start)
     if done:
         break
 
 # %% Visualization
-env.render(x_pos,y_pos)
-plt.title("Trajectory of the Continuum Robot")
-plt.xlabel("X - Position")
-plt.ylabel("Y - Position")
+env.visualization(x_pos,y_pos)
+plt.title(f"Initial Position is x: {initial_state[0]} y: {initial_state[1]} & Target Position is x: {state[0]} y: {state[1]}")
+plt.xlabel("X [m]")
+plt.ylabel("Y [m]")
 plt.show()
 env.close()

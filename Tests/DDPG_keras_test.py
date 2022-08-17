@@ -21,12 +21,13 @@ ou_noise = OUActionNoise(mean=np.zeros(3), std_deviation=float(std_dev) * np.one
 
 state = env.reset() # generate random starting point for the robot and random target point.
 env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
+initial_state = state[0:2]
 x_pos = []
 y_pos = []
 i = 0
 # while True:
 for i in range(750):
-
+    start = time.time()
     tf_prev_state = tf.expand_dims(tf.convert_to_tensor(state), 0)
     action = policy(tf_prev_state, ou_noise, add_noise = False) # policyde noise'i evaluate ederken 0 yap
     # Recieve state and reward from environment.
@@ -34,6 +35,7 @@ for i in range(750):
     state, reward, done, info = env.step_2(action[0]) # reward is -(e^2)
     x_pos.append(state[0])
     y_pos.append(state[1])
+    env.render()
     # buffer.record((prev_state, action, reward, state))
     # buffer.learn()
     # update_target(target_actor.variables, actor_model.variables, tau)
@@ -47,16 +49,18 @@ for i in range(750):
     print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
     print("Reward is ", reward)
     print("--------------------------------------------------------------------------------")
-    
+    stop = time.time()
+    env.time += (stop - start)
     # End this episode when `done` is True
     if done:
         break
-
-time.sleep(2)
+    
+time.sleep(5)
 # %% Visualization
-env.render(x_pos,y_pos)
-plt.title("Trajectory of the Continuum Robot")
-plt.xlabel("X - Position")
-plt.ylabel("Y - Position")
+env.visualization(x_pos,y_pos)
+plt.title(f"Initial Position is x: {initial_state[0]} y: {initial_state[1]} & Target Position is x: {state[0]} y: {state[1]}")
+plt.xlabel("X [m]")
+plt.ylabel("Y [m]")
 plt.show()
 env.close()
+
