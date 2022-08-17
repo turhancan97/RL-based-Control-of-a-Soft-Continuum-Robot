@@ -44,7 +44,7 @@ class Actor(nn.Module):
         x = F.relu(self.fc2(x))
         x = F.relu(self.fc3(x))
         x = F.relu(self.fc4(x))
-        return F.tanh(self.fc5(x))
+        return torch.tanh(self.fc5(x))
 
 
 class Critic(nn.Module):
