@@ -1,13 +1,17 @@
-import sys
+'''
+    Author: Turhan Can KARGIN
+    Python Version: 3.9.7
+    Forward kinematics of the robot (Kappa,Length -> Task Space). Only for the tip of the continuum robot
+'''
+# import necessary libraries
+import sys # to include the path of the package
 sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Functions')
-
 import numpy as np
 import matplotlib.pyplot as plt
 from forward_velocity_kinematics import three_section_planar_robot
 
 
 # from configuration space (kappa, length) to task space (x,y)
-
 # parameters
 kappa1 = 0.5; # 1/m
 l1 = 0.1000; # metre
@@ -19,7 +23,6 @@ l3 = 0.1000; # metre
 # kappa = [kappa1, kappa2, kappa3] # Each section's curvature
 l = [l1, l2, l3] # Each section's length
 
-    
 # section 1
 T3_cc = three_section_planar_robot(kappa1,kappa2,kappa3,l);
 

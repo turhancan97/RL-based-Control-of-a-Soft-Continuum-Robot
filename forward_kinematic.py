@@ -1,13 +1,17 @@
-import sys
+'''
+    Author: Turhan Can KARGIN
+    Python Version: 3.9.7
+    Forward kinematics of the robot (Kappa,Length -> Task Space)
+'''
+
+# import necessary libraries
+import sys # to include the path of the package
 sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Functions')
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 from forward_velocity_kinematics import trans_mat_cc, coupletransformations
 
 # from configuration space (kappa, length) to task space (x,y)
-
 # parameters
 kappa1 = 1.7035; # 1/m
 l1 = 0.1000; # metre
@@ -15,6 +19,8 @@ kappa2 = 1.0000; # 1/m
 l2 = 0.1000; # metre
 kappa3 = 2.0000; # 1/m
 l3 = 0.1000; # metre
+
+# Constraint for the curvature (It shouldn't be more than 16 and less than -4 for material strength reasons)
 
 if kappa1 > 16 or kappa1 < -4:
     print("Please enter the First Curvature values between -4 and 16")
