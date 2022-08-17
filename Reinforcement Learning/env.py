@@ -109,6 +109,7 @@ class continuumEnv(gym.Env):
         self.error = 0              # initializes the error
         self.previous_error = 0     # initializes the previous error
         self.start_kappa = [0,0,0]  # initializes the start kappas for the three segments
+        self.time = 0               # to count the time of the simulation
         
         # Define the observation and action space from OpenAI Gym
         high = np.array([0.2, 0.3, 0.16, 0.3], dtype=np.float32) # [0.16, 0.3, 0.16, 0.3]
@@ -437,7 +438,41 @@ class continuumEnv(gym.Env):
         x,y,goal_x,goal_y = self.state
         return np.array([x,y,goal_x,goal_y],dtype=np.float32)
     
-    def render(self,x_pos,y_pos):
+    def render(self):
+        # This function is used to plot the robot in the environment (both in start and end state)
+
+        # current state
+        # section 1 calculation
+        T1_cc = trans_mat_cc(self.kappa1,self.l[0])
+        T1_tip = np.reshape(T1_cc[len(T1_cc)-1,:],(4,4),order='F');
+        # section 2 calculation
+        T2 = trans_mat_cc(self.kappa2,self.l[1]);
+        T2_cc = coupletransformations(T2,T1_tip);
+        T2_tip = np.reshape(T2_cc[len(T2_cc)-1,:],(4,4),order='F');
+        # section 3 calculation
+        T3 = trans_mat_cc(self.kappa3,self.l[2]);
+        T3_cc = coupletransformations(T3,T2_tip);
+
+        # Plot the trunk with three sections and point the section seperation
+        plt.plot(T1_cc[:,12],T1_cc[:,13],'b',linewidth=3)
+        #plt.scatter(T1_cc[-1,12],T1_cc[-1,13],linewidths=5,color = 'black')
+        plt.plot(T2_cc[:,12],T2_cc[:,13],'r',linewidth=3)
+        #plt.scatter(T2_cc[-1,12],T2_cc[-1,13],linewidths=5,color = 'black')
+        plt.plot(T3_cc[:,12],T3_cc[:,13],'g',linewidth=3)
+        plt.scatter(T3_cc[-1,12],T3_cc[-1,13],linewidths=5,color = 'black')        
+        
+        # Plot the target point and trajectory of the robot
+        plt.scatter(self.state[2],self.state[3],100, marker= "x",linewidths=2, color = 'red')
+        plt.title(f"The time elapsed in the simulation is {round(self.time,2)} seconds.")
+        plt.xlabel("X - Position")
+        plt.ylabel("Y - Position")
+        plt.xlim([-0.4, 0.4])
+        plt.ylim([-0.4, 0.4])
+        plt.pause(0.000001)
+        plt.clf()
+        
+        
+    def visualization(self,x_pos,y_pos):
         # This function is used to plot the robot in the environment (both in start and end state)
 
         # Start state
@@ -486,3 +521,4 @@ class continuumEnv(gym.Env):
         plt.scatter(x_pos,y_pos,25,linewidths=0.01,color = 'blue',alpha=0.1)
         plt.xlim([-0.4, 0.4])
         plt.ylim([-0.4, 0.4])
+        
