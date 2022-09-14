@@ -17,7 +17,7 @@ env.seed(10)
 agent = Agent(state_size=4, action_size=3, random_seed=10)
 
 # %%
-def ddpg(n_episodes=500, max_t=750, print_every=1):
+def ddpg(n_episodes=3000, max_t=1000, print_every=300):
     global scores
     global avg_reward_list
     scores_deque = deque(maxlen=print_every)
@@ -25,7 +25,7 @@ def ddpg(n_episodes=500, max_t=750, print_every=1):
     avg_reward_list = []
     counter = 0
     for i_episode in range(1, n_episodes+1):
-        state = env.reset_unknown()
+        state = env.reset()
         agent.reset()
         score = 0
         print("Initial Position is",state[0:2])
@@ -58,7 +58,8 @@ def ddpg(n_episodes=500, max_t=750, print_every=1):
                 break 
         scores_deque.append(score)
         scores.append(score)
-        avg_reward_list.append(np.mean(scores))
+        # Mean of 300 episodes
+        avg_reward_list.append(np.mean(scores[-300:]))
         print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque)), end="")
         time.sleep(2)
         torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
