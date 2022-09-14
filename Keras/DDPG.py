@@ -267,7 +267,7 @@ actor_lr = 1e-4         # learning rate of the actor
 critic_optimizer = tf.keras.optimizers.Adam(critic_lr)
 actor_optimizer = tf.keras.optimizers.Adam(actor_lr)
 
-total_episodes = 100
+total_episodes = 3000
 # Discount factor for future rewards
 gamma = 0.99            # discount factor
 # Used to update target networks
@@ -309,7 +309,7 @@ if TRAIN:
         episodic_reward = 0
     
         # while True:
-        for i in range(750):
+        for i in range(1000):
             # Uncomment this to see the Actor in action
             # But not in a python notebook.
             # env.render()
@@ -347,8 +347,8 @@ if TRAIN:
     
         ep_reward_list.append(episodic_reward)
     
-        # Mean of 50 episodes
-        avg_reward = np.mean(ep_reward_list[-50:])
+        # Mean of 300 episodes
+        avg_reward = np.mean(ep_reward_list[-300:])
         print("Episode * {} * Avg Reward is ==> {}".format(ep, avg_reward))
         time.sleep(1.5)
         avg_reward_list.append(avg_reward)
@@ -374,10 +374,10 @@ if TRAIN:
     target_critic.save_weights("continuum_target_critic.h5")
 
 else:
-    actor_model.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights/continuum_actor.h5")
-    critic_model.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights/continuum_critic.h5")
-    target_actor.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights/continuum_target_actor.h5")
-    target_critic.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights/continuum_target_critic.h5")
+    actor_model.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_actor.h5")
+    critic_model.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_critic.h5")
+    target_actor.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_target_actor.h5")
+    target_critic.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_target_critic.h5")
     
     # state = env.reset() # generate random starting point for the robot and random target point.
     # env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
