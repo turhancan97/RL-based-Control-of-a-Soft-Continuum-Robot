@@ -16,8 +16,8 @@ agent = Agent(state_size=4, action_size=3, random_seed=10)
 
 # %% Evaluation
 #### Change the directory for your file structure
-agent.actor_local.load_state_dict(torch.load('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Pytorch/Weights/checkpoint_actor.pth'))
-agent.critic_local.load_state_dict(torch.load('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Pytorch/Weights/checkpoint_critic.pth'))
+agent.actor_local.load_state_dict(torch.load('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Pytorch/Weights_better/checkpoint_actor.pth'))
+agent.critic_local.load_state_dict(torch.load('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Pytorch/Weights_better/checkpoint_critic.pth'))
  
 state = env.reset() # generate random starting point for the robot and random target point.
 env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
@@ -25,7 +25,7 @@ initial_state = state[0:2]
 x_pos = []
 y_pos = []
 
-for t in range(750):
+for t in range(1000):
     start = time.time()
     action = agent.act(state, add_noise=False)
     state, reward, done, _ = env.step_2(action)

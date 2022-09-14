@@ -454,6 +454,7 @@ class continuumEnv(gym.Env):
         T3_cc = coupletransformations(T3,T2_tip);
 
         # Plot the trunk with three sections and point the section seperation
+        plt.plot([-0.025, 0.025],[0,0],'black',linewidth=5)
         plt.plot(T1_cc[:,12],T1_cc[:,13],'b',linewidth=3)
         #plt.scatter(T1_cc[-1,12],T1_cc[-1,13],linewidths=5,color = 'black')
         plt.plot(T2_cc[:,12],T2_cc[:,13],'r',linewidth=3)
@@ -464,8 +465,8 @@ class continuumEnv(gym.Env):
         # Plot the target point and trajectory of the robot
         plt.scatter(self.state[2],self.state[3],100, marker= "x",linewidths=2, color = 'red')
         plt.title(f"The time elapsed in the simulation is {round(self.time,2)} seconds.")
-        plt.xlabel("X - Position")
-        plt.ylabel("Y - Position")
+        plt.xlabel("X - Position [m]")
+        plt.ylabel("Y - Position [m]")
         plt.xlim([-0.4, 0.4])
         plt.ylim([-0.4, 0.4])
         plt.pause(0.000001)

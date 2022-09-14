@@ -73,6 +73,6 @@ plt.scatter(x_pos[0][i-1],x_pos[1][i-1],linewidths=2.5,color = 'blue',label = "V
 plt.scatter(tip_point[0],tip_point[1],linewidths=5,color = 'black',label="Actual Motion")
 plt.legend(loc="best")
 plt.title("2D Motion of Tip of the Continuum Robot")
-plt.xlabel("X - Position")
-plt.ylabel("Y - Position")
+plt.xlabel("X [m]")
+plt.ylabel("Y [m]")
 plt.show()
