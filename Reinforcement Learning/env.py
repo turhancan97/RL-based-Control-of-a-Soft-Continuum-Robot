@@ -61,27 +61,16 @@ class continuumEnv(gym.Env):
     -> r = -(((x-x_goal)^2)-((y-y_goal)^2)) = -(e^2) <-
     which means that the reward is negative of the squared distance between the robot's tip point and the target point.
 
-    Class docstrings go here. # TODO: add nice description for the environment.
-    * A brief summary of its purpose and behavior
-    * Any public methods, along with a brief description - e.g. step
-    * Any class properties (attributes) e.g. kappa_dot_max, dt
-    * Anything related to the interface for subclassers, if the class is intended to be subclassed
-    
-    Attributes
-    ----------
-    says_str : str
-        a formatted string to print out what the animal says
-    name : str
-        the name of the animal
-    sound : str
-        the sound that the animal makes
-    num_legs : int
-        the number of legs the animal has (default 4)
+    * Environment is where the agent resides and is connected to, the environment is such that the agent can learn and interact.
+    The environment in which the agent is located is partially observable or fully observable. In reinforcement learning, 
+    the environment and observations of the agent can be random. Because there is no open access environment for the continuum robot,
+    this class is created to simulate the environment. The environment is created by using the forward kinematics and velocity kinematics.
 
-    Methods
-    -------
-    step()
-        Prints the animals name and what sound it makes
+    * There are several methods in this class. The first method is the reset method. This method is used to reset the environment.
+    * There are several attributes in this class. For example some of the attribute is kappa_dot_max, kappa_max, and kappa_min
+    which are the maximum and minimum values of the curvature and the maximum value of the curvature derivative. Thanks to these attributes,
+    we can limit the actions and movement of the robot.
+    * Furter more details can be found in comments in the code.
         
     """
     
