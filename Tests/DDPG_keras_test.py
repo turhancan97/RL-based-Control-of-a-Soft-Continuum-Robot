@@ -19,6 +19,8 @@ ou_noise = OUActionNoise(mean=np.zeros(3), std_deviation=float(std_dev) * np.one
 
 
 # %% Evaluate
+# Some of the initial and target states. Uncomment below if you want to see behavior of the agent for theses states.
+# Otherwise, the agent will be evaluated for random states.
 # t = random.randint(0,10)
 # env.kappa1 = [-2,2,14.108017793675163,1.7150558451751081,-4,16,0.01,14,0.01,2.45,-3.374][t]
 # env.kappa2 = [-3,-1,9.135168696509695,11.867430716497964,-4,16,0.01,14,12,13.58,15.9254][t]
@@ -85,6 +87,7 @@ plt.ylabel("Y [m]")
 plt.show()
 env.close()
 
+## Uncomment wanted plot to see the results
 # # Error
 # plt.plot(range(len(error_store)),error_store,c = 'red',linewidth=2)
 # plt.title("Error Plot of the Test Simulation")
