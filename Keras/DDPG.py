@@ -1,7 +1,7 @@
 import sys
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Reinforcement Learning')
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Functions')
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Tests')
+sys.path.append('../')
+sys.path.append('../Reinforcement Learning')
+sys.path.append('../Tests')
 
 # import gym
 import tensorflow as tf
@@ -374,10 +374,10 @@ if TRAIN:
     target_critic.save_weights("continuum_target_critic.h5")
 
 else:
-    actor_model.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_actor.h5")
-    critic_model.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_critic.h5")
-    target_actor.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_target_actor.h5")
-    target_critic.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_target_critic.h5")
+    actor_model.load_weights("../Keras/Weights_better/continuum_actor.h5")
+    critic_model.load_weights("../Keras/Weights_better/continuum_critic.h5")
+    target_actor.load_weights("../Keras/Weights_better/continuum_target_actor.h5")
+    target_critic.load_weights("../Keras/Weights_better/continuum_target_critic.h5")
     
     # state = env.reset() # generate random starting point for the robot and random target point.
     # env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas

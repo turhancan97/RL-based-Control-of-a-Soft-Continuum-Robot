@@ -5,10 +5,10 @@
 '''
 # %% import necessary libraries
 import sys # to include the path of the package
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Functions')
+sys.path.append('../')
 import numpy as np
 import matplotlib.pyplot as plt
-from forward_velocity_kinematics import trans_mat_cc, coupletransformations
+from kinematics.forward_velocity_kinematics import trans_mat_cc, coupletransformations
 
 # from configuration space (kappa, length) to task space (x,y)
 # %% Section 1: With known kappa values

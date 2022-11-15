@@ -5,7 +5,7 @@
 '''
 # %% import necessary libraries
 import sys # to include the path of the package
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Functions') # the kinematics functions are here 
+sys.path.append('../') # the kinematics functions are here 
 
 import gym                      # openai gym library
 import numpy as np              # numpy for matrix operations
@@ -14,8 +14,8 @@ from gym import spaces          # "spaces" for the observation and action space
 import matplotlib.pyplot as plt # quick "plot" library
 
 # My own libraries
-from forward_velocity_kinematics import three_section_planar_robot, jacobian_matrix # the velocity kinematics
-from forward_velocity_kinematics import trans_mat_cc, coupletransformations # forward kinematics
+from kinematics.forward_velocity_kinematics import three_section_planar_robot, jacobian_matrix # the velocity kinematics
+from kinematics.forward_velocity_kinematics import trans_mat_cc, coupletransformations # forward kinematics
 
 class continuumEnv(gym.Env):
     """

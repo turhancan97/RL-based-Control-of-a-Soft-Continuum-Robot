@@ -1,0 +1,13 @@
+name: continuum-rl
+dependencies:
+  - python=3.9.7
+  - pip
+  - pip:
+    - numpy
+    - matplotlib
+    - pandas
+    - tensorflow==2.8.0
+    - torch==1.8.1
+    - protobuf==3.20.*
+    - gym==0.23.1
+  
