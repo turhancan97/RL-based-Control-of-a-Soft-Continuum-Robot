@@ -1,8 +1,8 @@
 import sys
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Functions')
+sys.path.append('../')
 
 import numpy as np
-from forward_velocity_kinematics import three_section_planar_robot, jacobian_matrix
+from kinematics.forward_velocity_kinematics import three_section_planar_robot, jacobian_matrix
 
 # parameters
 delta_kappa = 0.1; 

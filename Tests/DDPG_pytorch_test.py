@@ -1,7 +1,8 @@
 # Libraries and important folders
 import sys
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Reinforcement Learning')
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Pytorch')
+sys.path.append('../')
+sys.path.append('../Reinforcement Learning')
+sys.path.append('../Pytorch')
 
 import torch
 import matplotlib.pyplot as plt
@@ -16,8 +17,8 @@ agent = Agent(state_size=4, action_size=3, random_seed=10)
 
 # %% Evaluation
 #### Change the directory for your file structure
-agent.actor_local.load_state_dict(torch.load('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Pytorch/Weights_better/checkpoint_actor.pth'))
-agent.critic_local.load_state_dict(torch.load('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Pytorch/Weights_better/checkpoint_critic.pth'))
+agent.actor_local.load_state_dict(torch.load('../Pytorch/Weights_better/checkpoint_actor.pth'))
+agent.critic_local.load_state_dict(torch.load('../Pytorch/Weights_better/checkpoint_critic.pth'))
  
 state = env.reset() # generate random starting point for the robot and random target point.
 env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
@@ -31,7 +32,7 @@ for t in range(1000):
     state, reward, done, _ = env.step_2(action)
     x_pos.append(state[0])
     y_pos.append(state[1])
-    env.render()
+    # env.render() # uncomment for instant animation
     print("{}th action".format(t))
     print("Goal Position",state[2:4])
     print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), state)) # for step_2
