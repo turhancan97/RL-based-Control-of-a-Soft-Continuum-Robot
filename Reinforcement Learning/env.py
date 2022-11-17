@@ -515,7 +515,7 @@ class continuumEnv(gym.Env):
         plt.ylim([-0.4, 0.4])
         plt.xticks(fontsize=14)
         plt.yticks(fontsize=14)
-        plt.legend()
+        plt.legend(fontsize=14)
         plt.grid(which='major',linewidth=0.7)
         plt.grid(which='minor',linewidth=0.5)
         # Show the minor ticks and grid.
