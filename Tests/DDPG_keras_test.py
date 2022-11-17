@@ -1,3 +1,4 @@
+# %%
 import sys
 
 sys.path.append('../')
@@ -82,10 +83,11 @@ for i in range(1000):
     
 time.sleep(1)
 # %% Visualization
+plt.rcParams["figure.figsize"] = (12,7)
 env.visualization(x_pos,y_pos)
-plt.title(f"Initial Position is x: {initial_state[0]} y: {initial_state[1]} & Target Position is x: {state[0]} y: {state[1]}")
-plt.xlabel("X [m]")
-plt.ylabel("Y [m]")
+# plt.title(f"Initial Position is (x,y): ({initial_state[0]},{initial_state[1]}) & Target Position is (x,y): ({state[0]},{state[1]})",fontweight="bold")
+plt.xlabel("Position x - [m]",fontsize=20)
+plt.ylabel("Position y - [m]",fontsize=20)
 plt.show()
 env.close()
 
