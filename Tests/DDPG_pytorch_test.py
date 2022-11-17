@@ -17,8 +17,8 @@ agent = Agent(state_size=4, action_size=3, random_seed=10)
 
 # %% Evaluation
 #### Change the directory for your file structure
-agent.actor_local.load_state_dict(torch.load('../Pytorch/Weights_better/checkpoint_actor.pth'))
-agent.critic_local.load_state_dict(torch.load('../Pytorch/Weights_better/checkpoint_critic.pth'))
+agent.actor_local.load_state_dict(torch.load('../Pytorch/model/checkpoint_actor.pth'))
+agent.critic_local.load_state_dict(torch.load('../Pytorch/model/checkpoint_critic.pth'))
  
 state = env.reset() # generate random starting point for the robot and random target point.
 env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas

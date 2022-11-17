@@ -260,9 +260,10 @@ class continuumEnv(gym.Env):
         self.costs = self.error # Set the cost (reward) to the error squared
         
         # Just to show if the robot is moving along the goal or not
-        if self.error < self.previous_error:
+        # if self.error < self.previous_error:
             #self.costs -= 1
-            print("=========================POSITIVE MOVE=========================")
+            # UNCOMMENT HERE !!!!!!!
+            # print("=========================POSITIVE MOVE=========================")
             
         
         self.previous_error = self.error # Update the previous error
@@ -343,7 +344,9 @@ class continuumEnv(gym.Env):
             new_y = y + state_update[1]
             
         elif self.stop == 7:
-            print("Robot is not moving")
+            pass
+            # # UNCOMMENT HERE!!!!!!!
+            # print("Robot is not moving")
             # time.sleep(1)
         
         # Update the curvatures

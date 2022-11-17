@@ -18,6 +18,19 @@ LR_CRITIC = 3e-4        # learning rate of the critic
 WEIGHT_DECAY = 0.0001   # L2 weight decay
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+if device == 'cpu':
+    print('GPU is not available')
+print('Using device:', device)
+print()
+#Additional Info when using cuda
+if device.type == 'cuda:0':
+    print(torch.cuda.get_device_name(0))
+    print('Memory Usage:')
+    print('Allocated:', round(torch.cuda.memory_allocated(0)/1024**3,1), 'GB')
+    print('Cached:   ', round(torch.cuda.memory_reserved(0)/1024**3,1), 'GB')
+    
+devices = torch.cuda.device_count()
+print(f'{devices} Number of Devices Exists')
 
 class Agent():
     """Interacts with and learns from the environment."""
