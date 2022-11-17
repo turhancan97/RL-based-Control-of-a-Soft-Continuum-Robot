@@ -7,6 +7,7 @@ sys.path.append('../Tests')
 import tensorflow as tf
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 from tensorflow.keras import layers
+import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 import time
@@ -267,7 +268,7 @@ actor_lr = 1e-4         # learning rate of the actor
 critic_optimizer = tf.keras.optimizers.Adam(critic_lr)
 actor_optimizer = tf.keras.optimizers.Adam(actor_lr)
 
-total_episodes = 3000
+total_episodes = 5000
 # Discount factor for future rewards
 gamma = 0.99            # discount factor
 # Used to update target networks
@@ -296,16 +297,18 @@ if TRAIN:
         # high = np.array([0.18, 0.3], dtype=np.float32)
         # low = np.array([-0.25, -0.1], dtype=np.float32)
         # env.q_goal = np.random.uniform(low=low, high=high)
-        print("Initial Position is",prev_state[0:2])
-        print("===============================================================")
-        print("Target Position is",prev_state[2:4])
-        print("===============================================================")
-        print("Initial Kappas are ",[env.kappa1,env.kappa2,env.kappa3])
-        print("===============================================================")
-        print("Goal Kappas are ",[env.target_k1,env.target_k2,env.target_k3])
-        print("===============================================================")
+        if ep % 100 == 0:
+            print('Episode Number',ep)
+            print("Initial Position is",prev_state[0:2])
+            print("===============================================================")
+            print("Target Position is",prev_state[2:4])
+            print("===============================================================")
+            print("Initial Kappas are ",[env.kappa1,env.kappa2,env.kappa3])
+            print("===============================================================")
+            print("Goal Kappas are ",[env.target_k1,env.target_k2,env.target_k3])
+            print("===============================================================")
         
-        time.sleep(2)
+        # time.sleep(2) # uncomment when training in local computer
         episodic_reward = 0
     
         # while True:
@@ -335,30 +338,37 @@ if TRAIN:
     
             prev_state = state
             # print(prev_state)
-            print("Episode Number {0} and {1}th action".format(ep,i))
-            print("Goal Position",prev_state[2:4])
-            # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
-            print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), prev_state)) # for step_2
-            print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
-            print("Reward is ", reward)
-            print("{0} times robot reached to the target".format(counter))
-            print("Avg Reward is {0}, Episodic Reward is {1}".format(avg_reward,episodic_reward))
-            print("--------------------------------------------------------------------------------")
+            # # Uncomment below when training in local computer
+            # print("Episode Number {0} and {1}th action".format(ep,i))
+            # print("Goal Position",prev_state[2:4])
+            # # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
+            # print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), prev_state)) # for step_2
+            # print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
+            # print("Reward is ", reward)
+            # print("{0} times robot reached to the target".format(counter))
+            # print("Avg Reward is {0}, Episodic Reward is {1}".format(avg_reward,episodic_reward))
+            # print("--------------------------------------------------------------------------------")
     
         ep_reward_list.append(episodic_reward)
     
-        # Mean of 300 episodes
-        avg_reward = np.mean(ep_reward_list[-300:])
-        print("Episode * {} * Avg Reward is ==> {}".format(ep, avg_reward))
-        time.sleep(1.5)
+        # Mean of 250 episodes
+        avg_reward = np.mean(ep_reward_list[-250:])
+        if ep % 100 == 0:
+            print("Episode * {} * Avg Reward is ==> {}".format(ep, avg_reward))
+            time.sleep(1.5)
         avg_reward_list.append(avg_reward)
     
+    print(f'{counter} times robot reached the target point in total {total_episodes} episodes')
     # Plotting graph
     # Episodes versus Avg. Rewards
     plt.subplot(1, 2, 1)
     plt.plot(np.arange(1, len(avg_reward_list)+1), avg_reward_list)
     plt.xlabel("Episode")
     plt.ylabel("Avg. Epsiodic Reward")
+
+    with open('avg_reward_list.pickle', 'wb') as f:
+        # Pickle the 'data' dictionary using the highest protocol available.
+        pickle.dump(avg_reward_list, f, pickle.HIGHEST_PROTOCOL)
     
     # Episodes versus Rewards
     plt.subplot(1, 2, 2)
@@ -366,6 +376,10 @@ if TRAIN:
     plt.xlabel('Episode')
     plt.ylabel('Average Reward')
     plt.show()
+
+    with open('ep_reward_list.pickle', 'wb') as f:
+        # Pickle the 'data' dictionary using the highest protocol available.
+        pickle.dump(ep_reward_list, f, pickle.HIGHEST_PROTOCOL)
     
     # Save Weights
     actor_model.save_weights("continuum_actor.h5")
@@ -374,10 +388,10 @@ if TRAIN:
     target_critic.save_weights("continuum_target_critic.h5")
 
 else:
-    actor_model.load_weights("../Keras/Weights_better/continuum_actor.h5")
-    critic_model.load_weights("../Keras/Weights_better/continuum_critic.h5")
-    target_actor.load_weights("../Keras/Weights_better/continuum_target_actor.h5")
-    target_critic.load_weights("../Keras/Weights_better/continuum_target_critic.h5")
+    actor_model.load_weights("../Keras/model/continuum_actor.h5")
+    critic_model.load_weights("../Keras/model/continuum_critic.h5")
+    target_actor.load_weights("../Keras/model/continuum_target_actor.h5")
+    target_critic.load_weights("../Keras/model/continuum_target_critic.h5")
     
     # state = env.reset() # generate random starting point for the robot and random target point.
     # env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas

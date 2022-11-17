@@ -5,6 +5,7 @@ sys.path.append('../Reinforcement Learning')
 sys.path.append('../Keras')
 
 import tensorflow as tf
+print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 import numpy as np
 import math
 import matplotlib.pyplot as plt

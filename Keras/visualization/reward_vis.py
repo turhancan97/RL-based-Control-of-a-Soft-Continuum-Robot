@@ -66,7 +66,7 @@ axs[0].yaxis.set_minor_locator(AutoMinorLocator(2))
 axs[1].xaxis.set_minor_locator(AutoMinorLocator(2))
 axs[1].yaxis.set_minor_locator(AutoMinorLocator(2))
 
-plt.savefig('../../docs/images/reward.png')
+plt.savefig('../../docs/images/reward_keras.png')
 plt.show()
 # %%
 # Plotting graph log scale
@@ -119,6 +119,6 @@ axs[0].yaxis.set_minor_locator(AutoMinorLocator(2))
 axs[1].xaxis.set_minor_locator(AutoMinorLocator(2))
 axs[1].yaxis.set_minor_locator(AutoMinorLocator(2))
 
-plt.savefig('../../docs/images/reward_log.png')
+plt.savefig('../../docs/images/reward_log_keras.png')
 plt.show()
 # %%
