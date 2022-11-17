@@ -127,7 +127,7 @@ for ax in axs.flat:
 ## Uncomment wanted plot to see the results
 # # Error
 # plt.plot(range(len(error_store)),error_store,c = 'red',linewidth=2)
-# # plt.title("Error Plot of the Test Simulation")
+# plt.title("Error Plot of the Test Simulation")
 # plt.xlabel("Step",fontsize=20)
 # plt.ylabel("Error",fontsize=20)
 # plt.xticks(fontsize=14)
@@ -157,7 +157,7 @@ for ax in axs.flat:
 # plt.ylabel("Y-[m]")
 # plt.show()
 
-# # X-Y Position
+# X-Y Position
 # plt.plot(range(len(x_pos)),x_pos,c = 'red',linewidth=2, label = "X Axis")
 # plt.axhline(y=state[2])
 # plt.plot(range(len(y_pos)),y_pos,c = 'green',linewidth=2, label = "Y Axis")
@@ -174,11 +174,11 @@ for ax in axs.flat:
 # plt.minorticks_on()
 # plt.show()
 
-# # # Kappa Plots
+# Kappa Plots
 # plt.plot(range(len(kappa1_store)),kappa1_store,c = 'blue',linewidth=2, label = "Curvature-1")
 # plt.plot(range(len(kappa2_store)),kappa2_store,c = 'green',linewidth=2, label = "Curvature-2")
 # plt.plot(range(len(kappa3_store)),kappa3_store,c = 'red',linewidth=2, label = "Curvature-3")
-# # plt.title("Change of Curvature Values Over Time")
+# plt.title("Change of Curvature Values Over Time")
 # plt.xlabel("Step",fontsize=20)
 # plt.ylabel(r"Curvature Values $\left [\frac{1}{m}  \right ]$",fontsize=20)
 # plt.legend(fontsize=14)
@@ -190,24 +190,24 @@ for ax in axs.flat:
 # plt.minorticks_on()
 # plt.show()
 
-# # X Error
+# X Error
 # plt.plot(range(len(error_x)),error_x,c = 'green',linewidth=2)
 # plt.title("Error on the X Axis")
 # plt.xlabel("Step")
 # plt.ylabel("Error")
 # plt.show()
 
-# # Y Error
+# Y Error
 # plt.plot(range(len(error_y)),error_y,c = 'blue',linewidth=2)
 # plt.title("Error on the Y Axis")
 # plt.xlabel("Step")
 # plt.ylabel("Error")
 # plt.show()
 
-# # # X-Y Error
+# X-Y Error
 # plt.plot(range(len(error_x)),error_x,c = 'blue',linewidth=2, label = "X Axis")
 # plt.plot(range(len(error_y)),error_y,c = 'green',linewidth=2, label = "Y Axis")
-# # plt.title("Error on the X-Y Axis")
+# plt.title("Error on the X-Y Axis")
 # plt.xlabel("Step",fontsize=20)
 # plt.ylabel("Error",fontsize=20)
 # plt.legend(fontsize=14)
