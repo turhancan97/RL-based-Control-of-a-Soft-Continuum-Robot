@@ -47,14 +47,14 @@ plt.grid(visible=True)
 plt.title("Task Space of Planar Continuum Robot with Known Curvatures")
 plt.xlabel("X - Position [m]")
 plt.ylabel("Y - Position [m]")
-
+plt.show()
 # %% Section 2: With random kappa values
 ## In this section, the all curvature values will be uniformly random and beween -4 and 16 (limit for our robot).
 ## The aim is to see all posible curvature values in the task space so that we can have idea of the robot's behaviour.
 ## This will help us to max, min state in RL environment.
-
+plt.rcParams["figure.figsize"] = (20,15)
 # parameters (kappa1, kappa2, kappa3, length1, length2, length3)
-size = 30000 # make it bigger to get more accurate result
+size = 10000 # make it bigger to get more accurate result
 kappa1 = np.random.uniform(low=-4, high=16, size=(size,)) # 1/m
 kappa2 = np.random.uniform(low=-4, high=16, size=(size,))
 kappa3 = np.random.uniform(low=-4, high=16, size=(size,))
@@ -64,7 +64,7 @@ x = []
 y = []
 plt.subplot(2, 2, 2)
 for i in range(size):
-    print(i)
+    print(f'Sample: {i}', end='\r')
     T1_cc = trans_mat_cc(kappa1[i],l)
     T1_tip = np.reshape(T1_cc[len(T1_cc)-1,:],(4,4),order='F');
     
@@ -79,6 +79,7 @@ for i in range(size):
     
     # Plot the trunk with three sections and point the section seperation
     #plt.scatter(T1_cc[0,12],T1_cc[0,13],linewidths=5,color = 'black')
+    
     plt.plot([-0.025, 0.025],[0,0],'black',linewidth=5)
     plt.plot(T1_cc[:,12],T1_cc[:,13],'b',linewidth=1,alpha=0.01)
     #plt.scatter(T1_cc[-1,12],T1_cc[-1,13],linewidths=5,color = 'black')
@@ -89,11 +90,22 @@ for i in range(size):
     x.append(T3_cc[-1,12])
     y.append(T3_cc[-1,13])
 
-plt.grid(visible=True)
-plt.title("Task Space of Planar Continuum Robot with Random Curvatures")
-plt.xlabel("X - Position [m]")
-plt.ylabel("Y - Position [m]")
+# plt.grid(linestyle=':', linewidth=1.5)
+# plt.title("Task Space of Planar Continuum Robot",fontsize=20,fontweight="bold")
+plt.xlabel("Position x - [m]",fontsize=20)
+plt.ylabel("Position y - [m]",fontsize=20)
+plt.savefig('../docs/images/task_space.png')
+plt.show()
 
+# %% 
+# To just see the task space without robot
+plt.scatter(x,y,linewidths=2,color = 'black')
+plt.grid(linestyle=':', linewidth=1.5)
+plt.title("Task Space of Planar Continuum Robot",fontsize=30,fontweight="bold")
+plt.xlabel("Position x - [m]",fontsize=30)
+plt.ylabel("Position y - [m]",fontsize=30)
+plt.savefig('../docs/images/task_space_2.png')
+plt.show()
 # %%  Section 3: Plotting the position of the robot for a given curvature
 
 # Uncommment the below code to see the position of the robot for a given curvature
