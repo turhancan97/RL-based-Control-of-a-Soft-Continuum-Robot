@@ -486,7 +486,7 @@ class continuumEnv(gym.Env):
         plt.plot(T2_cc[:,12],T2_cc[:,13],'r',linewidth=3)
         #plt.scatter(T2_cc[-1,12],T2_cc[-1,13],linewidths=5,color = 'black')
         plt.plot(T3_cc[:,12],T3_cc[:,13],'g',linewidth=3)
-        plt.scatter(T3_cc[-1,12],T3_cc[-1,13],linewidths=5,color = 'black',label='Initial Point')
+        plt.scatter(T3_cc[-1,12],T3_cc[-1,13],linewidths=5,color = 'orange',label='Initial Point')
 
         # End state
         # section 1 calculation
@@ -513,9 +513,9 @@ class continuumEnv(gym.Env):
         plt.scatter(x_pos,y_pos,25,linewidths=0.03,color = 'blue',alpha=0.2)
         plt.xlim([-0.4, 0.4])
         plt.ylim([-0.4, 0.4])
-        plt.xticks(fontsize=14)
-        plt.yticks(fontsize=14)
-        plt.legend(fontsize=14)
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+        plt.legend(fontsize=15)
         plt.grid(which='major',linewidth=0.7)
         plt.grid(which='minor',linewidth=0.5)
         # Show the minor ticks and grid.
