@@ -8,7 +8,9 @@
 #SBATCH --output=results_train.txt
 #SBATCH --error=errors.txt
 
-eval "$(conda shell.bash hook)"
+conda init bash
+source ~/miniconda3/etc/profile.d/conda.sh
 conda activate continuum-rl
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/
 
 python DDPG.py
