@@ -4,7 +4,7 @@
 #SBATCH -n 8
 #SBATCH --gres=gpu:01
 #SBATCH -w xeon-09
-#SBATCH --job-name=train_network
+#SBATCH --job-name=train
 #SBATCH --output=results_train.txt
 #SBATCH --error=errors.txt
 
