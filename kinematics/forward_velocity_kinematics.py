@@ -2,7 +2,7 @@
     Author: Turhan Can KARGIN
     Python Version: 3.9.7
     
-This forward_velociry_kinematics.py file contains all necessary kinematics functions for the project
+This forward_velocity_kinematics.py file contains all necessary kinematics functions for the project
 '''
 
 import numpy as np
