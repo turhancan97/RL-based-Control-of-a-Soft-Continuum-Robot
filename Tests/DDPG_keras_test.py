@@ -14,12 +14,9 @@ import time
 import random
 from env import continuumEnv
 from DDPG import OUActionNoise, policy
-
-env = continuumEnv()
-
-std_dev = 0.2
-ou_noise = OUActionNoise(mean=np.zeros(3), std_deviation=float(std_dev) * np.ones(3))
-
+from matplotlib import animation
+# %matplotlib notebook
+from IPython import display
 
 # %% Evaluate
 # Some of the initial and target states. Uncomment below if you want to see behavior of the agent for theses states.
@@ -32,104 +29,146 @@ ou_noise = OUActionNoise(mean=np.zeros(3), std_deviation=float(std_dev) * np.one
 # env.target_k2 = [12,-3,-4.0,4.712192928536007,16,-4,-3,-2,-2,-4.0,16.0][t]
 # env.target_k3 = [16,-1,-4.,2.8197409208656574,16,-4,-3,-2,-3,-4.0,11.824][t]
 
-state = env.reset() # generate random starting point for the robot and random target point.
-env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
-initial_state = state[0:2]
-error_store = [] # store the error value here
-x_pos = [] # store the x position value here
-y_pos = [] # store the y position here
-# kappa1_store = [] # store kappa 1 values
-# kappa2_store = [] # store kappa 2 values
-# kappa3_store = [] # store kappa 3 values
-# error_x = [] # store error in x axis
-# error_y = [] # store error in y axis
-i = 0
-# while True:
-for i in range(1000):
-    start = time.time()
-    tf_prev_state = tf.expand_dims(tf.convert_to_tensor(state), 0)
-    action = policy(tf_prev_state, ou_noise, add_noise = False) # policyde noise'i evaluate ederken 0 yap
-    # Recieve state and reward from environment.
-    # state, reward, done, info = env.step_1(action) # reward is -1 or 0 or 1
-    state, reward, done, info = env.step_2(action[0]) # reward is -(e^2)
-    x_pos.append(state[0])
-    y_pos.append(state[1])
-    # env.render() # uncomment for instant animation
-    # buffer.record((prev_state, action, reward, state))
-    # buffer.learn()
-    # update_target(target_actor.variables, actor_model.variables, tau)
-    # update_target(target_critic.variables, critic_model.variables, tau)
+storage = {store_name: {} for store_name in ['error', 'pos', 'kappa']}
+storage['error']['error_store'] = []
+storage['error']['x'] = []
+storage['error']['y'] = []
 
-    # print(prev_state)
-    print("{}th action".format(i))
-    print("Goal Position",state[2:4])
-    # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
-    print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), state)) # for step_2
-    print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
-    print("Reward is ", reward)
-    print("--------------------------------------------------------------------------------")
-    stop = time.time()
-    env.time += (stop - start)
-    error_store.append(math.sqrt(-1*reward))
-    # kappa1_store.append(env.kappa1)
-    # kappa2_store.append(env.kappa2)
-    # kappa3_store.append(env.kappa3)
-    # error_x.append(abs(state[0]-state[2]))
-    # error_y.append(abs(state[1]-state[3]))
-    
-    # End this episode when `done` is True
-    if done:
-        break
-    
+storage['pos']['x'] = []
+storage['pos']['y'] = []
+
+storage['kappa']['kappa1'] = []
+storage['kappa']['kappa2'] = []
+storage['kappa']['kappa3'] = []
+
+for _ in range(10):
+    env = continuumEnv()
+
+    std_dev = 0.2
+    ou_noise = OUActionNoise(mean=np.zeros(3), std_deviation=float(std_dev) * np.ones(3))
+
+    state = env.reset() # generate random starting point for the robot and random target point.
+    env.time = 0
+    env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
+    initial_state = state[0:2]
+
+    i = 0
+    env.render_init() # uncomment for animation
+    # while True:
+    for i in range(1500):
+        start = time.time()
+        tf_prev_state = tf.expand_dims(tf.convert_to_tensor(state), 0)
+        action = policy(tf_prev_state, ou_noise, add_noise = False) # policyde noise'i evaluate ederken 0 yap
+        # Recieve state and reward from environment.
+        # state, reward, done, info = env.step_error_comparison(action[0]) # reward is -1 or 0 or 1
+        # state, reward, done, info = env.step_minus_euclidean_square(action[0]) # reward is -(e^2)
+        #state, reward, done, info = env.step_distance_based(action[0]) # reward is du-1 - du
+        state, reward, done, info = env.step_minus_weighted_euclidean(action[0]) # -0.7*e
+        
+        storage['pos']['x'].append(state[0])
+        storage['pos']['y'].append(state[1])
+        env.render_calculate() # uncomment for animation
+        # buffer.record((prev_state, action, reward, state))
+        # buffer.learn()
+        # update_target(target_actor.variables, actor_model.variables, tau)
+        # update_target(target_critic.variables, critic_model.variables, tau)
+
+        # print(prev_state)
+        print("{}th action".format(i))
+        print("Goal Position",state[2:4])
+        # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
+        # print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), state)) # for step_minus_euclidean_square
+        print("Error: {0}, Current State: {1}".format(env.error, state)) # for step_error_comparison
+        print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
+        print("Reward is ", reward)
+        print("--------------------------------------------------------------------------------")
+        stop = time.time()
+        env.time += (stop - start)
+        # storage['error']['error_store'].append(math.sqrt(-1*reward)) # for step_minus_euclidean_square
+        storage['error']['error_store'].append(env.error) # for step_error_comparison
+        storage['kappa']['kappa1'].append(env.kappa1)
+        storage['kappa']['kappa2'].append(env.kappa2)
+        storage['kappa']['kappa3'].append(env.kappa3)
+        storage['error']['x'].append(abs(state[0]-state[2]))
+        storage['error']['y'].append(abs(state[1]-state[3]))
+        # print(env.position_dic)
+        
+        # End this episode when `done` is True
+        if done:
+            pass
+            #break
+        
 time.sleep(1)
-# %% Visualization
-plt.rcParams["figure.figsize"] = (8.5,5.0)
+print(f'{env.overshoot0} times robot tried to cross the task space')
+print(f'{env.overshoot1} times random goal was generated outside of the task space')
+print(f'Simulation took {(env.time)} seconds')
 
-env.visualization(x_pos,y_pos)
+# %% Visualization of the results
+############----------------###############
+## Adjust the Figure Size at the beginning ##
+plt.style.use('ggplot') # ggplot sytle plots
+plt.rcParams["figure.figsize"] = (10,8)
+plt.rcParams["xtick.labelsize"] = 7
+plt.rcParams["ytick.labelsize"] = 10
+plt.rcParams['font.family'] = 'monospace'
+plt.rcParams['figure.constrained_layout.use'] = True
+plt.rcParams["figure.titlesize"] = 'x-large'
+plt.rcParams['animation.ffmpeg_path'] = '/home/tkargin/miniconda3/envs/continuum-rl/bin/ffmpeg' 
+## plt.rcParams.keys() ## To see the plot adjustment parameters
+############----------------###############
+env.visualization(storage['pos']['x'],storage['pos']['y'])
 # plt.title(f"Initial Position is (x,y): ({initial_state[0]},{initial_state[1]}) & Target Position is (x,y): ({state[0]},{state[1]})",fontweight="bold")
 plt.xlabel("Position x [m]",fontsize=15)
 plt.ylabel("Position y [m]",fontsize=15)
 plt.show()
 env.close()
+# %%
+## uncomment below for animation 
+# ani = env.render()
+# video = ani.to_html5_video()
+# html = display.HTML(video)
+# display.display(html)
+# plt.close()
+# writergif = animation.FFMpegWriter(fps=30)
+# ani.save("result.gif",writer=writergif)
+# %%
+# As Subplots
+fig, axs = plt.subplots(2, 2)
+fig.tight_layout(h_pad=5, w_pad=5)
+axs[0, 0].plot(range(len(storage['error']['error_store'])),storage['error']['error_store'],c = 'red',linewidth=2,label='Total Error')
+axs[0, 0].set_xlabel("Steps\n (a)",fontsize=20)
+axs[0, 0].set_ylabel("Error",fontsize=20)
 
-# # As Subplots
-# fig, axs = plt.subplots(2, 2,figsize=(15, 7))
-# fig.tight_layout(h_pad=5, w_pad=5)
-# axs[0, 0].plot(range(len(error_store)),error_store,c = 'red',linewidth=2,label='Total Error')
-# axs[0, 0].set_xlabel("Steps\n (a)",fontsize=20)
-# axs[0, 0].set_ylabel("Error",fontsize=20)
+axs[0, 1].plot(range(len(storage['error']['x'])),storage['error']['x'],c = 'blue',linewidth=2, label = "X Axis")
+axs[0, 1].plot(range(len(storage['error']['y'])),storage['error']['y'],c = 'green',linewidth=2, label = "Y Axis")
+axs[0, 1].set_xlabel("Steps\n (b)",fontsize=20)
+axs[0, 1].set_ylabel("Error",fontsize=20)
 
-# axs[0, 1].plot(range(len(error_x)),error_x,c = 'blue',linewidth=2, label = "X Axis")
-# axs[0, 1].plot(range(len(error_y)),error_y,c = 'green',linewidth=2, label = "Y Axis")
-# axs[0, 1].set_xlabel("Steps\n (b)",fontsize=20)
-# axs[0, 1].set_ylabel("Error",fontsize=20)
+axs[1, 0].plot(range(len(storage['pos']['x'])),storage['pos']['x'],c = 'red',linewidth=2, label = "X Axis")
+axs[1, 0].axhline(y=state[2])
+axs[1, 0].plot(range(len(storage['pos']['y'])),storage['pos']['y'],c = 'green',linewidth=2, label = "Y Axis")
+axs[1, 0].axhline(y=state[3])
+axs[1, 0].set_xlabel("Steps\n (c)",fontsize=20)
+axs[1, 0].set_ylabel("Position - [m]",fontsize=20)
 
-# axs[1, 0].plot(range(len(x_pos)),x_pos,c = 'red',linewidth=2, label = "X Axis")
-# axs[1, 0].axhline(y=state[2])
-# axs[1, 0].plot(range(len(y_pos)),y_pos,c = 'green',linewidth=2, label = "Y Axis")
-# axs[1, 0].axhline(y=state[3])
-# axs[1, 0].set_xlabel("Steps\n (c)",fontsize=20)
-# axs[1, 0].set_ylabel("Position - [m]",fontsize=20)
+axs[1, 1].plot(range(len(storage['kappa']['kappa1'])),storage['kappa']['kappa1'],c = 'blue',linewidth=2, label = "Curvature-1")
+axs[1, 1].plot(range(len(storage['kappa']['kappa2'])),storage['kappa']['kappa2'],c = 'green',linewidth=2, label = "Curvature-2")
+axs[1, 1].plot(range(len(storage['kappa']['kappa3'])),storage['kappa']['kappa3'],c = 'red',linewidth=2, label = "Curvature-3")
+axs[1, 1].set_xlabel("Steps\n (d)",fontsize=20)
+axs[1, 1].set_ylabel(r"Curvature Values $\left [\frac{1}{m}  \right ]$",fontsize=20)
 
-# axs[1, 1].plot(range(len(kappa1_store)),kappa1_store,c = 'blue',linewidth=2, label = "Curvature-1")
-# axs[1, 1].plot(range(len(kappa2_store)),kappa2_store,c = 'green',linewidth=2, label = "Curvature-2")
-# axs[1, 1].plot(range(len(kappa3_store)),kappa3_store,c = 'red',linewidth=2, label = "Curvature-3")
-# axs[1, 1].set_xlabel("Steps\n (d)",fontsize=20)
-# axs[1, 1].set_ylabel(r"Curvature Values $\left [\frac{1}{m}  \right ]$",fontsize=20)
-
-# for ax in axs.flat:
-#     #ax.set_xticks(fontsize=14)
-#     #ax.set_yticks(fontsize=14)
-#     ax.legend(fontsize=14)
-#     ax.grid(which='major',linewidth=0.7)
-#     ax.grid(which='minor',linewidth=0.5)
-#     ax.minorticks_on()
-
-# plt.rcParams["figure.figsize"] = (6.5,3.4)
-# ## Uncomment wanted plot to see the results
-# # # Error
-# plt.plot(range(len(error_store)),error_store,c = 'red',linewidth=2,label='Total Error')
-# # plt.title("Error Plot of the Test Simulation")
+for ax in axs.flat:
+    #ax.set_xticks(fontsize=14)
+    #ax.set_yticks(fontsize=14)
+    ax.legend(fontsize=14)
+    ax.grid(which='major',linewidth=0.7)
+    ax.grid(which='minor',linewidth=0.5)
+    ax.minorticks_on()
+# %%
+## Uncomment wanted plot to see the results
+# # Error
+# plt.plot(range(len(storage['error']['error_store'])),storage['error']['error_store'],c = 'red',linewidth=2,label='Total Error')
+# plt.title("Error Plot of the Test Simulation")
 # plt.xlabel("Step",fontsize=20)
 # plt.ylabel("Error",fontsize=20)
 # plt.legend(fontsize=15)
@@ -141,7 +180,7 @@ env.close()
 # plt.show()
 
 # # X Position
-# plt.plot(range(len(x_pos)),x_pos,c = 'green',linewidth=2)
+# plt.plot(range(len(storage['pos']['x'])),storage['pos']['x'],c = 'green',linewidth=2)
 # plt.axhline(y=state[2])
 # plt.grid()
 # plt.legend(["Simulation Result","Reference Signal"])
@@ -151,7 +190,7 @@ env.close()
 # plt.show()
 
 # # Y Position
-# plt.plot(range(len(y_pos)),y_pos,c = 'red',linewidth=2)
+# plt.plot(range(len(storage['pos']['y'])),storage['pos']['y'],c = 'red',linewidth=2)
 # plt.axhline(y=state[3])
 # plt.grid()
 # plt.legend(["Simulation Result","Reference Signal"])
@@ -161,11 +200,11 @@ env.close()
 # plt.show()
 
 # # X-Y Position
-# plt.plot(range(len(x_pos)),x_pos,c = 'red',linewidth=2, label = "X Axis")
+# plt.plot(range(len(storage['pos']['x'])),storage['pos']['x'],c = 'red',linewidth=2, label = "X Axis")
 # plt.axhline(y=state[2])
-# plt.plot(range(len(y_pos)),y_pos,c = 'green',linewidth=2, label = "Y Axis")
+# plt.plot(range(len(storage['pos']['y'])),storage['pos']['y'],c = 'green',linewidth=2, label = "Y Axis")
 # plt.axhline(y=state[3],label='Reference Signal')
-# # plt.title("Trajectory on the X-Y Axis")
+# plt.title("Trajectory on the X-Y Axis")
 # plt.xlabel("Step",fontsize=20)
 # plt.ylabel("Position [m]",fontsize=20)
 # plt.xticks(fontsize=15)
@@ -177,38 +216,38 @@ env.close()
 # plt.minorticks_on()
 # plt.show()
 
-# Kappa Plots
-# plt.plot(range(len(kappa1_store)),kappa1_store,c = 'blue',linewidth=2, label = "Curvature-1")
-# plt.plot(range(len(kappa2_store)),kappa2_store,c = 'green',linewidth=2, label = "Curvature-2")
-# plt.plot(range(len(kappa3_store)),kappa3_store,c = 'red',linewidth=2, label = "Curvature-3")
+# # Kappa Plots
+# plt.plot(range(len(storage['kappa']['kappa1'])),storage['kappa']['kappa1'],c = 'blue',linewidth=2, label = "Curvature-1")
+# plt.plot(range(len(storage['kappa']['kappa2'])),storage['kappa']['kappa2'],c = 'green',linewidth=2, label = "Curvature-2")
+# plt.plot(range(len(storage['kappa']['kappa3'])),storage['kappa']['kappa3'],c = 'red',linewidth=2, label = "Curvature-3")
 # plt.title("Change of Curvature Values Over Time")
 # plt.xlabel("Step",fontsize=20)
 # plt.ylabel(r"Curvature Values $\left [\frac{1}{m}  \right ]$",fontsize=18)
 # plt.legend(fontsize=15)
 # plt.xticks(fontsize=15)
 # plt.yticks(fontsize=15)
-# plt.grid(which='major',linewidth=0.7)
+# plt.grid(which='major',linewidth=0.7)
 # plt.grid(which='minor',linewidth=0.5)
 # plt.minorticks_on()
 # plt.show()
 
-# X Error
-# plt.plot(range(len(error_x)),error_x,c = 'green',linewidth=2)
+# # X Error
+# plt.plot(range(len(storage['error']['x'])),storage['error']['x'],c = 'green',linewidth=2)
 # plt.title("Error on the X Axis")
 # plt.xlabel("Step")
 # plt.ylabel("Error")
 # plt.show()
 
-# Y Error
-# plt.plot(range(len(error_y)),error_y,c = 'blue',linewidth=2)
+# # Y Error
+# plt.plot(range(len(storage['error']['y'])),storage['error']['y'],c = 'blue',linewidth=2)
 # plt.title("Error on the Y Axis")
 # plt.xlabel("Step")
 # plt.ylabel("Error")
 # plt.show()
 
-# X-Y Error
-# plt.plot(range(len(error_x)),error_x,c = 'blue',linewidth=2, label = "X Axis")
-# plt.plot(range(len(error_y)),error_y,c = 'green',linewidth=2, label = "Y Axis")
+# # X-Y Error
+# plt.plot(range(len(storage['error']['x'])),storage['error']['x'],c = 'blue',linewidth=2, label = "X Axis")
+# plt.plot(range(len(storage['error']['y'])),storage['error']['y'],c = 'green',linewidth=2, label = "Y Axis")
 # plt.title("Error on the X-Y Axis")
 # plt.xlabel("Step",fontsize=20)
 # plt.ylabel("Error",fontsize=20)
@@ -218,46 +257,61 @@ env.close()
 # plt.grid(which='major',linewidth=0.7)
 # plt.grid(which='minor',linewidth=0.5)
 # plt.minorticks_on()
-# plt.show()
+# plt.show()
 
 # %%
-# theList_x = error_x
-# N = 1000
-# subList_x = [theList_x[n:n+N] for n in range(0, len(theList_x), N)]
-# error_x_np = np.array(subList_x)
-# error_x_mean = error_x_np.mean(axis=0)
-# error_x_std = error_x_np.std(axis=0)
+N = 1500
 
-# theList_y = error_y
-# N = 1000
-# subList_y = [theList_y[n:n+N] for n in range(0, len(theList_y), N)]
-# error_y_np = np.array(subList_y)
-# error_y_mean = error_y_np.mean(axis=0)
-# error_y_mean = error_y_np.std(axis=0)
+theList_x = storage['error']['x']
+subList_x = [theList_x[n:n+N] for n in range(0, len(theList_x), N)]
+error_x_np = np.array(subList_x)
+error_x_mean = error_x_np.mean(axis=0)
+error_x_std = error_x_np.std(axis=0)
 
-# # X Error
-# plt.plot(range(len(error_x_mean)),error_x_mean,c = 'blue',linewidth=3)
-# plt.fill_between(range(len(error_x_mean)),error_x_mean-error_x_std,error_x_mean+error_x_std,alpha=0.2)
-# plt.title("Confidence Interval of 10 episodes Mean Error on the X Axis")
-# plt.xlabel("Step")
-# plt.ylabel("Error")
-# plt.show()
+theList_y = storage['error']['y']
+subList_y = [theList_y[n:n+N] for n in range(0, len(theList_y), N)]
+error_y_np = np.array(subList_y)
+error_y_mean = error_y_np.mean(axis=0)
+error_y_std = error_y_np.std(axis=0)
 
-# # # Y Error
-# plt.plot(range(len(error_y_mean)),error_y_mean,c = 'red',linewidth=3)
-# plt.fill_between(range(len(error_y_mean)),error_y_mean-error_y_mean,error_y_mean+error_y_mean,alpha=0.2,color ="r")
-# plt.title("Confidence Interval of 10 episodes Mean Error on the Y Axis")
-# plt.xlabel("Step")
-# plt.ylabel("Error")
-# plt.show()
+theList_combined = storage['error']['error_store']
+subList_combined = [theList_combined[n:n+N] for n in range(0, len(theList_combined), N)]
+error_combined_np = np.array(subList_combined)
+error_combined_mean = error_combined_np.mean(axis=0)
+error_combined_std = error_combined_np.std(axis=0)
 
-# # X-Y Error
-# plt.plot(range(len(error_x_mean)),error_x_mean,c = 'blue',linewidth=2, label = "X Axis")
-# plt.fill_between(range(len(error_x_mean)),error_x_mean-error_x_std,error_x_mean+error_x_std,alpha=0.3)
-# plt.plot(range(len(error_y_mean)),error_y_mean,c = 'red',linewidth=2, label = "Y Axis")
-# plt.fill_between(range(len(error_y_mean)),error_y_mean-error_y_mean,error_y_mean+error_y_mean,alpha=0.1,color ="r")
-# plt.title("Confidence Interval of 10 episodes Mean Error on the X-Y Axis")
-# plt.xlabel("Step")
-# plt.ylabel("Error")
-# plt.legend()
-# plt.show()
+# X Error
+plt.plot(range(len(error_x_mean)),error_x_mean,c = 'blue',linewidth=3)
+plt.fill_between(range(len(error_x_mean)),error_x_mean-error_x_std,error_x_mean+error_x_std,alpha=0.2,color='b')
+plt.title("Confidence Interval of 10 episodes Mean Error on the X Axis")
+plt.xlabel("Step")
+plt.ylabel("Error")
+plt.show()
+
+# # Y Error
+plt.plot(range(len(error_y_mean)),error_y_mean,c = 'red',linewidth=3)
+plt.fill_between(range(len(error_y_mean)),error_y_mean-error_y_std,error_y_mean+error_y_std,alpha=0.2,color ="r")
+plt.title("Confidence Interval of 10 episodes Mean Error on the Y Axis")
+plt.xlabel("Step")
+plt.ylabel("Error")
+plt.show()
+
+# X-Y Error
+plt.plot(range(len(error_x_mean)),error_x_mean,c = 'blue',linewidth=2, label = "X Axis")
+plt.fill_between(range(len(error_x_mean)),error_x_mean-error_x_std,error_x_mean+error_x_std,alpha=0.3,color='b')
+plt.plot(range(len(error_y_mean)),error_y_mean,c = 'red',linewidth=2, label = "Y Axis")
+plt.fill_between(range(len(error_y_mean)),error_y_mean-error_y_std,error_y_mean+error_y_std,alpha=0.1,color ="r")
+plt.title("Confidence Interval of 10 episodes Mean Error on the X-Y Axis")
+plt.xlabel("Step")
+plt.ylabel("Error")
+plt.legend()
+plt.show()
+
+# Combined Error
+plt.plot(range(len(error_combined_mean)),error_combined_mean,c = 'black',linewidth=3)
+plt.fill_between(range(len(error_combined_mean)),error_combined_mean-error_combined_std,error_combined_mean+error_combined_std,alpha=0.2,color ="k")
+plt.title("Confidence Interval of 10 episodes Mean Error on the Y Axis")
+plt.xlabel("Step")
+plt.ylabel("Error")
+plt.show()
+# %%
