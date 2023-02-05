@@ -1,0 +1,3 @@
+2023-01-19 10:29:36.476790: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-01-19 10:29:37.951346: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1525] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 4561 MB memory:  -> device: 0, name: Tesla P40, pci bus id: 0000:81:00.0, compute capability: 6.1
