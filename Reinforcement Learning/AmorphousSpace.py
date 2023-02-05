@@ -46,7 +46,7 @@ class AmorphousSpace(spaces.Space):
                 return True
         return False
 
-    def seed(self, x):
+    def clip(self, x):
         """Clip a point to the bounds of the amorphous space."""
         if self.contains(x):
             return x
