@@ -7,8 +7,19 @@
 import sys # to include the path of the package
 sys.path.append('../')
 import numpy as np
-import matplotlib.pyplot as plt
 from kinematics.forward_velocity_kinematics import trans_mat_cc, coupletransformations
+############----------------###############
+## Adjust the Figure Size at the beginning ##
+import matplotlib.pyplot as plt
+plt.style.use('ggplot') # ggplot sytle plots
+plt.rcParams["figure.figsize"] = (10,8)
+plt.rcParams["xtick.labelsize"] = 7
+plt.rcParams["ytick.labelsize"] = 10
+plt.rcParams['font.family'] = 'monospace'
+plt.rcParams['figure.constrained_layout.use'] = True
+plt.rcParams["figure.titlesize"] = 'x-large'
+## plt.rcParams.keys() ## To see the plot adjustment parameters
+############----------------###############
 
 # from configuration space (kappa, length) to task space (x,y)
 # %% Section 1: With known kappa values
@@ -52,7 +63,7 @@ plt.show()
 ## In this section, the all curvature values will be uniformly random and beween -4 and 16 (limit for our robot).
 ## The aim is to see all posible curvature values in the task space so that we can have idea of the robot's behaviour.
 ## This will help us to max, min state in RL environment.
-plt.rcParams["figure.figsize"] = (20.0,15.0)
+
 # parameters (kappa1, kappa2, kappa3, length1, length2, length3)
 size = 10000 # make it bigger to get more accurate result
 kappa1 = np.random.uniform(low=-4, high=16, size=(size,)) # 1/m
