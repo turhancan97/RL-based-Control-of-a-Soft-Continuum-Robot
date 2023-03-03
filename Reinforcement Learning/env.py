@@ -867,9 +867,9 @@ class continuumEnv(gym.Env): #TODO: Change it to 'ContinuumEnv' to follow standa
        
        # Random target point
        # (Random curvatures are given so that forward kinematics equation will generate random target position)
-       self.target_k1 = -2 # np.random.uniform(low=-4, high=16)
-       self.target_k2 = -2 # np.random.uniform(low=-4, high=16)
-       self.target_k3 = -2 # np.random.uniform(low=-4, high=16)
+       self.target_k1 =  6.2 # np.random.uniform(low=-4, high=16)
+       self.target_k2 =  6.2 # np.random.uniform(low=-4, high=16)
+       self.target_k3 =  6.2 # np.random.uniform(low=-4, high=16)
        
        T3_target = three_section_planar_robot(self.target_k1,self.target_k2,self.target_k3, self.l) # Generate the target point for the robot
        goal_x,goal_y = np.array([T3_target[0,3],T3_target[1,3]]) # Extract the x and y coordinates of the target
