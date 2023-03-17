@@ -172,13 +172,13 @@ def get_actor():
     inputs = layers.Input(shape=(num_states,))
     # inputs = layers.Dropout(0.2)(inputs) # delete
     # inputs = layers.BatchNormalization()(inputs)  # delete
-    out = layers.Dense(512, activation="relu")(inputs) # 256
+    out = layers.Dense(256, activation="relu")(inputs) # 256
     # out = layers.BatchNormalization()(out)  # delete
     out = layers.Dense(256, activation="relu")(out) # 256
     # out = layers.BatchNormalization()(out)  # delete
-    out = layers.Dense(256, activation="relu")(out) # delete
+    # out = layers.Dense(256, activation="relu")(out) # delete
     # out = layers.BatchNormalization()(out)  # delete
-    out = layers.Dense(512, activation="relu")(out) # delete
+    # out = layers.Dense(512, activation="relu")(out) # delete
     # out = layers.BatchNormalization()(out) # delete
     # out = layers.Dense(256, activation="relu")(out) # delete
     
@@ -197,21 +197,21 @@ def get_critic():
     state_input = layers.Input(shape=(num_states))
     # state_input = layers.Dropout(0.2)(state_input) # delete
     # state_input = layers.BatchNormalization()(state_input) # delete
-    state_out = layers.Dense(32, activation="relu")(state_input) # 16
+    state_out = layers.Dense(16, activation="relu")(state_input) # 16
     # state_out = layers.BatchNormalization()(state_out) # delete
-    state_out = layers.Dense(64, activation="relu")(state_out) # 32
+    state_out = layers.Dense(32, activation="relu")(state_out) # 32
     # state_out = layers.BatchNormalization()(state_out) # delete
-    state_out = layers.Dense(128, activation="relu")(state_out) # delete
+    # state_out = layers.Dense(128, activation="relu")(state_out) # delete
 
     # Action as input
     action_input = layers.Input(shape=(num_actions))
     # action_input = layers.Dropout(0.2)(action_input) # delete
     # action_input = layers.BatchNormalization()(action_input) # delete
-    action_out = layers.Dense(128, activation="relu")(action_input) # 32
+    action_out = layers.Dense(32, activation="relu")(action_input) # 32
     # action_out = layers.BatchNormalization()(action_out) # delete
-    action_out = layers.Dense(64, activation="relu")(action_out) # delete
+    # action_out = layers.Dense(64, activation="relu")(action_out) # delete
     # action_out = layers.BatchNormalization()(action_out) # delete
-    action_out = layers.Dense(32, activation="relu")(action_out) # delete
+    # action_out = layers.Dense(32, activation="relu")(action_out) # delete
     
     # Both are passed through seperate layer before concatenating
     concat = layers.Concatenate()([state_out, action_out])
@@ -220,7 +220,7 @@ def get_critic():
     # out = layers.BatchNormalization()(out) # delete
     out = layers.Dense(256, activation="relu")(out) # 256
     # out = layers.BatchNormalization()(out)  # delete
-    out = layers.Dense(128, activation="relu")(out) # delete
+    # out = layers.Dense(128, activation="relu")(out) # delete
     # out = layers.BatchNormalization()(out) # delete
     # out = layers.Dense(256, activation="relu")(out) # delete
     # out = layers.BatchNormalization()(out)  # delete
@@ -262,19 +262,19 @@ target_critic.set_weights(critic_model.get_weights())
 # target_critic.load_weights("continuum_target_critic.h5")
 
 # Learning rate for actor-critic models
-critic_lr = 1e-4        # learning rate of the critic
-actor_lr = 5e-5         # learning rate of the actor
+critic_lr = 1e-3        # learning rate of the critic
+actor_lr = 1e-4         # learning rate of the actor
 
 critic_optimizer = tf.keras.optimizers.Adam(critic_lr)
 actor_optimizer = tf.keras.optimizers.Adam(actor_lr)
 
-total_episodes = 500
+total_episodes = 250
 # Discount factor for future rewards
 gamma = 0.99            # discount factor
 # Used to update target networks
-tau = 1e-3              # for soft update of target parameters
+tau = 5e-3              # for soft update of target parameters
 
-buffer = Buffer(int(5e6), 256) # Buffer(50000, 64)
+buffer = Buffer(int(5e5), 128) # Buffer(50000, 64)
 
 # %% Train or Evaluate
 # To store reward history of each episode
@@ -312,7 +312,7 @@ if TRAIN:
         episodic_reward = 0
     
         # while True:
-        for i in range(1500):
+        for i in range(1000):
             # Uncomment this to see the Actor in action
             # But not in a python notebook.
             # env.render()
@@ -321,8 +321,8 @@ if TRAIN:
             action = policy(tf_prev_state, ou_noise)
     
             # Recieve state and reward from environment.
-            # state, reward, done, info = env.step_minus_euclidean_square(action[0]) # -e^2
-            state, reward, done, info = env.step_minus_weighted_euclidean(action[0]) # -0.7*e
+            state, reward, done, info = env.step_minus_euclidean_square(action[0]) # -e^2
+            # state, reward, done, info = env.step_minus_weighted_euclidean(action[0]) # -0.7*e
             # state, reward, done, info = env.step_error_comparison(action[0]) # reward is -1.00 or -0.50 or 1.00
             # state, reward, done, info = env.step_distance_based(action[0]) # reward is du-1 - du
             

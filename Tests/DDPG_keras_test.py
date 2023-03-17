@@ -29,7 +29,7 @@ from IPython import display
 # env.target_k2 = [12,-3,-4.0,4.712192928536007,16,-4,-3,-2,-2,-4.0,16.0][t]
 # env.target_k3 = [16,-1,-4.,2.8197409208656574,16,-4,-3,-2,-3,-4.0,11.824][t]
 
-storage = {store_name: {} for store_name in ['error', 'pos', 'kappa']}
+storage = {store_name: {} for store_name in ['error', 'pos', 'kappa','reward']}
 storage['error']['error_store'] = []
 storage['error']['x'] = []
 storage['error']['y'] = []
@@ -41,7 +41,10 @@ storage['kappa']['kappa1'] = []
 storage['kappa']['kappa2'] = []
 storage['kappa']['kappa3'] = []
 
-for _ in range(10):
+storage['reward']['value'] = []
+storage['reward']['effectiveness'] = []
+
+for _ in range(1):
     env = continuumEnv()
 
     std_dev = 0.2
@@ -55,15 +58,16 @@ for _ in range(10):
     i = 0
     env.render_init() # uncomment for animation
     # while True:
-    for i in range(1500):
+    for i in range(1000):
         start = time.time()
         tf_prev_state = tf.expand_dims(tf.convert_to_tensor(state), 0)
         action = policy(tf_prev_state, ou_noise, add_noise = False) # policyde noise'i evaluate ederken 0 yap
+        
         # Recieve state and reward from environment.
-        # state, reward, done, info = env.step_error_comparison(action[0]) # reward is -1 or 0 or 1
-        # state, reward, done, info = env.step_minus_euclidean_square(action[0]) # reward is -(e^2)
-        #state, reward, done, info = env.step_distance_based(action[0]) # reward is du-1 - du
+        # state, reward, done, info = env.step_minus_euclidean_square(action[0]) # -e^2
+        # state, reward, done, info = env.step_error_comparison(action[0]) # reward is -1.00 or -0.50 or 1.00
         state, reward, done, info = env.step_minus_weighted_euclidean(action[0]) # -0.7*e
+        # state, reward, done, info = env.step_distance_based(action[0]) # reward is du-1 - du
         
         storage['pos']['x'].append(state[0])
         storage['pos']['y'].append(state[1])
@@ -77,6 +81,7 @@ for _ in range(10):
         print("{}th action".format(i))
         print("Goal Position",state[2:4])
         # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
+        # TODO: Make it if-else to show prints below regarding to the reward
         # print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), state)) # for step_minus_euclidean_square
         print("Error: {0}, Current State: {1}".format(env.error, state)) # for step_error_comparison
         print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
@@ -85,34 +90,42 @@ for _ in range(10):
         stop = time.time()
         env.time += (stop - start)
         # storage['error']['error_store'].append(math.sqrt(-1*reward)) # for step_minus_euclidean_square
-        storage['error']['error_store'].append(env.error) # for step_error_comparison
+        storage['error']['error_store'].append((env.error)) # for step_error_comparison
         storage['kappa']['kappa1'].append(env.kappa1)
         storage['kappa']['kappa2'].append(env.kappa2)
         storage['kappa']['kappa3'].append(env.kappa3)
         storage['error']['x'].append(abs(state[0]-state[2]))
         storage['error']['y'].append(abs(state[1]-state[3]))
+        storage['reward']['value'].append(reward)
         # print(env.position_dic)
         
         # End this episode when `done` is True
         if done:
             pass
-            #break
+            # break
+    storage['reward']['effectiveness'].append(i)
+        
+            
         
 time.sleep(1)
 print(f'{env.overshoot0} times robot tried to cross the task space')
 print(f'{env.overshoot1} times random goal was generated outside of the task space')
 print(f'Simulation took {(env.time)} seconds')
+effectiveness_score = np.mean(storage['reward']['effectiveness'])
+print(f'Average Effectiveness Score is {effectiveness_score}')
 
 # %% Visualization of the results
 ############----------------###############
 ## Adjust the Figure Size at the beginning ##
 plt.style.use('ggplot') # ggplot sytle plots
-plt.rcParams["figure.figsize"] = (10,8)
-plt.rcParams["xtick.labelsize"] = 7
-plt.rcParams["ytick.labelsize"] = 10
+plt.rcParams["figure.figsize"] = (20,10)
+plt.rcParams['legend.fontsize'] = 'large'
+plt.rcParams["xtick.labelsize"] = 20
+plt.rcParams["ytick.labelsize"] = 20
 plt.rcParams['font.family'] = 'monospace'
 plt.rcParams['figure.constrained_layout.use'] = True
-plt.rcParams["figure.titlesize"] = 'x-large'
+plt.rcParams["axes.titlesize"] = 'xx-large'
+plt.rcParams["axes.labelsize"] = 'xx-large'
 plt.rcParams['animation.ffmpeg_path'] = '/home/tkargin/miniconda3/envs/continuum-rl/bin/ffmpeg' 
 ## plt.rcParams.keys() ## To see the plot adjustment parameters
 ############----------------###############
@@ -260,7 +273,7 @@ for ax in axs.flat:
 # plt.show()
 
 # %%
-N = 1500
+N = 1000
 
 theList_x = storage['error']['x']
 subList_x = [theList_x[n:n+N] for n in range(0, len(theList_x), N)]
@@ -283,7 +296,7 @@ error_combined_std = error_combined_np.std(axis=0)
 # X Error
 plt.plot(range(len(error_x_mean)),error_x_mean,c = 'blue',linewidth=3)
 plt.fill_between(range(len(error_x_mean)),error_x_mean-error_x_std,error_x_mean+error_x_std,alpha=0.2,color='b')
-plt.title("Confidence Interval of 10 episodes Mean Error on the X Axis")
+plt.title("10 episodes of Distance Error on the X Axis with Confidence Band")
 plt.xlabel("Step")
 plt.ylabel("Error")
 plt.show()
@@ -291,7 +304,7 @@ plt.show()
 # # Y Error
 plt.plot(range(len(error_y_mean)),error_y_mean,c = 'red',linewidth=3)
 plt.fill_between(range(len(error_y_mean)),error_y_mean-error_y_std,error_y_mean+error_y_std,alpha=0.2,color ="r")
-plt.title("Confidence Interval of 10 episodes Mean Error on the Y Axis")
+plt.title("10 episodes of Distance Error on the Y Axis with Confidence Band")
 plt.xlabel("Step")
 plt.ylabel("Error")
 plt.show()
@@ -301,7 +314,7 @@ plt.plot(range(len(error_x_mean)),error_x_mean,c = 'blue',linewidth=2, label = "
 plt.fill_between(range(len(error_x_mean)),error_x_mean-error_x_std,error_x_mean+error_x_std,alpha=0.3,color='b')
 plt.plot(range(len(error_y_mean)),error_y_mean,c = 'red',linewidth=2, label = "Y Axis")
 plt.fill_between(range(len(error_y_mean)),error_y_mean-error_y_std,error_y_mean+error_y_std,alpha=0.1,color ="r")
-plt.title("Confidence Interval of 10 episodes Mean Error on the X-Y Axis")
+plt.title("10 episodes of Distance Error on the X-Y Axis with Confidence Band")
 plt.xlabel("Step")
 plt.ylabel("Error")
 plt.legend()
@@ -310,8 +323,13 @@ plt.show()
 # Combined Error
 plt.plot(range(len(error_combined_mean)),error_combined_mean,c = 'black',linewidth=3)
 plt.fill_between(range(len(error_combined_mean)),error_combined_mean-error_combined_std,error_combined_mean+error_combined_std,alpha=0.2,color ="k")
-plt.title("Confidence Interval of 10 episodes Mean Error on the Y Axis")
+plt.title("10 episodes of Total Distance Error with Confidence Band")
 plt.xlabel("Step")
 plt.ylabel("Error")
+plt.show()
+# %% Plot Rewards
+plt.plot(storage['reward']['value'],linewidth=4)
+plt.xlabel("Step")
+plt.ylabel("Reward 4")
 plt.show()
 # %%
