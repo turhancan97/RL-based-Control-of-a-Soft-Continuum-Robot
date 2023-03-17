@@ -104,9 +104,7 @@ for _ in range(1):
             pass
             # break
     storage['reward']['effectiveness'].append(i)
-        
-            
-        
+                           
 time.sleep(1)
 print(f'{env.overshoot0} times robot tried to cross the task space')
 print(f'{env.overshoot1} times random goal was generated outside of the task space')
@@ -115,20 +113,6 @@ effectiveness_score = np.mean(storage['reward']['effectiveness'])
 print(f'Average Effectiveness Score is {effectiveness_score}')
 
 # %% Visualization of the results
-############----------------###############
-## Adjust the Figure Size at the beginning ##
-plt.style.use('ggplot') # ggplot sytle plots
-plt.rcParams["figure.figsize"] = (20,10)
-plt.rcParams['legend.fontsize'] = 'large'
-plt.rcParams["xtick.labelsize"] = 20
-plt.rcParams["ytick.labelsize"] = 20
-plt.rcParams['font.family'] = 'monospace'
-plt.rcParams['figure.constrained_layout.use'] = True
-plt.rcParams["axes.titlesize"] = 'xx-large'
-plt.rcParams["axes.labelsize"] = 'xx-large'
-plt.rcParams['animation.ffmpeg_path'] = '/home/tkargin/miniconda3/envs/continuum-rl/bin/ffmpeg' 
-## plt.rcParams.keys() ## To see the plot adjustment parameters
-############----------------###############
 env.visualization(storage['pos']['x'],storage['pos']['y'])
 # plt.title(f"Initial Position is (x,y): ({initial_state[0]},{initial_state[1]}) & Target Position is (x,y): ({state[0]},{state[1]})",fontweight="bold")
 plt.xlabel("Position x [m]",fontsize=15)
