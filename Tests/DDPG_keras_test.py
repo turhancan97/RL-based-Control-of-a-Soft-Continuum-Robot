@@ -119,14 +119,14 @@ plt.ylabel("Position y [m]",fontsize=15)
 plt.show()
 env.close()
 # %%
-## uncomment below for animation 
+# # uncomment below for animation 
 # ani = env.render()
 # video = ani.to_html5_video()
 # html = display.HTML(video)
 # display.display(html)
 # plt.close()
 # writergif = animation.FFMpegWriter(fps=30)
-# ani.save("result.gif",writer=writergif)
+# ani.save("../docs/videos/result.gif",writer=writergif)
 # %%
 # As Subplots
 sub_plot_various_results(error_store = storage['error']['error_store'],
