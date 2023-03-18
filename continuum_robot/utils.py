@@ -125,28 +125,57 @@ def reward_log10_visualization(ep_reward_list, avg_reward_list):
 
 def plot_various_results(plot_choice,error_store,error_x,error_y,pos_x,pos_y,kappa_1,kappa_2,kappa_3,goal_x,goal_y):
     if plot_choice == 1:
-        plt.ylabel("Error",fontsize=20)
-        plt.legend(fontsize=15)
         # Error
         plt.plot(range(len(error_store)),error_store,c = 'red',linewidth=2,label='Total Error')
         plt.title("Error Plot of the Test Simulation")
+        plt.ylabel("Error",fontsize=20)
+        plt.xlabel("Step",fontsize=20)
+        plt.xticks(fontsize=15)
+        plt.yticks(fontsize=15)
+        plt.grid(which='major',linewidth=0.7)
+        plt.grid(which='minor',linewidth=0.5)
+        plt.minorticks_on()
+        plt.legend(fontsize=15)
         plt.show()
 
         # X Error
         plt.plot(range(len(error_x)),error_x,c = 'green',linewidth=2)
         plt.title("Error on the X Axis")
+        plt.ylabel("Error",fontsize=20)
+        plt.xlabel("Step",fontsize=20)
+        plt.xticks(fontsize=15)
+        plt.yticks(fontsize=15)
+        plt.grid(which='major',linewidth=0.7)
+        plt.grid(which='minor',linewidth=0.5)
+        plt.minorticks_on()
         plt.show()
 
         # Y Error
         plt.plot(range(len(error_y)),error_y,c = 'blue',linewidth=2)
         plt.title("Error on the Y Axis")
+        plt.ylabel("Error",fontsize=20)
+        plt.xlabel("Step",fontsize=20)
+        plt.xticks(fontsize=15)
+        plt.yticks(fontsize=15)
+        plt.grid(which='major',linewidth=0.7)
+        plt.grid(which='minor',linewidth=0.5)
+        plt.minorticks_on()
         plt.show()
 
         # X-Y Error
         plt.plot(range(len(error_x)),error_x,c = 'blue',linewidth=2, label = "X Axis")
         plt.plot(range(len(error_y)),error_y,c = 'green',linewidth=2, label = "Y Axis")
         plt.title("Error on the X-Y Axis")
+        plt.ylabel("Error",fontsize=20)
+        plt.xlabel("Step",fontsize=20)
+        plt.xticks(fontsize=15)
+        plt.yticks(fontsize=15)
+        plt.grid(which='major',linewidth=0.7)
+        plt.grid(which='minor',linewidth=0.5)
+        plt.minorticks_on()
+        plt.legend(fontsize=15)
         plt.show()
+
     elif plot_choice == 2:
         # X Position
         plt.plot(range(len(pos_x)),pos_x,c = 'green',linewidth=2)
@@ -154,6 +183,12 @@ def plot_various_results(plot_choice,error_store,error_x,error_y,pos_x,pos_y,kap
         plt.legend(["Simulation Result","Reference Signal"])
         plt.title("Trajectory on the X Axis")
         plt.ylabel("X [m]")
+        plt.xlabel("Step",fontsize=20)
+        plt.xticks(fontsize=15)
+        plt.yticks(fontsize=15)
+        plt.grid(which='major',linewidth=0.7)
+        plt.grid(which='minor',linewidth=0.5)
+        plt.minorticks_on()
         plt.show()
 
         # Y Position
@@ -162,6 +197,12 @@ def plot_various_results(plot_choice,error_store,error_x,error_y,pos_x,pos_y,kap
         plt.legend(["Simulation Result","Reference Signal"])
         plt.title("Trajectory on the Y Axis")
         plt.ylabel("Y [m]")
+        plt.xlabel("Step",fontsize=20)
+        plt.xticks(fontsize=15)
+        plt.yticks(fontsize=15)
+        plt.grid(which='major',linewidth=0.7)
+        plt.grid(which='minor',linewidth=0.5)
+        plt.minorticks_on()
         plt.show()
 
         # X-Y Position
@@ -172,22 +213,79 @@ def plot_various_results(plot_choice,error_store,error_x,error_y,pos_x,pos_y,kap
         plt.title("Trajectory on the X-Y Axis")
         plt.legend(["X Axis","Reference Signal",'Y Axis','Reference Signal'])
         plt.ylabel("Position [m]",fontsize=20)
+        plt.xlabel("Step",fontsize=20)
+        plt.xticks(fontsize=15)
+        plt.yticks(fontsize=15)
+        plt.grid(which='major',linewidth=0.7)
+        plt.grid(which='minor',linewidth=0.5)
+        plt.minorticks_on()
         plt.show()
     elif plot_choice == 3:
-        plt.legend(fontsize=15)
         # Kappa Plots
         plt.plot(range(len(kappa_1)),kappa_1,c = 'blue',linewidth=2, label = "Curvature-1")
         plt.plot(range(len(kappa_2)),kappa_2,c = 'green',linewidth=2, label = "Curvature-2")
         plt.plot(range(len(kappa_3)),kappa_3,c = 'red',linewidth=2, label = "Curvature-3")
         plt.title("Change of Curvature Values Over Time")
         plt.ylabel(r"Curvature Values $\left [\frac{1}{m}  \right ]$",fontsize=18)
+        plt.xlabel("Step",fontsize=20)
+        plt.xticks(fontsize=15)
+        plt.yticks(fontsize=15)
+        plt.grid(which='major',linewidth=0.7)
+        plt.grid(which='minor',linewidth=0.5)
+        plt.minorticks_on()
+        plt.legend(fontsize=15)
         plt.show()
 
-    plt.xlabel("Step",fontsize=20)
-    plt.xticks(fontsize=15)
-    plt.yticks(fontsize=15)
-    plt.grid(which='major',linewidth=0.7)
-    plt.grid(which='minor',linewidth=0.5)
-    plt.minorticks_on()
+def plot_average_error(error_x, error_y, error_store, N = 1000):
+    theList_x = error_x
+    subList_x = [theList_x[n:n+N] for n in range(0, len(theList_x), N)]
+    error_x_np = np.array(subList_x)
+    error_x_mean = error_x_np.mean(axis=0)
+    error_x_std = error_x_np.std(axis=0)
+
+    theList_y = error_y
+    subList_y = [theList_y[n:n+N] for n in range(0, len(theList_y), N)]
+    error_y_np = np.array(subList_y)
+    error_y_mean = error_y_np.mean(axis=0)
+    error_y_std = error_y_np.std(axis=0)
+
+    theList_combined = error_store
+    subList_combined = [theList_combined[n:n+N] for n in range(0, len(theList_combined), N)]
+    error_combined_np = np.array(subList_combined)
+    error_combined_mean = error_combined_np.mean(axis=0)
+    error_combined_std = error_combined_np.std(axis=0)
+
+    # X Error
+    plt.plot(range(len(error_x_mean)),error_x_mean,c = 'blue',linewidth=3)
+    plt.fill_between(range(len(error_x_mean)),error_x_mean-error_x_std,error_x_mean+error_x_std,alpha=0.2,color='b')
+    plt.title("10 episodes of Distance Error on the X Axis with Confidence Band")
+    plt.xlabel("Step")
+    plt.ylabel("Error")
     plt.show()
 
+    # # Y Error
+    plt.plot(range(len(error_y_mean)),error_y_mean,c = 'red',linewidth=3)
+    plt.fill_between(range(len(error_y_mean)),error_y_mean-error_y_std,error_y_mean+error_y_std,alpha=0.2,color ="r")
+    plt.title("10 episodes of Distance Error on the Y Axis with Confidence Band")
+    plt.xlabel("Step")
+    plt.ylabel("Error")
+    plt.show()
+
+    # X-Y Error
+    plt.plot(range(len(error_x_mean)),error_x_mean,c = 'blue',linewidth=2, label = "X Axis")
+    plt.fill_between(range(len(error_x_mean)),error_x_mean-error_x_std,error_x_mean+error_x_std,alpha=0.3,color='b')
+    plt.plot(range(len(error_y_mean)),error_y_mean,c = 'red',linewidth=2, label = "Y Axis")
+    plt.fill_between(range(len(error_y_mean)),error_y_mean-error_y_std,error_y_mean+error_y_std,alpha=0.1,color ="r")
+    plt.title("10 episodes of Distance Error on the X-Y Axis with Confidence Band")
+    plt.xlabel("Step")
+    plt.ylabel("Error")
+    plt.legend()
+    plt.show()
+
+    # Combined Error
+    plt.plot(range(len(error_combined_mean)),error_combined_mean,c = 'black',linewidth=3)
+    plt.fill_between(range(len(error_combined_mean)),error_combined_mean-error_combined_std,error_combined_mean+error_combined_std,alpha=0.2,color ="k")
+    plt.title("10 episodes of Total Distance Error with Confidence Band")
+    plt.xlabel("Step")
+    plt.ylabel("Error")
+    plt.show()
