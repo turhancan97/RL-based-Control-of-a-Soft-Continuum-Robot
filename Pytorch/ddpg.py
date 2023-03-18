@@ -19,7 +19,7 @@ env.seed(10)
 agent = Agent(state_size=4, action_size=3, random_seed=10)
 
 # %%
-def ddpg(n_episodes=5000, max_t=1000, print_every=250):
+def ddpg(n_episodes=250, max_t=1000, print_every=50):
     global scores
     global avg_reward_list
     scores_deque = deque(maxlen=print_every)
@@ -43,8 +43,11 @@ def ddpg(n_episodes=5000, max_t=1000, print_every=250):
         
         for t in range(max_t):
             action = agent.act(state)
-            next_state, reward, done, _ = env.step_2(action)
-            agent.step(state, action, reward, next_state, done)
+            next_state, reward, done, _ = env.step_minus_euclidean_square(action) # -e^2
+            # next_state, reward, done, _ = env.step_minus_weighted_euclidean(action) # -0.7*e
+            # next_state, reward, done, _ = env.step_error_comparison(action) # reward is -1.00 or -0.50 or 1.00
+            # next_state, reward, done, _ = env.step_distance_based(action) # reward is du-1 - du
+            agent.step(state, action, reward, next_state, done) 
             state = next_state
             # # Uncomment below!!!!
             # print("Episode Number {0} and {1}th action".format(i_episode,t))
@@ -62,8 +65,8 @@ def ddpg(n_episodes=5000, max_t=1000, print_every=250):
                 break 
         scores_deque.append(score)
         scores.append(score)
-        # Mean of 250 episodes
-        avg_reward_list.append(np.mean(scores[-250:]))
+        # Mean of 50 episodes
+        avg_reward_list.append(np.mean(scores[-50:]))
         print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque)), end="")
         # time.sleep(2)
         torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
