@@ -254,7 +254,7 @@ def sub_plot_various_results(error_store,error_x,error_y,pos_x,pos_y,kappa_1,kap
     axs[1, 0].plot(range(len(pos_y)),pos_y,c = 'green',linewidth=2, label = "Y Axis")
     axs[1, 0].axhline(y=goal_y)
     axs[1, 0].set_xlabel("Steps\n (c)",fontsize=20)
-    axs[1, 0].set_ylabel("Position - [m]",fontsize=20)
+    axs[1, 0].set_ylabel("Position [m]",fontsize=20)
 
     axs[1, 1].plot(range(len(kappa_1)),kappa_1,c = 'blue',linewidth=2, label = "Curvature-1")
     axs[1, 1].plot(range(len(kappa_2)),kappa_2,c = 'green',linewidth=2, label = "Curvature-2")
