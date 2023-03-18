@@ -1,6 +1,5 @@
 # %%
 import sys
-
 sys.path.append('../')
 sys.path.append('../Reinforcement Learning')
 sys.path.append('../Keras')
@@ -14,6 +13,7 @@ import time
 import random
 from env import continuumEnv
 from DDPG import OUActionNoise, policy
+from continuum_robot.utils import *
 from matplotlib import animation
 # %matplotlib notebook
 from IPython import display
@@ -163,6 +163,18 @@ for ax in axs.flat:
     ax.minorticks_on()
 # %%
 ## Uncomment wanted plot to see the results
+plot_choice = int(input("Please Enter 1 for Error Plot, 2 for Position Plot, 3 for Curvature Plot: "))
+plot_various_results(plot_choice = plot_choice,
+                     error_store = storage['error']['error_store'],
+                     error_x = storage['error']['x'],
+                     error_y = storage['error']['y'],
+                     pos_x = storage['pos']['x'],
+                     pos_y = storage['pos']['y'],
+                     kappa_1 = storage['kappa']['kappa1'],
+                     kappa_2 = storage['kappa']['kappa2'],
+                     kappa_3 = storage['kappa']['kappa3'],
+                     goal_x = state[2],
+                     goal_y = state[3])
 # # Error
 # plt.plot(range(len(storage['error']['error_store'])),storage['error']['error_store'],c = 'red',linewidth=2,label='Total Error')
 # plt.title("Error Plot of the Test Simulation")
@@ -316,4 +328,3 @@ plt.plot(storage['reward']['value'],linewidth=4)
 plt.xlabel("Step")
 plt.ylabel("Reward 4")
 plt.show()
-# %%

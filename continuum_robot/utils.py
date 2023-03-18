@@ -122,3 +122,72 @@ def reward_log10_visualization(ep_reward_list, avg_reward_list):
     axs[0].yaxis.set_minor_locator(AutoMinorLocator(2))
     axs[1].xaxis.set_minor_locator(AutoMinorLocator(2))
     axs[1].yaxis.set_minor_locator(AutoMinorLocator(2))
+
+def plot_various_results(plot_choice,error_store,error_x,error_y,pos_x,pos_y,kappa_1,kappa_2,kappa_3,goal_x,goal_y):
+    if plot_choice == 1:
+        plt.ylabel("Error",fontsize=20)
+        plt.legend(fontsize=15)
+        # Error
+        plt.plot(range(len(error_store)),error_store,c = 'red',linewidth=2,label='Total Error')
+        plt.title("Error Plot of the Test Simulation")
+        plt.show()
+
+        # X Error
+        plt.plot(range(len(error_x)),error_x,c = 'green',linewidth=2)
+        plt.title("Error on the X Axis")
+        plt.show()
+
+        # Y Error
+        plt.plot(range(len(error_y)),error_y,c = 'blue',linewidth=2)
+        plt.title("Error on the Y Axis")
+        plt.show()
+
+        # X-Y Error
+        plt.plot(range(len(error_x)),error_x,c = 'blue',linewidth=2, label = "X Axis")
+        plt.plot(range(len(error_y)),error_y,c = 'green',linewidth=2, label = "Y Axis")
+        plt.title("Error on the X-Y Axis")
+        plt.show()
+    elif plot_choice == 2:
+        # X Position
+        plt.plot(range(len(pos_x)),pos_x,c = 'green',linewidth=2)
+        plt.axhline(y=goal_x)
+        plt.legend(["Simulation Result","Reference Signal"])
+        plt.title("Trajectory on the X Axis")
+        plt.ylabel("X [m]")
+        plt.show()
+
+        # Y Position
+        plt.plot(range(len(pos_y)),pos_y,c = 'red',linewidth=2)
+        plt.axhline(y=goal_y)
+        plt.legend(["Simulation Result","Reference Signal"])
+        plt.title("Trajectory on the Y Axis")
+        plt.ylabel("Y [m]")
+        plt.show()
+
+        # X-Y Position
+        plt.plot(range(len(pos_x)),pos_x,c = 'red',linewidth=2)
+        plt.axhline(y=goal_x)
+        plt.plot(range(len(pos_y)),pos_y,c = 'green',linewidth=2)
+        plt.axhline(y=goal_y,label='Reference Signal')
+        plt.title("Trajectory on the X-Y Axis")
+        plt.legend(["X Axis","Reference Signal",'Y Axis','Reference Signal'])
+        plt.ylabel("Position [m]",fontsize=20)
+        plt.show()
+    elif plot_choice == 3:
+        plt.legend(fontsize=15)
+        # Kappa Plots
+        plt.plot(range(len(kappa_1)),kappa_1,c = 'blue',linewidth=2, label = "Curvature-1")
+        plt.plot(range(len(kappa_2)),kappa_2,c = 'green',linewidth=2, label = "Curvature-2")
+        plt.plot(range(len(kappa_3)),kappa_3,c = 'red',linewidth=2, label = "Curvature-3")
+        plt.title("Change of Curvature Values Over Time")
+        plt.ylabel(r"Curvature Values $\left [\frac{1}{m}  \right ]$",fontsize=18)
+        plt.show()
+
+    plt.xlabel("Step",fontsize=20)
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.grid(which='major',linewidth=0.7)
+    plt.grid(which='minor',linewidth=0.5)
+    plt.minorticks_on()
+    plt.show()
+
