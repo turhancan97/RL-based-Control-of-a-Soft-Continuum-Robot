@@ -236,6 +236,40 @@ def plot_various_results(plot_choice,error_store,error_x,error_y,pos_x,pos_y,kap
         plt.legend(fontsize=15)
         plt.show()
 
+def sub_plot_various_results(error_store,error_x,error_y,pos_x,pos_y,kappa_1,kappa_2,kappa_3,goal_x,goal_y):
+    # As Subplots
+    fig, axs = plt.subplots(2, 2)
+    fig.tight_layout(h_pad=5, w_pad=5)
+    axs[0, 0].plot(range(len(error_store)),error_store,c = 'red',linewidth=2,label='Total Error')
+    axs[0, 0].set_xlabel("Steps\n (a)",fontsize=20)
+    axs[0, 0].set_ylabel("Error",fontsize=20)
+
+    axs[0, 1].plot(range(len(error_x)),error_x,c = 'blue',linewidth=2, label = "X Axis")
+    axs[0, 1].plot(range(len(error_y)),error_y,c = 'green',linewidth=2, label = "Y Axis")
+    axs[0, 1].set_xlabel("Steps\n (b)",fontsize=20)
+    axs[0, 1].set_ylabel("Error",fontsize=20)
+
+    axs[1, 0].plot(range(len(pos_x)),pos_x,c = 'red',linewidth=2, label = "X Axis")
+    axs[1, 0].axhline(y=goal_x)
+    axs[1, 0].plot(range(len(pos_y)),pos_y,c = 'green',linewidth=2, label = "Y Axis")
+    axs[1, 0].axhline(y=goal_y)
+    axs[1, 0].set_xlabel("Steps\n (c)",fontsize=20)
+    axs[1, 0].set_ylabel("Position - [m]",fontsize=20)
+
+    axs[1, 1].plot(range(len(kappa_1)),kappa_1,c = 'blue',linewidth=2, label = "Curvature-1")
+    axs[1, 1].plot(range(len(kappa_2)),kappa_2,c = 'green',linewidth=2, label = "Curvature-2")
+    axs[1, 1].plot(range(len(kappa_3)),kappa_3,c = 'red',linewidth=2, label = "Curvature-3")
+    axs[1, 1].set_xlabel("Steps\n (d)",fontsize=20)
+    axs[1, 1].set_ylabel(r"Curvature Values $\left [\frac{1}{m}  \right ]$",fontsize=20)
+
+    for ax in axs.flat:
+        #ax.set_xticks(fontsize=14)
+        #ax.set_yticks(fontsize=14)
+        ax.legend(fontsize=14)
+        ax.grid(which='major',linewidth=0.7)
+        ax.grid(which='minor',linewidth=0.5)
+        ax.minorticks_on()
+
 def plot_average_error(error_x, error_y, error_store, N = 1000):
     theList_x = error_x
     subList_x = [theList_x[n:n+N] for n in range(0, len(theList_x), N)]
