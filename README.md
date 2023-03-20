@@ -166,11 +166,83 @@ In the algorithm described above, we applied it to depict the motion of the cont
 </figure>
 
 ## Environment Design
+We simulated a continuum robot with a section length of 0.1 $[m]$ and a curvature range of $-4 [\frac{1}{m}] \leq \kappa \leq 16 [\frac{1}{m}]$. The robot is mounted at the point (0,0) at its base.
 
+Our system's aim is to take the three segment continuum robot from a random starting point to a random target by using  the forward kinematics and velocity kinematics to describe the continuum robot.
+
+* $x-y$: cartesian coordinates of the robot's tip point $m$. We don't have z axis since planar case for continuum robot was considered.
+* $\kappa$: Curvatures  $\frac{1}{m}$. 
+* $\dot{\kappa}$: Derivative of curvatures $\frac{1}{\frac{m}{s}}$.
+* $l$ - section length $[m]$
 ### Action Space
 
+Action refers to the artificial agent selecting an option from a provided list of actions. In this thesis, the agent's action is represented by a data structure consisting of an `ndarray` with a shape of `(3,)` that represents the curvature derivative of each segment. While the agent is navigating the environment, it will generate three different values for the rate of change of curvature that are continuous at each step. Based on the rate of change, the robot must move towards the intended target.
+
 ### State Space
+The state that is being designed for this project includes the current x and y coordinates of the robot in the cartesian system, as well as the x and y coordinates of the target point.
 
 ### Reward Functions
 
+<figure align="center">
+<img src="docs/images/task_space.png" alt="drawing"width="600"/>
+  <figcaption>Task Space of three section continuum robot</figcaption>
+</figure>
+
+To finalize the environment, we need to design the reward. The state space has been intentionally limited to match the robot's task space (check Figure above), making it easier to describe the reward function. We define the Euclidean distance to $x_{goal}$ as follows:
+
+$$ \begin{equation}
+    d_u = \sqrt{(x-x_{goal})^2+(y-y_{goal})^2}
+\end{equation} $$
+
+The reward can be defined in different ways to showcase its significant impact on the learning process. The first reward is given as:
+
+$$ \begin{equation}
+   r_1 = -1\cdot (d_u)^{2}
+\end{equation} $$
+
+The second reward function is defined as:
+
+$$ \begin{equation}
+   r_2 = \left\{\begin{matrix}
+1 & d_u < d_{u-1}\\ 
+-0.5 & d_u =  d_{u-1}\\
+-1 & d_u >  d_{u-1}
+\end{matrix}\right.
+\end{equation} $$
+
+
+The third reward is calculated based on the weighted distance:
+
+$$ \begin{equation}
+r_3 = -0.7\times d_u
+\end{equation} $$
+
+The final reward is:
+
+$$ \begin{equation} 
+r_4 = \left\{\begin{matrix}
+ 200 & d_u \leq 0.025 \\ 
+ 150 & d_u \leq 0.05 \\ 
+ 100 & d_u \leq 0.1 \\ 
+ 100\times (d_{u-1} - d_u) & d_u > 0.1 \\
+-100 & d_u = d_{u-1}  
+\end{matrix}\right.
+\end{equation} $$
+
+
 ## Simulations and Results
+
+Some of the results can be seen in this section. Each demonstration has a different reward function implemented.
+
+
+<p align="center">
+<img src="docs/videos/result1.gif" alt="drawing" width="750" />
+</p>
+
+<p align="center">
+<img src="docs/videos/result2.gif" alt="drawing" width="750"/>
+</p>
+
+<p align="center">
+<img src="docs/videos/result3.gif" alt="drawing" width="750"/>
+</p>
