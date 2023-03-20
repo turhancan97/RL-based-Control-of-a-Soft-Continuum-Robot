@@ -32,7 +32,7 @@ In this repository, a detailed formulation and explanation of the forward kinema
 Kinematics is a sub-branch of physics that deals with the motion of objects. It examines the position, velocity, acceleration and jerk values of rigid objects according to a reference coordinate system. Kinematics is not concerned with the forces and moments that cause motion; that is studied in dynamics. In this project, forward and velocity kinematics calculations were made for continuum robots using the constant curvature method. The inverse kinematics of the continuum robot is not calculated. Forward and inverse kinematics of continuum robot can be seen in Figure below.
 
 <figure align="center"> 
-  <img src="docs/images/forward-inverse.png" alt="drawing" width="400"/>
+  <img src="docs/images/forward-inverse.png" alt="drawing" width="600"/>
   <figcaption>X. Wang, Y. Li, and K. Kwok. A survey for machine learning-based control of continuum robots. Frontiers in Robotics and AI, 2021</figcaption>
 </figure>
 
@@ -54,53 +54,53 @@ $$\begin{align}
 
 The frames for a three section continuum robot can be setup as a combination of three sections. So, the transformation matrix from frame 0 to frame 9 is:
 
-$\begin{align}
+$$\begin{align}
 A_{0}^{9}= A_{0}^{3}A_{3}^{6}A_{6}^{9} = \left[\begin{array}{cccc}
 \cos \left(\omega_{1}+\omega_{2}+\omega_{3}\right) & -\sin \left(\omega_{1}+\omega_{2}+\omega_{3}\right) & 0 & A_{14} \\
 \sin \left(\omega_{1}+\omega_{2}+\omega_{3}\right) & \cos \left(\omega_{1}+\omega_{2}+\omega_{3}\right) & 0 & A_{24} \\
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1
 \end{array}\right]
-\end{align}$
+\end{align}$$
 
 The previously undefined matrix elements are given as:
-$
-\begin{align}
+
+$$\begin{align}
 \begin{aligned}
 A_{14}=& \frac{1}{\kappa_{1}}\left\{\cos \omega_{1}-1\right\}+\frac{1}{\kappa_{2}}\left\{\cos \left(\omega_{1}+\omega_{2}\right)-\cos \omega_{1}\right\} \\
 &+\frac{1}{\kappa_{3}}\left\{\cos \left(\omega_{1}+\omega_{2}+\omega_{3}\right)-\cos \left(\omega_{1}+\omega_{2}\right)\right\} \\
 A_{24}=& \frac{1}{\kappa_{1}} \sin \omega_{1}+\frac{1}{\kappa_{2}}\left\{\sin \left(\omega_{1}+\omega_{2}\right)-\sin \omega_{1}\right\} \\
 &+\frac{1}{\kappa_{3}}\left\{\sin \left(\omega_{1}+\omega_{2}+\omega_{3}\right)-\sin \left(\omega_{1}+\omega_{2}\right)\right\}
 \end{aligned}
-\end{align}$
+\end{align}$$
 
 where $\kappa_{i}$ and $l_{i}$ are the curvature and total arc length respectively for section $i$ and $\omega_{i}=\kappa_{i} l_{i}$ for $i=\{1,2,3\}$. Note, the total arc length for $i=\{1,2\}$ must be used so that section 3 is properly oriented, but any arc length can be used for the final section depending on where the point of interest lies in the section. The total arc length for the final section gives the kinematics in terms of the end point.
 
 In Figure below, you can see the simulated forward kinematics model of our robot with $\kappa_1 = 1.7035 [\frac{1}{m}]$, $\kappa_2 = 1.0 [\frac{1}{m}$], and $\kappa_3 = 2.0 [\frac{1}{m}]$ as curvature values of each section and $l_1 = 0.1 [m]$, $l_2 = 0.1 [m]$, and $l_3 = 0.1 [m]$ as length of each section.
 
 <figure align="center">
-<img src="docs/images/for_kine_rep.png" alt="drawing"width="500"/>
+<img src="docs/images/for_kine_rep.png" alt="drawing"width="600"/>
   <figcaption>Forward Kinematics Implementation</figcaption>
 </figure>
 
 ### Velocity Kinematics
 The velocity kinematics of a continuum robot can be expressed in a way that is similar to conventional kinematic analysis (Spong and Vidyasagar, 1989).
 
-$\begin{align}
+$$\begin{align}
     \dot{x} = J\dot{q},
-\end{align}$
+\end{align}$$
 
 For our three-section planar robot, the task space vector $x\in \mathbb{R}^{m\times 1}$ represents its position and/or orientation, and the dot indicates differentiation with respect to time.
 
-$\begin{align}
+$$\begin{align}
     \mathbf{q} = \left [ \kappa _1, \kappa _2, \kappa _3 \right ]^T, \\
     \mathbf{\dot{q}} = \left [ \dot{\kappa _1}, \dot{\kappa _2}, \dot{\kappa _3} \right ]^T, \\
     \mathbf{\dot{x}} = \left [ \dot{x}, \dot{y} \right ]^T
-\end{align}$
+\end{align}$$
 
 The matrix $J$ represents the Jacobian and depends on the 'joint' (curvature in the context of continuum robot) variables $\mathbf{q}$. The elements of the Jacobian $J_{ij}$ can be found by taking partial derivatives of the forward kinematic equations, as described below:
 
-$\begin{align}
+$$\begin{align}
     \begin{bmatrix}
 \dot{x}\\ 
 \dot{y}
@@ -111,36 +111,36 @@ J_{21} & J_{22}
 \dot{q_1}\\ 
 \dot{q_2}
 \end{bmatrix},
-\end{align}$
+\end{align}$$
 
 If we apply the chain rule, we obtain the following equation:
 
-$\begin{align}
+$$\begin{align}
 \frac{dx}{dt} = \frac{\partial x}{\partial q_1} \frac{d q_1}{dt} + \frac{\partial x}{\partial q_2} \frac{d q_2}{dt}, \\ 
 \frac{dy}{dt} = \frac{\partial y}{\partial q_1} \frac{d q_1}{dt} + \frac{\partial y}{\partial q_2} \frac{d q_2}{dt}
-\end{align}$
+\end{align}$$
 
 Let's apply this to our case, as shown in the equation below:
 
 
-$\begin{align}
+$$\begin{align}
     \frac{dx}{dt} = {\color{red} \frac{\partial x}{\partial \kappa_1}} \frac{d \kappa_1}{dt} + {\color{red} \frac{\partial x}{\partial \kappa_2} }\frac{d\kappa_2}{dt} +{\color{red}  \frac{\partial x}{\partial \kappa_3}} \frac{d \kappa_3}{dt}, \\
     \frac{dy}{dt} ={\color{red}  \frac{\partial y}{\partial \kappa_1}} \frac{d \kappa_1}{dt} + {\color{red} \frac{\partial y}{\partial \kappa_2}} \frac{d \kappa_2}{dt} + {\color{red} \frac{\partial y}{\partial \kappa_3}} \frac{d \kappa_3}{dt}
-\end{align}$
+\end{align}$$
 
 The red elements in the equation above represent the elements of our Jacobian Matrix. To define the Jacobian Matrix, we can use the equation below:
 
-$\begin{align}
+$$\begin{align}
     J = 
 \begin{bmatrix}
  \frac{\partial x}{\partial \kappa_1}& \frac{\partial x}{\partial \kappa_2} &  \frac{\partial x}{\partial \kappa_3}\\
 \frac{\partial y}{\partial \kappa_1} & \frac{\partial y}{\partial \kappa_2} & \frac{\partial y}{\partial \kappa_3} \\
 \end{bmatrix}
-\end{align}$
+\end{align}$$
 
 As a result, the final form of equation is:
 
-$\begin{align}
+$$\begin{align}
     \begin{bmatrix}
 \frac{dx}{dt} \\ \frac{dy}{dt}
 \end{bmatrix} =\begin{bmatrix}
@@ -150,19 +150,19 @@ $\begin{align}
 \frac{d \kappa_1}{dt} \\ \frac{d \kappa_2}{dt}
  \\ \frac{d \kappa_3}{dt}
 \end{bmatrix}
-\end{align}$
+\end{align}$$
 
 Jacobian matrices are a useful tool in robotics and control theory that explain the dynamic relationship between different system representations, such as position and curvature derivatives. In velocity kinematics, these matrices are used to describe the highly constrained motion of the end-effector (tip of the continuum robot).
 
 
 <figure align="center"> 
-  <img src="docs/images/velo_kin_algo.png" alt="drawing" width="400"/>
+  <img src="docs/images/velo_kin_algo.png" alt="drawing" width="600"/>
 </figure>
 
 In the algorithm described above, we applied it to depict the motion of the continuum robot. You can view the simulated velocity kinematics motion of our robot below by applying the algorithm. It portrays solely the motion of the continuum robot’s tip point. For this project, we utilized forward and velocity kinematics models to design a reinforcement learning environment that describes the three section continuum robot. The next section will delve into the specifics of the environment designed for reinforcement learning.
 
 <figure align="center"> 
-  <img src="docs/images/velo_kin_res.png" alt="drawing" width="400"/>
+  <img src="docs/images/velo_kin_res.png" alt="drawing" width="600"/>
 </figure>
 
 ## Environment Design
