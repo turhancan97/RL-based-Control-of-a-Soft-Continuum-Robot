@@ -43,14 +43,14 @@ The authors utilized a modified Denavit-Hartenberg method to perform forward kin
 
 Therefore, using the D-H method, the homogeneous transformation matrix for the curve from frame 0 to frame 3 can be written in terms of the curvature $\kappa$ and the total arc length $l$ as
 
-$\begin{align}
-    A_{0}^{3}=A_{0}^{1}A_{1}^{2}A_{2}^{3}=\left[\begin{array}{cccc}
+$$\begin{align}
+    A_{0}^{3}=A_{0}^{1}A_{1}^{2}A_{2}^{3}=\begin{bmatrix}
 \cos (\kappa l) & -\sin (\kappa l) & 0 & \frac{\mathbf{1}}{\kappa}\{\cos (\kappa l)-1\} \\
 \sin (\kappa l) & \cos (\kappa l) & 0 & \frac{\mathbf{1}}{\kappa} \sin (\kappa l) \\
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1
-\end{array}\right]
-\end{align}$
+\end{bmatrix}
+\end{align}$$
 
 The frames for a three section continuum robot can be setup as a combination of three sections. So, the transformation matrix from frame 0 to frame 9 is:
 
