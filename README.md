@@ -67,10 +67,10 @@ The previously undefined matrix elements are given as:
 
 $$\begin{align}
 \begin{aligned}
-A_{14}=& \frac{1}{\kappa_{1}}\left\{\cos \omega_{1}-1\right\}+\frac{1}{\kappa_{2}}\left\{\cos \left(\omega_{1}+\omega_{2}\right)-\cos \omega_{1}\right\} \\
-&+\frac{1}{\kappa_{3}}\left\{\cos \left(\omega_{1}+\omega_{2}+\omega_{3}\right)-\cos \left(\omega_{1}+\omega_{2}\right)\right\} \\
-A_{24}=& \frac{1}{\kappa_{1}} \sin \omega_{1}+\frac{1}{\kappa_{2}}\left\{\sin \left(\omega_{1}+\omega_{2}\right)-\sin \omega_{1}\right\} \\
-&+\frac{1}{\kappa_{3}}\left\{\sin \left(\omega_{1}+\omega_{2}+\omega_{3}\right)-\sin \left(\omega_{1}+\omega_{2}\right)\right\}
+A_{14}=& \frac{1}{\kappa_{1}}\left(\cos \omega_{1}-1\right)+\frac{1}{\kappa_{2}}\left(\cos \left(\omega_{1}+\omega_{2}\right)-\cos \omega_{1}\right) \\
+&+\frac{1}{\kappa_{3}}\left(\cos \left(\omega_{1}+\omega_{2}+\omega_{3}\right)-\cos \left(\omega_{1}+\omega_{2}\right)\right) \\
+A_{24}=& \frac{1}{\kappa_{1}} \sin \omega_{1}+\frac{1}{\kappa_{2}}\left(\sin \left(\omega_{1}+\omega_{2}\right)-\sin \omega_{1}\right) \\
+&+\frac{1}{\kappa_{3}}\left(\sin \left(\omega_{1}+\omega_{2}+\omega_{3}\right)-\sin \left(\omega_{1}+\omega_{2}\right)\right)
 \end{aligned}
 \end{align}$$
 
