@@ -1,0 +1,618 @@
+no change     /home/tkargin/miniconda3/condabin/conda
+no change     /home/tkargin/miniconda3/bin/conda
+no change     /home/tkargin/miniconda3/bin/conda-env
+no change     /home/tkargin/miniconda3/bin/activate
+no change     /home/tkargin/miniconda3/bin/deactivate
+no change     /home/tkargin/miniconda3/etc/profile.d/conda.sh
+no change     /home/tkargin/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/tkargin/miniconda3/shell/condabin/Conda.psm1
+no change     /home/tkargin/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/tkargin/miniconda3/lib/python3.9/site-packages/xontrib/conda.xsh
+no change     /home/tkargin/miniconda3/etc/profile.d/conda.csh
+no change     /home/tkargin/.bashrc
+No action taken.
+cuda:0
+Using device: cuda:0
+
+1 Number of Devices Exists
+Episode 1	Average Score: 147.00Episode 2	Average Score: 157.50Episode 3	Average Score: -14.33Episode 4	Average Score: -81.75Episode 5	Average Score: -135.20Episode 6	Average Score: -68.42Episode 7	Average Score: -79.14Episode 8	Average Score: -81.75Episode 9	Average Score: -91.94Episode 10	Average Score: -99.75Episode 11	Average Score: -113.23Episode 12	Average Score: -112.17Episode 13	Average Score: -98.81Episode 14	Average Score: -105.00Episode 15	Average Score: -98.00Episode 16	Average Score: -107.81Episode 17	Average Score: -91.00Episode 18	Average Score: -83.67Episode 19	Average Score: -64.95Episode 20	Average Score: -44.70Episode 21	Average Score: -13.86Episode 22	Average Score: -13.64Episode 23	Average Score: -32.07Episode 24	Average Score: -28.38
+
+Initial Position is [-0.23322709  0.10445331]
+===============================================================
+Target Position is [0.03647115 0.29540017]
+===============================================================
+Initial Kappas are  [10.776189701663547, 1.391615378749779, 10.96667553186176]
+===============================================================
+Goal Kappas are  [0.008595440233387208, -1.8002720316979968, -2.0237594370160026]
+===============================================================
+Episode 25	Average Score: -6.44Episode 26	Average Score: -14.80Episode 27	Average Score: -43.02Episode 28	Average Score: -20.10Episode 29	Average Score: 6.50Episode 30	Average Score: 34.78Episode 31	Average Score: 20.96Episode 32	Average Score: 42.38Episode 33	Average Score: 24.12Episode 34	Average Score: 40.52Episode 35	Average Score: 51.22Episode 36	Average Score: 64.50Episode 37	Average Score: 51.08Episode 38	Average Score: 41.34Episode 39	Average Score: 36.68Episode 40	Average Score: 16.82Episode 41	Average Score: 39.26Episode 42	Average Score: 22.68Episode 43	Average Score: 16.52Episode 44	Average Score: 8.36Episode 45	Average Score: -4.78Episode 46	Average Score: -54.18Episode 47	Average Score: -60.86Episode 48	Average Score: -39.68Episode 49	Average Score: -54.02
+
+Initial Position is [-0.18909647 -0.05490166]
+===============================================================
+Target Position is [-0.15808658  0.07357545]
+===============================================================
+Initial Kappas are  [13.485244320563126, 13.051790291959577, 0.03534560928683561]
+===============================================================
+Goal Kappas are  [3.902257627227895, 13.196986421369221, 14.772618533471533]
+===============================================================
+Episode 50	Average Score: -103.86Episode 51	Average Score: -92.50Episode 52	Average Score: -86.12Episode 53	Average Score: -97.12Episode 54	Average Score: -108.60Episode 55	Average Score: -135.80Episode 56	Average Score: -128.92Episode 57	Average Score: -139.54Episode 58	Average Score: -119.32Episode 59	Average Score: -125.10Episode 60	Average Score: -113.28Episode 61	Average Score: -102.42Episode 62	Average Score: -101.20Episode 63	Average Score: -91.44Episode 64	Average Score: -68.72Episode 65	Average Score: -51.42Episode 66	Average Score: -57.52Episode 67	Average Score: -34.14Episode 68	Average Score: -13.78Episode 69	Average Score: -25.86Episode 70	Average Score: -14.98Episode 71	Average Score: 21.18Episode 72	Average Score: 44.38Episode 73	Average Score: 63.02Episode 74	Average Score: 80.86
+
+Initial Position is [-0.18614589  0.12714188]
+===============================================================
+Target Position is [-0.19393884  0.15073742]
+===============================================================
+Initial Kappas are  [2.352326176140373, 15.49170618401157, -0.24951403806008443]
+===============================================================
+Goal Kappas are  [6.478003097995003, 3.1925538887172564, 14.543744445955085]
+===============================================================
+Episode 75	Average Score: 117.18Episode 76	Average Score: 115.74Episode 77	Average Score: 127.58Episode 78	Average Score: 130.78Episode 79	Average Score: 127.66Episode 80	Average Score: 136.54Episode 81	Average Score: 131.34Episode 82	Average Score: 141.40Episode 83	Average Score: 149.76Episode 84	Average Score: 139.68Episode 85	Average Score: 129.44Episode 86	Average Score: 112.74Episode 87	Average Score: 135.92Episode 88	Average Score: 125.44Episode 89	Average Score: 112.38Episode 90	Average Score: 127.44Episode 91	Average Score: 128.22Episode 92	Average Score: 125.26Episode 93	Average Score: 139.34Episode 94	Average Score: 148.06Episode 95	Average Score: 131.52Episode 96	Average Score: 114.88Episode 97	Average Score: 104.40Episode 98	Average Score: 86.96Episode 99	Average Score: 86.28
+
+Initial Position is [0.00916009 0.29953367]
+===============================================================
+Target Position is [-0.23017819  0.1129888 ]
+===============================================================
+Initial Kappas are  [-0.6031690807747734, 1.11005469010869, -2.149363349613621]
+===============================================================
+Goal Kappas are  [12.157447254792373, -2.9523998991178644, 15.710329942736987]
+===============================================================
+Episode 100	Average Score: 70.28Episode 101	Average Score: 75.44Episode 102	Average Score: 90.32Episode 103	Average Score: 87.36Episode 104	Average Score: 84.96Episode 105	Average Score: 89.42Episode 106	Average Score: 91.14Episode 107	Average Score: 100.26Episode 108	Average Score: 99.06Episode 109	Average Score: 107.82Episode 110	Average Score: 113.66Episode 111	Average Score: 119.42Episode 112	Average Score: 122.62Episode 113	Average Score: 111.18Episode 114	Average Score: 122.40Episode 115	Average Score: 118.06Episode 116	Average Score: 101.78Episode 117	Average Score: 97.86Episode 118	Average Score: 52.84Episode 119	Average Score: 48.28Episode 120	Average Score: 56.92Episode 121	Average Score: 51.16Episode 122	Average Score: 62.76Episode 123	Average Score: 49.24Episode 124	Average Score: 48.32
+
+Initial Position is [-0.16802321  0.15938404]
+===============================================================
+Target Position is [-0.12385105  0.2692699 ]
+===============================================================
+Initial Kappas are  [0.6228844559880695, 14.644491526041808, 1.786583016703708]
+===============================================================
+Goal Kappas are  [5.082535445056594, -0.43832957599097755, 1.7212607254929493]
+===============================================================
+Episode 125	Average Score: 64.56Episode 126	Average Score: 58.84Episode 127	Average Score: 47.88Episode 128	Average Score: 62.76Episode 129	Average Score: 42.88Episode 130	Average Score: 45.14Episode 131	Average Score: 50.82Episode 132	Average Score: 28.32Episode 133	Average Score: 31.04Episode 134	Average Score: 27.56Episode 135	Average Score: 29.92Episode 136	Average Score: 26.68Episode 137	Average Score: 18.42Episode 138	Average Score: 38.98Episode 139	Average Score: 44.98Episode 140	Average Score: 43.18Episode 141	Average Score: 68.86Episode 142	Average Score: 66.94Episode 143	Average Score: 105.56Episode 144	Average Score: 105.16Episode 145	Average Score: 116.44Episode 146	Average Score: 129.80Episode 147	Average Score: 130.60Episode 148	Average Score: 148.00Episode 149	Average Score: 142.22
+
+Initial Position is [-0.20585598 -0.00720698]
+===============================================================
+Target Position is [-0.1741916  0.2244468]
+===============================================================
+Initial Kappas are  [12.468286560822715, 7.4547446876803605, 11.00115939521086]
+===============================================================
+Goal Kappas are  [4.966414787314534, 4.718605413556517, 0.4336201130472608]
+===============================================================
+Episode 150	Average Score: 145.74Episode 151	Average Score: 141.18Episode 152	Average Score: 123.00Episode 153	Average Score: 85.26Episode 154	Average Score: 119.30Episode 155	Average Score: 120.50Episode 156	Average Score: 126.62Episode 157	Average Score: 118.32Episode 158	Average Score: 127.48Episode 159	Average Score: 109.90Episode 160	Average Score: 95.82Episode 161	Average Score: 83.56Episode 162	Average Score: 61.76Episode 163	Average Score: 60.68Episode 164	Average Score: 39.08Episode 165	Average Score: 33.76Episode 166	Average Score: 16.72Episode 167	Average Score: 27.84Episode 168	Average Score: 5.76Episode 169	Average Score: -9.14Episode 170	Average Score: -19.30Episode 171	Average Score: -4.58Episode 172	Average Score: -41.84Episode 173	Average Score: -35.40Episode 174	Average Score: -49.52
+
+Initial Position is [-0.17901115 -0.03829687]
+===============================================================
+Target Position is [0.11235557 0.2742641 ]
+===============================================================
+Initial Kappas are  [11.607806006450886, 13.869073268187094, 3.8766177134418296]
+===============================================================
+Goal Kappas are  [-3.8681005794702714, -1.5641204646043292, 0.7444532978966585]
+===============================================================
+Episode 175	Average Score: -66.56Episode 176	Average Score: -49.44Episode 177	Average Score: -6.62Episode 178	Average Score: -0.88Episode 179	Average Score: -14.48Episode 180	Average Score: -33.08Episode 181	Average Score: -34.92Episode 182	Average Score: -20.12Episode 183	Average Score: -55.76Episode 184	Average Score: -46.78Episode 185	Average Score: -36.30Episode 186	Average Score: -15.20Episode 187	Average Score: -14.10Episode 188	Average Score: -17.98Episode 189	Average Score: 10.42Episode 190	Average Score: 11.18Episode 191	Average Score: 17.90Episode 192	Average Score: 15.70Episode 193	Average Score: 30.26Episode 194	Average Score: 50.68Episode 195	Average Score: 41.08Episode 196	Average Score: 29.78Episode 197	Average Score: 45.12Episode 198	Average Score: 31.20Episode 199	Average Score: 41.82
+
+Initial Position is [-0.19043195  0.10540994]
+===============================================================
+Target Position is [0.02122875 0.29838288]
+===============================================================
+Initial Kappas are  [5.846629557773699, 7.844890625770061, 13.868202991428433]
+===============================================================
+Goal Kappas are  [-1.66795222369423, 0.6116836128399363, 2.2465394832641437]
+===============================================================
+Episode 200	Average Score: 58.54Episode 201	Average Score: 54.62Episode 202	Average Score: 10.14Episode 203	Average Score: 50.54Episode 204	Average Score: 27.82Episode 205	Average Score: 50.66Episode 206	Average Score: 42.02Episode 207	Average Score: 32.02Episode 208	Average Score: 39.58Episode 209	Average Score: 72.18Episode 210	Average Score: 72.26Episode 211	Average Score: 71.06Episode 212	Average Score: 87.86Episode 213	Average Score: 96.18Episode 214	Average Score: 57.54Episode 215	Average Score: 52.06Episode 216	Average Score: 52.30Episode 217	Average Score: 39.62Episode 218	Average Score: 50.66Episode 219	Average Score: 64.10Episode 220	Average Score: 78.98Episode 221	Average Score: 76.28Episode 222	Average Score: 78.84Episode 223	Average Score: 79.48Episode 224	Average Score: 80.28
+
+Initial Position is [-0.23991935  0.09422673]
+===============================================================
+Target Position is [-0.1826901   0.02694158]
+===============================================================
+Initial Kappas are  [13.392960289035077, -3.117521911678683, 14.392611565490757]
+===============================================================
+Goal Kappas are  [8.035044160434559, 11.831236738172304, 11.503553272875585]
+===============================================================
+Episode 225	Average Score: 81.12Episode 226	Average Score: 71.04Episode 227	Average Score: 92.66Episode 228	Average Score: 90.50Episode 229	Average Score: 114.90Episode 230	Average Score: 111.58Episode 231	Average Score: 112.62Episode 232	Average Score: 121.42Episode 233	Average Score: 133.62Episode 234	Average Score: 117.22Episode 235	Average Score: 119.94Episode 236	Average Score: 111.42Episode 237	Average Score: 126.78Episode 238	Average Score: 126.62Episode 239	Average Score: 158.70Episode 240	Average Score: 173.50Episode 241	Average Score: 172.26Episode 242	Average Score: 170.90Episode 243	Average Score: 155.86Episode 244	Average Score: 147.30Episode 245	Average Score: 152.82Episode 246	Average Score: 158.98Episode 247	Average Score: 150.42Episode 248	Average Score: 126.22Episode 249	Average Score: 122.70
+
+Initial Position is [-0.2577153   0.06454384]
+===============================================================
+Target Position is [-0.14062254 -0.04049788]
+===============================================================
+Initial Kappas are  [14.861865139212249, -0.8883277457462166, 6.611329226236084]
+===============================================================
+Goal Kappas are  [12.111834878297188, 12.725848850919196, 13.746293631902876]
+===============================================================
+Episode 250	Average Score: 123.26Episode 251	Average Score: 128.22Episode 252	Average Score: 97.08Episode 253	Average Score: 73.16Episode 254	Average Score: 69.40Episode 255	Average Score: 65.68Episode 256	Average Score: 77.44Episode 257	Average Score: 91.68Episode 258	Average Score: 70.56Episode 259	Average Score: 76.80Episode 260	Average Score: 56.32Episode 261	Average Score: 52.04Episode 262	Average Score: 40.12Episode 263	Average Score: 36.80Episode 264	Average Score: 34.08Episode 265	Average Score: 21.04Episode 266	Average Score: 16.08Episode 267	Average Score: 12.56Episode 268	Average Score: 13.28Episode 269	Average Score: -0.40Episode 270	Average Score: 2.18Episode 271	Average Score: 4.82Episode 272	Average Score: 26.34Episode 273	Average Score: 34.46Episode 274	Average Score: 58.78
+
+Initial Position is [-0.24441111  0.14403184]
+===============================================================
+Target Position is [-0.08561695  0.28171006]
+===============================================================
+Initial Kappas are  [14.189435895967097, -3.8494749313245, 2.3065977719472466]
+===============================================================
+Goal Kappas are  [1.3941902123774588, 4.894876464161069, -3.9481884490669947]
+===============================================================
+Episode 275	Average Score: 40.96Episode 276	Average Score: 38.56Episode 277	Average Score: 58.80Episode 278	Average Score: 51.52Episode 279	Average Score: 66.08Episode 280	Average Score: 75.68Episode 281	Average Score: 45.62Episode 282	Average Score: 26.34Episode 283	Average Score: 51.06Episode 284	Average Score: 59.06Episode 285	Average Score: 73.66Episode 286	Average Score: 76.06Episode 287	Average Score: 54.62Episode 288	Average Score: 74.90Episode 289	Average Score: 52.42Episode 290	Average Score: 67.86Episode 291	Average Score: 66.54Episode 292	Average Score: 55.72Episode 293	Average Score: 49.72Episode 294	Average Score: 67.24Episode 295	Average Score: 52.22Episode 296	Average Score: 34.06Episode 297	Average Score: 34.30Episode 298	Average Score: 56.46Episode 299	Average Score: 60.86
+
+Initial Position is [-0.2631659   0.05863659]
+===============================================================
+Target Position is [-0.18140621 -0.0171493 ]
+===============================================================
+Initial Kappas are  [15.810894560666004, -0.8144553965481269, 2.960008921472703]
+===============================================================
+Goal Kappas are  [12.709357394283721, 7.486765564399606, 15.961248427982113]
+===============================================================
+Episode 300	Average Score: 59.60Episode 301	Average Score: 54.28Episode 302	Average Score: 70.36Episode 303	Average Score: 66.92Episode 304	Average Score: 55.40Episode 305	Average Score: 47.24Episode 306	Average Score: 49.46Episode 307	Average Score: 61.70Episode 308	Average Score: 46.02Episode 309	Average Score: 23.54Episode 310	Average Score: 28.66Episode 311	Average Score: 18.74Episode 312	Average Score: 52.66Episode 313	Average Score: 34.02Episode 314	Average Score: 56.66Episode 315	Average Score: 45.06Episode 316	Average Score: 73.22Episode 317	Average Score: 87.72Episode 318	Average Score: 68.12Episode 319	Average Score: 68.12Episode 320	Average Score: 67.64Episode 321	Average Score: 82.20Episode 322	Average Score: 77.88Episode 323	Average Score: 61.16Episode 324	Average Score: 48.20
+
+Initial Position is [-0.17491242  0.2298611 ]
+===============================================================
+Target Position is [0.06465054 0.29040846]
+===============================================================
+Initial Kappas are  [6.096410854778, 2.5259101787213813, 0.7877492063654081]
+===============================================================
+Goal Kappas are  [-1.3173507826037598, -1.8971161756970543, -0.8619474158006]
+===============================================================
+Episode 325	Average Score: 32.92Episode 326	Average Score: 42.32Episode 327	Average Score: 45.14Episode 328	Average Score: 63.94Episode 329	Average Score: 84.26Episode 330	Average Score: 107.62Episode 331	Average Score: 131.38Episode 332	Average Score: 120.38Episode 333	Average Score: 142.94Episode 334	Average Score: 146.14Episode 335	Average Score: 139.18Episode 336	Average Score: 156.54Episode 337	Average Score: 143.26Episode 338	Average Score: 141.10Episode 339	Average Score: 133.42Episode 340	Average Score: 132.94Episode 341	Average Score: 89.10Episode 342	Average Score: 102.70Episode 343	Average Score: 117.02Episode 344	Average Score: 129.66Episode 345	Average Score: 143.74Episode 346	Average Score: 123.74Episode 347	Average Score: 124.46Episode 348	Average Score: 125.58Episode 349	Average Score: 117.42
+
+Initial Position is [-0.08892256  0.28350568]
+===============================================================
+Target Position is [-0.06901432  0.28205055]
+===============================================================
+Initial Kappas are  [2.575136226492333, 2.1710690665551926, -1.171065508468637]
+===============================================================
+Goal Kappas are  [1.8971974780202263, -1.4683338888148376, 9.578948441770278]
+===============================================================
+Episode 350	Average Score: 135.18Episode 351	Average Score: 127.98Episode 352	Average Score: 138.76Episode 353	Average Score: 138.28Episode 354	Average Score: 122.84Episode 355	Average Score: 104.76Episode 356	Average Score: 104.44Episode 357	Average Score: 108.34Episode 358	Average Score: 106.66Episode 359	Average Score: 89.10Episode 360	Average Score: 75.88Episode 361	Average Score: 94.76Episode 362	Average Score: 102.76Episode 363	Average Score: 121.72Episode 364	Average Score: 117.80Episode 365	Average Score: 110.68Episode 366	Average Score: 147.08Episode 367	Average Score: 136.76Episode 368	Average Score: 140.04Episode 369	Average Score: 133.32Episode 370	Average Score: 113.74Episode 371	Average Score: 149.10Episode 372	Average Score: 151.42Episode 373	Average Score: 171.90Episode 374	Average Score: 172.86
+
+Initial Position is [-0.05993081  0.28928247]
+===============================================================
+Target Position is [-0.25211754  0.11947796]
+===============================================================
+Initial Kappas are  [1.533223468929867, -0.38948575733805146, 5.8323686810832776]
+===============================================================
+Goal Kappas are  [14.48457353626899, -3.575721586532877, 5.223597967103316]
+===============================================================
+Episode 375	Average Score: 185.10Episode 376	Average Score: 184.96Episode 377	Average Score: 168.26Episode 378	Average Score: 182.34Episode 379	Average Score: 202.02Episode 380	Average Score: 214.26Episode 381	Average Score: 225.70Episode 382	Average Score: 241.76Episode 383	Average Score: 256.88Episode 384	Average Score: 273.56Episode 385	Average Score: 304.26Episode 386	Average Score: 283.94Episode 387	Average Score: 289.62Episode 388	Average Score: 287.30Episode 389	Average Score: 302.58Episode 390	Average Score: 291.32Episode 391	Average Score: 251.72Episode 392	Average Score: 268.44Episode 393	Average Score: 269.32Episode 394	Average Score: 273.32Episode 395	Average Score: 290.86Episode 396	Average Score: 278.62Episode 397	Average Score: 272.38Episode 398	Average Score: 260.90Episode 399	Average Score: 273.94
+
+Initial Position is [-0.21431476  0.13637592]
+===============================================================
+Target Position is [-0.22904094  0.05751809]
+===============================================================
+Initial Kappas are  [8.862856801033939, 1.1200543379807435, 13.573072900854218]
+===============================================================
+Goal Kappas are  [9.089747176443701, 11.384905961180948, -1.722451987378005]
+===============================================================
+Episode 400	Average Score: 267.98Episode 401	Average Score: 291.32Episode 402	Average Score: 293.06Episode 403	Average Score: 284.22Episode 404	Average Score: 259.90Episode 405	Average Score: 249.42Episode 406	Average Score: 227.34Episode 407	Average Score: 204.86Episode 408	Average Score: 189.66Episode 409	Average Score: 188.38Episode 410	Average Score: 170.70Episode 411	Average Score: 176.38Episode 412	Average Score: 166.54Episode 413	Average Score: 163.34Episode 414	Average Score: 173.98Episode 415	Average Score: 206.92Episode 416	Average Score: 245.80Episode 417	Average Score: 240.60Episode 418	Average Score: 260.20Episode 419	Average Score: 256.28Episode 420	Average Score: 246.16Episode 421	Average Score: 246.72Episode 422	Average Score: 262.16Episode 423	Average Score: 271.88Episode 424	Average Score: 286.04
+
+Initial Position is [-0.23657814  0.1510308 ]
+===============================================================
+Target Position is [-0.21128692 -0.00233549]
+===============================================================
+Initial Kappas are  [11.358782790919046, -0.25493019697993535, 3.5221537797913456]
+===============================================================
+Goal Kappas are  [11.342188211010527, 10.356043544394153, 5.065144166124066]
+===============================================================
+Episode 425	Average Score: 281.68Episode 426	Average Score: 237.64Episode 427	Average Score: 251.40Episode 428	Average Score: 251.44Episode 429	Average Score: 253.64Episode 430	Average Score: 261.24Episode 431	Average Score: 253.80Episode 432	Average Score: 263.32Episode 433	Average Score: 249.18Episode 434	Average Score: 245.10Episode 435	Average Score: 234.06Episode 436	Average Score: 213.80Episode 437	Average Score: 221.72Episode 438	Average Score: 229.00Episode 439	Average Score: 211.32Episode 440	Average Score: 211.08Episode 441	Average Score: 186.44Episode 442	Average Score: 171.56Episode 443	Average Score: 156.68Episode 444	Average Score: 150.84Episode 445	Average Score: 157.20Episode 446	Average Score: 159.00Episode 447	Average Score: 154.88Episode 448	Average Score: 152.84Episode 449	Average Score: 124.28
+
+Initial Position is [-0.1313345   0.26287264]
+===============================================================
+Target Position is [-0.16212271  0.2374921 ]
+===============================================================
+Initial Kappas are  [4.394616731972452, 1.1994373555831803, 2.179412450627913]
+===============================================================
+Goal Kappas are  [4.837349832798946, 3.2879076997566123, 1.7739134733475268]
+===============================================================
+Episode 450	Average Score: 128.76Episode 451	Average Score: 164.28Episode 452	Average Score: 129.48Episode 453	Average Score: 122.20Episode 454	Average Score: 133.52Episode 455	Average Score: 111.68Episode 456	Average Score: 146.08Episode 457	Average Score: 142.68Episode 458	Average Score: 142.10Episode 459	Average Score: 153.30Episode 460	Average Score: 163.38Episode 461	Average Score: 157.62Episode 462	Average Score: 160.34Episode 463	Average Score: 148.80Episode 464	Average Score: 141.60Episode 465	Average Score: 128.52Episode 466	Average Score: 136.12Episode 467	Average Score: 141.84Episode 468	Average Score: 142.56Episode 469	Average Score: 142.00Episode 470	Average Score: 123.54Episode 471	Average Score: 106.54Episode 472	Average Score: 107.94Episode 473	Average Score: 125.50Episode 474	Average Score: 137.50
+
+Initial Position is [-0.16328849  0.1297465 ]
+===============================================================
+Target Position is [0.09749171 0.28128305]
+===============================================================
+Initial Kappas are  [2.657634306088096, 10.092933472402542, 14.436887040395376]
+===============================================================
+Goal Kappas are  [-3.643442610074704, -0.5247607854353928, -0.20212284063488717]
+===============================================================
+Episode 475	Average Score: 136.82Episode 476	Average Score: 130.70Episode 477	Average Score: 148.50Episode 478	Average Score: 149.38Episode 479	Average Score: 141.38Episode 480	Average Score: 172.02Episode 481	Average Score: 162.82Episode 482	Average Score: 154.94Episode 483	Average Score: 166.70Episode 484	Average Score: 178.22Episode 485	Average Score: 190.14Episode 486	Average Score: 220.70Episode 487	Average Score: 205.32Episode 488	Average Score: 180.96Episode 489	Average Score: 183.12Episode 490	Average Score: 193.24Episode 491	Average Score: 209.08Episode 492	Average Score: 210.40Episode 493	Average Score: 205.36Episode 494	Average Score: 210.24Episode 495	Average Score: 224.78Episode 496	Average Score: 232.78Episode 497	Average Score: 214.30Episode 498	Average Score: 185.26Episode 499	Average Score: 187.30
+
+Initial Position is [-0.2198448 -0.0085959]
+===============================================================
+Target Position is [-0.129089    0.19168785]
+===============================================================
+Initial Kappas are  [14.349737455627825, 3.9040074494926156, 12.328914323681033]
+===============================================================
+Goal Kappas are  [-2.515141296962354, 14.898055951433577, 4.107958797156552]
+===============================================================
+Episode 500	Average Score: 193.90Episode 501	Average Score: 200.70Episode 502	Average Score: 205.06Episode 503	Average Score: 225.54Episode 504	Average Score: 229.22Episode 505	Average Score: 184.52Episode 506	Average Score: 160.92Episode 507	Average Score: 171.76Episode 508	Average Score: 143.16Episode 509	Average Score: 154.60Episode 510	Average Score: 108.76Episode 511	Average Score: 95.74Episode 512	Average Score: 106.80Episode 513	Average Score: 144.78Episode 514	Average Score: 146.54Episode 515	Average Score: 123.82Episode 516	Average Score: 115.10Episode 517	Average Score: 118.78Episode 518	Average Score: 98.76Episode 519	Average Score: 82.10Episode 520	Average Score: 105.22Episode 521	Average Score: 106.14Episode 522	Average Score: 122.78Episode 523	Average Score: 139.66Episode 524	Average Score: 127.40
+
+Initial Position is [-0.07217652  0.28998953]
+===============================================================
+Target Position is [-0.12010513  0.20322976]
+===============================================================
+Initial Kappas are  [2.843978826859538, 0.43515640457700755, -0.8981273894097717]
+===============================================================
+Goal Kappas are  [-1.6258218669013655, 10.518522869983777, 10.589618760963479]
+===============================================================
+Episode 525	Average Score: 91.80Episode 526	Average Score: 52.16Episode 527	Average Score: 31.60Episode 528	Average Score: 7.46Episode 529	Average Score: 1.62Episode 530	Average Score: 20.96Episode 531	Average Score: 40.82Episode 532	Average Score: 32.94Episode 533	Average Score: 65.64Episode 534	Average Score: 57.72Episode 535	Average Score: 103.88Episode 536	Average Score: 116.20Episode 537	Average Score: 111.72Episode 538	Average Score: 97.72Episode 539	Average Score: 84.86Episode 540	Average Score: 89.14Episode 541	Average Score: 82.18Episode 542	Average Score: 73.46Episode 543	Average Score: 80.20Episode 544	Average Score: 83.18Episode 545	Average Score: 47.50Episode 546	Average Score: 32.58Episode 547	Average Score: -3.58Episode 548	Average Score: -31.18Episode 549	Average Score: -9.04
+
+Initial Position is [-0.19873072  0.18247645]
+===============================================================
+Target Position is [0.04311528 0.29413655]
+===============================================================
+Initial Kappas are  [6.201125591299842, 4.053429583406015, 6.55370317372865]
+===============================================================
+Goal Kappas are  [-2.8404914798473055, 0.2925735147465405, 4.613177108789907]
+===============================================================
+Episode 550	Average Score: 27.36Episode 551	Average Score: 47.08Episode 552	Average Score: 62.68Episode 553	Average Score: 60.98Episode 554	Average Score: 60.38Episode 555	Average Score: 74.54Episode 556	Average Score: 61.08Episode 557	Average Score: 50.84Episode 558	Average Score: 47.22Episode 559	Average Score: 49.38Episode 560	Average Score: 48.82Episode 561	Average Score: 48.26Episode 562	Average Score: 46.34Episode 563	Average Score: 45.86Episode 564	Average Score: 66.72Episode 565	Average Score: 78.68Episode 566	Average Score: 81.08Episode 567	Average Score: 69.96Episode 568	Average Score: 85.24Episode 569	Average Score: 76.68Episode 570	Average Score: 90.60Episode 571	Average Score: 121.22Episode 572	Average Score: 145.38Episode 573	Average Score: 170.98Episode 574	Average Score: 136.90
+
+Initial Position is [-0.14441274  0.14344431]
+===============================================================
+Target Position is [-0.14016467  0.2595055 ]
+===============================================================
+Initial Kappas are  [-0.30632165168932834, 13.630295672199708, 11.222748871993586]
+===============================================================
+Goal Kappas are  [7.311963844141896, -1.2819040534909196, -3.0494170957819797]
+===============================================================
+Episode 575	Average Score: 108.34Episode 576	Average Score: 114.34Episode 577	Average Score: 127.78Episode 578	Average Score: 147.70Episode 579	Average Score: 156.42Episode 580	Average Score: 139.22Episode 581	Average Score: 124.00Episode 582	Average Score: 150.16Episode 583	Average Score: 126.08Episode 584	Average Score: 118.32Episode 585	Average Score: 82.98Episode 586	Average Score: 55.02Episode 587	Average Score: 45.98Episode 588	Average Score: 54.14Episode 589	Average Score: 51.82Episode 590	Average Score: 56.74Episode 591	Average Score: 68.90Episode 592	Average Score: 90.98Episode 593	Average Score: 88.98Episode 594	Average Score: 110.34Episode 595	Average Score: 101.70Episode 596	Average Score: 80.88Episode 597	Average Score: 77.18Episode 598	Average Score: 70.62Episode 599	Average Score: 82.26
+
+Initial Position is [-0.128237   0.2525579]
+===============================================================
+Target Position is [-0.07430937  0.23242843]
+===============================================================
+Initial Kappas are  [4.585634168496181, -1.9938240247322723, 11.73798442023554]
+===============================================================
+Goal Kappas are  [-3.5915482056075896, 8.62661842691976, 12.966916524379762]
+===============================================================
+Episode 600	Average Score: 92.80Episode 601	Average Score: 82.08Episode 602	Average Score: 70.12Episode 603	Average Score: 32.64Episode 604	Average Score: 12.06Episode 605	Average Score: 17.00Episode 606	Average Score: 32.10Episode 607	Average Score: 13.46Episode 608	Average Score: 36.90Episode 609	Average Score: 21.10Episode 610	Average Score: 41.80Episode 611	Average Score: 64.24Episode 612	Average Score: 84.40Episode 613	Average Score: 85.76Episode 614	Average Score: 99.52Episode 615	Average Score: 100.72Episode 616	Average Score: 70.32Episode 617	Average Score: 60.56Episode 618	Average Score: 62.48Episode 619	Average Score: 51.68Episode 620	Average Score: 82.00Episode 621	Average Score: 98.16Episode 622	Average Score: 90.32Episode 623	Average Score: 98.88Episode 624	Average Score: 106.12
+
+Initial Position is [-0.19355118  0.12755463]
+===============================================================
+Target Position is [-0.16945104 -0.0723668 ]
+===============================================================
+Initial Kappas are  [3.111386075737263, 15.051574481193107, -1.9049200796065766]
+===============================================================
+Goal Kappas are  [14.567917112207411, 12.200980428418799, 3.9928482898860924]
+===============================================================
+Episode 625	Average Score: 100.98Episode 626	Average Score: 112.98Episode 627	Average Score: 90.92Episode 628	Average Score: 102.64Episode 629	Average Score: 117.50Episode 630	Average Score: 114.32Episode 631	Average Score: 112.46Episode 632	Average Score: 121.34Episode 633	Average Score: 116.54Episode 634	Average Score: 116.82Episode 635	Average Score: 108.42Episode 636	Average Score: 115.70Episode 637	Average Score: 117.30Episode 638	Average Score: 106.42Episode 639	Average Score: 92.22Episode 640	Average Score: 87.34Episode 641	Average Score: 121.82Episode 642	Average Score: 133.82Episode 643	Average Score: 138.14Episode 644	Average Score: 134.70Episode 645	Average Score: 121.50Episode 646	Average Score: 109.42Episode 647	Average Score: 120.80Episode 648	Average Score: 99.44Episode 649	Average Score: 97.92
+
+Initial Position is [-0.19346644  0.17216471]
+===============================================================
+Target Position is [-0.21443863  0.05962696]
+===============================================================
+Initial Kappas are  [4.1770787774116815, 9.080150357545683, 2.3116832512920578]
+===============================================================
+Goal Kappas are  [9.436273072832293, 6.610414236707044, 11.737257688104041]
+===============================================================
+Episode 650	Average Score: 115.88Episode 651	Average Score: 115.88Episode 652	Average Score: 151.98Episode 653	Average Score: 148.22Episode 654	Average Score: 121.90Episode 655	Average Score: 132.66Episode 656	Average Score: 139.20Episode 657	Average Score: 141.60Episode 658	Average Score: 148.26Episode 659	Average Score: 150.58Episode 660	Average Score: 168.58Episode 661	Average Score: 167.50Episode 662	Average Score: 152.74Episode 663	Average Score: 148.98Episode 664	Average Score: 157.34Episode 665	Average Score: 157.18Episode 666	Average Score: 139.90Episode 667	Average Score: 134.82Episode 668	Average Score: 137.70Episode 669	Average Score: 127.30Episode 670	Average Score: 102.66Episode 671	Average Score: 119.34Episode 672	Average Score: 121.78Episode 673	Average Score: 128.86Episode 674	Average Score: 105.34
+
+Initial Position is [-0.25609118  0.08806092]
+===============================================================
+Target Position is [-0.01663367  0.29937747]
+===============================================================
+Initial Kappas are  [13.271052587803347, 2.2683129737561245, -0.05731262905085721]
+===============================================================
+Goal Kappas are  [1.2558937103878778, -1.077988603363905, 0.28493286080563696]
+===============================================================
+Episode 675	Average Score: 95.82Episode 676	Average Score: 78.20Episode 677	Average Score: 62.60Episode 678	Average Score: 79.76Episode 679	Average Score: 109.44Episode 680	Average Score: 115.80Episode 681	Average Score: 139.24Episode 682	Average Score: 118.84Episode 683	Average Score: 123.54Episode 684	Average Score: 129.78Episode 685	Average Score: 101.70Episode 686	Average Score: 102.14Episode 687	Average Score: 92.50Episode 688	Average Score: 89.22Episode 689	Average Score: 78.34Episode 690	Average Score: 72.66Episode 691	Average Score: 78.66Episode 692	Average Score: 66.54Episode 693	Average Score: 67.42Episode 694	Average Score: 100.86Episode 695	Average Score: 109.50Episode 696	Average Score: 91.82Episode 697	Average Score: 91.30Episode 698	Average Score: 68.70Episode 699	Average Score: 75.90
+
+Initial Position is [-0.22618815  0.13344935]
+===============================================================
+Target Position is [-0.17876895  0.09969208]
+===============================================================
+Initial Kappas are  [8.55268768271096, 4.449062632745317, 5.7656469686657985]
+===============================================================
+Goal Kappas are  [3.0520187454291516, 14.157923621920766, 7.096885006065026]
+===============================================================
+Episode 700	Average Score: 92.38Episode 701	Average Score: 117.68Episode 702	Average Score: 104.80Episode 703	Average Score: 111.40Episode 704	Average Score: 111.80Episode 705	Average Score: 96.96Episode 706	Average Score: 74.96Episode 707	Average Score: 97.44Episode 708	Average Score: 91.92Episode 709	Average Score: 76.50Episode 710	Average Score: 94.18Episode 711	Average Score: 103.10Episode 712	Average Score: 115.26Episode 713	Average Score: 114.90Episode 714	Average Score: 106.70Episode 715	Average Score: 92.26Episode 716	Average Score: 77.30Episode 717	Average Score: 61.80Episode 718	Average Score: 61.66Episode 719	Average Score: 41.30Episode 720	Average Score: 47.78Episode 721	Average Score: 49.06Episode 722	Average Score: 45.54Episode 723	Average Score: 84.98Episode 724	Average Score: 89.26
+
+Initial Position is [-0.20132443  0.10892482]
+===============================================================
+Target Position is [-0.09191572  0.23878135]
+===============================================================
+Initial Kappas are  [7.380690605201583, 5.027973595288778, 14.867447923219615]
+===============================================================
+Goal Kappas are  [-2.7737609804859407, 9.67851263199225, 7.788332436302847]
+===============================================================
+Episode 725	Average Score: 78.38Episode 726	Average Score: 42.62Episode 727	Average Score: 56.54Episode 728	Average Score: 52.50Episode 729	Average Score: 55.38Episode 730	Average Score: 50.12Episode 731	Average Score: 29.54Episode 732	Average Score: 27.94Episode 733	Average Score: 20.82Episode 734	Average Score: 27.40Episode 735	Average Score: 10.36Episode 736	Average Score: 8.72Episode 737	Average Score: 10.44Episode 738	Average Score: 18.72Episode 739	Average Score: 32.12Episode 740	Average Score: 34.80Episode 741	Average Score: 38.56Episode 742	Average Score: 68.62Episode 743	Average Score: 62.92Episode 744	Average Score: 77.04Episode 745	Average Score: 72.76Episode 746	Average Score: 91.16Episode 747	Average Score: 108.12Episode 748	Average Score: 83.40Episode 749	Average Score: 74.26
+
+Initial Position is [-0.21069242 -0.02859074]
+===============================================================
+Target Position is [0.04610284 0.2851531 ]
+===============================================================
+Initial Kappas are  [14.885128563684763, 4.956176832328108, 11.638965349247531]
+===============================================================
+Goal Kappas are  [-3.412027747448979, -1.0411107920373062, 10.820083137839333]
+===============================================================
+Episode 750	Average Score: 69.06Episode 751	Average Score: 91.94Episode 752	Average Score: 82.32Episode 753	Average Score: 63.48Episode 754	Average Score: 42.98Episode 755	Average Score: 37.88Episode 756	Average Score: 56.14Episode 757	Average Score: 36.78Episode 758	Average Score: 19.80Episode 759	Average Score: 34.64Episode 760	Average Score: 54.16Episode 761	Average Score: 32.80Episode 762	Average Score: 33.56Episode 763	Average Score: 29.68Episode 764	Average Score: 12.64Episode 765	Average Score: 22.28Episode 766	Average Score: 23.72Episode 767	Average Score: 27.96Episode 768	Average Score: 21.72Episode 769	Average Score: 11.08Episode 770	Average Score: 5.04Episode 771	Average Score: -20.06Episode 772	Average Score: -11.02Episode 773	Average Score: 1.62Episode 774	Average Score: 10.24
+
+Initial Position is [-0.17059223 -0.06665879]
+===============================================================
+Target Position is [-0.15873222  0.18173867]
+===============================================================
+Initial Kappas are  [15.320789367670969, 8.899188850786496, 10.391257795096578]
+===============================================================
+Goal Kappas are  [-0.308154313338179, 15.91225235962315, -3.2191094603102375]
+===============================================================
+Episode 775	Average Score: 40.24Episode 776	Average Score: 42.00Episode 777	Average Score: 52.02Episode 778	Average Score: 68.50Episode 779	Average Score: 83.24Episode 780	Average Score: 115.96Episode 781	Average Score: 100.52Episode 782	Average Score: 114.84Episode 783	Average Score: 113.82Episode 784	Average Score: 112.86Episode 785	Average Score: 89.96Episode 786	Average Score: 101.64Episode 787	Average Score: 91.32Episode 788	Average Score: 89.52Episode 789	Average Score: 86.88Episode 790	Average Score: 86.00Episode 791	Average Score: 87.36Episode 792	Average Score: 58.56Episode 793	Average Score: 54.08Episode 794	Average Score: 37.20Episode 795	Average Score: 36.00Episode 796	Average Score: 63.42Episode 797	Average Score: 31.10Episode 798	Average Score: 36.34Episode 799	Average Score: 51.38
+
+Initial Position is [-0.21738431  0.0257145 ]
+===============================================================
+Target Position is [-0.21162379  0.16320261]
+===============================================================
+Initial Kappas are  [9.365244959908985, 12.97663115242625, -0.6589982372462919]
+===============================================================
+Goal Kappas are  [9.557611247316999, -1.9366128520675083, 13.461186593329515]
+===============================================================
+Episode 800	Average Score: 30.74Episode 801	Average Score: 32.54Episode 802	Average Score: 29.88Episode 803	Average Score: 29.56Episode 804	Average Score: 23.32Episode 805	Average Score: 4.28Episode 806	Average Score: 30.28Episode 807	Average Score: 38.52Episode 808	Average Score: 50.60Episode 809	Average Score: 35.72Episode 810	Average Score: 33.76Episode 811	Average Score: 45.04Episode 812	Average Score: 71.68Episode 813	Average Score: 73.44Episode 814	Average Score: 86.24Episode 815	Average Score: 113.12Episode 816	Average Score: 111.68Episode 817	Average Score: 131.36Episode 818	Average Score: 119.12Episode 819	Average Score: 114.58Episode 820	Average Score: 123.46Episode 821	Average Score: 110.44Episode 822	Average Score: 119.60Episode 823	Average Score: 106.36Episode 824	Average Score: 108.52
+
+Initial Position is [-0.01973983  0.29606208]
+===============================================================
+Target Position is [-0.06100097  0.28929383]
+===============================================================
+Initial Kappas are  [0.7723921737363391, -2.1310825837084866, 6.570761934889049]
+===============================================================
+Goal Kappas are  [1.520565864021581, -0.16705476560562849, 5.4310089238388155]
+===============================================================
+Episode 825	Average Score: 77.64Episode 826	Average Score: 98.72Episode 827	Average Score: 122.26Episode 828	Average Score: 114.26Episode 829	Average Score: 127.50Episode 830	Average Score: 123.98Episode 831	Average Score: 115.26Episode 832	Average Score: 95.82Episode 833	Average Score: 109.86Episode 834	Average Score: 116.10Episode 835	Average Score: 162.16Episode 836	Average Score: 147.04Episode 837	Average Score: 120.32Episode 838	Average Score: 114.48Episode 839	Average Score: 107.64Episode 840	Average Score: 86.36Episode 841	Average Score: 71.44Episode 842	Average Score: 47.68Episode 843	Average Score: 56.00Episode 844	Average Score: 78.18Episode 845	Average Score: 52.42Episode 846	Average Score: 48.60Episode 847	Average Score: 19.50Episode 848	Average Score: 3.00Episode 849	Average Score: -9.92
+
+Initial Position is [-0.21100122  0.04717772]
+===============================================================
+Target Position is [-0.14278726  0.25377166]
+===============================================================
+Initial Kappas are  [8.064396021901967, 11.790641737808372, 4.3779348920381675]
+===============================================================
+Goal Kappas are  [4.102158678654829, 4.207252720488993, -2.4659718308791154]
+===============================================================
+Episode 850	Average Score: 25.60Episode 851	Average Score: -23.38Episode 852	Average Score: -62.18Episode 853	Average Score: -71.70Episode 854	Average Score: -73.54Episode 855	Average Score: -90.18Episode 856	Average Score: -94.10Episode 857	Average Score: -85.80Episode 858	Average Score: -85.68Episode 859	Average Score: -87.28Episode 860	Average Score: -120.64Episode 861	Average Score: -110.80Episode 862	Average Score: -99.66Episode 863	Average Score: -93.90Episode 864	Average Score: -111.16Episode 865	Average Score: -110.36Episode 866	Average Score: -85.84Episode 867	Average Score: -61.92Episode 868	Average Score: -55.44Episode 869	Average Score: -55.64Episode 870	Average Score: -10.44Episode 871	Average Score: -9.92Episode 872	Average Score: 15.46Episode 873	Average Score: 44.28Episode 874	Average Score: 50.12
+
+Initial Position is [-0.17533724  0.2019114 ]
+===============================================================
+Target Position is [-0.25677478  0.05074874]
+===============================================================
+Initial Kappas are  [3.4916272210947454, 7.050668247552235, 4.371208846924736]
+===============================================================
+Goal Kappas are  [14.044807175457453, 4.850819780757879, -3.9680409548515048]
+===============================================================
+Episode 875	Average Score: 54.12Episode 876	Average Score: 70.02Episode 877	Average Score: 72.82Episode 878	Average Score: 94.78Episode 879	Average Score: 89.78Episode 880	Average Score: 96.74Episode 881	Average Score: 97.26Episode 882	Average Score: 88.16Episode 883	Average Score: 102.24Episode 884	Average Score: 125.68Episode 885	Average Score: 133.36Episode 886	Average Score: 127.20Episode 887	Average Score: 125.74Episode 888	Average Score: 137.98Episode 889	Average Score: 156.80Episode 890	Average Score: 142.88Episode 891	Average Score: 140.72Episode 892	Average Score: 136.04Episode 893	Average Score: 136.88Episode 894	Average Score: 135.00Episode 895	Average Score: 115.16Episode 896	Average Score: 119.96Episode 897	Average Score: 127.08Episode 898	Average Score: 129.08Episode 899	Average Score: 140.32
+
+Initial Position is [-0.17526054  0.20879641]
+===============================================================
+Target Position is [-0.11314882 -0.0591522 ]
+===============================================================
+Initial Kappas are  [5.880134538289926, 0.5934838085235956, 11.361739399102348]
+===============================================================
+Goal Kappas are  [13.871096896810275, 13.335810711169824, 14.631068962366562]
+===============================================================
+Episode 900	Average Score: 132.40Episode 901	Average Score: 125.16Episode 902	Average Score: 120.72Episode 903	Average Score: 114.92Episode 904	Average Score: 109.24Episode 905	Average Score: 133.00Episode 906	Average Score: 134.40Episode 907	Average Score: 141.92Episode 908	Average Score: 125.84Episode 909	Average Score: 125.12Episode 910	Average Score: 126.92Episode 911	Average Score: 118.36Episode 912	Average Score: 113.64Episode 913	Average Score: 104.52Episode 914	Average Score: 94.32Episode 915	Average Score: 107.00Episode 916	Average Score: 112.00Episode 917	Average Score: 110.00Episode 918	Average Score: 110.52Episode 919	Average Score: 107.76Episode 920	Average Score: 95.68Episode 921	Average Score: 75.20Episode 922	Average Score: 80.08Episode 923	Average Score: 63.36Episode 924	Average Score: 31.30
+
+Initial Position is [-0.12078763  0.24353512]
+===============================================================
+Target Position is [-0.027389   0.2967945]
+===============================================================
+Initial Kappas are  [-0.18317313927581713, 8.486531781547633, 3.247468082504234]
+===============================================================
+Goal Kappas are  [-0.6300665602448228, 3.316360747058866, -1.2768140175125806]
+===============================================================
+Episode 925	Average Score: 36.58Episode 926	Average Score: 25.72Episode 927	Average Score: 42.40Episode 928	Average Score: 45.56Episode 929	Average Score: 73.88Episode 930	Average Score: 66.84Episode 931	Average Score: 68.44Episode 932	Average Score: 73.16Episode 933	Average Score: 96.20Episode 934	Average Score: 82.28Episode 935	Average Score: 101.28Episode 936	Average Score: 113.12Episode 937	Average Score: 106.56Episode 938	Average Score: 109.76Episode 939	Average Score: 140.52Episode 940	Average Score: 141.28Episode 941	Average Score: 145.88Episode 942	Average Score: 135.56Episode 943	Average Score: 139.40Episode 944	Average Score: 163.40Episode 945	Average Score: 174.04Episode 946	Average Score: 207.08Episode 947	Average Score: 197.08Episode 948	Average Score: 202.68Episode 949	Average Score: 231.46
+
+Initial Position is [-0.25297463  0.05267557]
+===============================================================
+Target Position is [-0.15019199  0.24084538]
+===============================================================
+Initial Kappas are  [14.917927039183542, -1.106067586163416, 9.596957110433909]
+===============================================================
+Goal Kappas are  [4.425188920941274, 1.394077262944017, 7.334102911382303]
+===============================================================
+Episode 950	Average Score: 227.94Episode 951	Average Score: 281.44Episode 952	Average Score: 281.52Episode 953	Average Score: 286.84Episode 954	Average Score: 254.92Episode 955	Average Score: 251.16Episode 956	Average Score: 249.40Episode 957	Average Score: 258.60Episode 958	Average Score: 237.68Episode 959	Average Score: 242.56Episode 960	Average Score: 238.24Episode 961	Average Score: 234.08Episode 962	Average Score: 228.50Episode 963	Average Score: 202.88Episode 964	Average Score: 178.54Episode 965	Average Score: 177.42Episode 966	Average Score: 163.26Episode 967	Average Score: 176.06Episode 968	Average Score: 181.90Episode 969	Average Score: 177.26Episode 970	Average Score: 174.66Episode 971	Average Score: 170.02Episode 972	Average Score: 179.86Episode 973	Average Score: 180.24Episode 974	Average Score: 176.16
+
+Initial Position is [-0.16709141  0.20274605]
+===============================================================
+Target Position is [1.7302687e-04 2.9347271e-01]
+===============================================================
+Initial Kappas are  [3.213106279214337, 5.897272800513067, 8.200927601238437]
+===============================================================
+Goal Kappas are  [-3.648763514847083, 6.458414657409774, -1.1822121502972625]
+===============================================================
+Episode 975	Average Score: 180.44Episode 976	Average Score: 150.60Episode 977	Average Score: 169.64Episode 978	Average Score: 161.96Episode 979	Average Score: 174.80Episode 980	Average Score: 176.40Episode 981	Average Score: 165.36Episode 982	Average Score: 153.84Episode 983	Average Score: 157.64Episode 984	Average Score: 162.84Episode 985	Average Score: 173.16Episode 986	Average Score: 174.12Episode 987	Average Score: 177.22Episode 988	Average Score: 206.36Episode 989	Average Score: 225.66Episode 990	Average Score: 231.98Episode 991	Average Score: 241.78Episode 992	Average Score: 243.54Episode 993	Average Score: 219.62Episode 994	Average Score: 198.16Episode 995	Average Score: 218.68Episode 996	Average Score: 187.08Episode 997	Average Score: 193.32Episode 998	Average Score: 203.74Episode 999	Average Score: 211.98
+
+Initial Position is [-0.21730725  0.12776716]
+===============================================================
+Target Position is [-0.0434938   0.28097966]
+===============================================================
+Initial Kappas are  [6.193050888401931, 11.27643022334728, -3.1627360874686525]
+===============================================================
+Goal Kappas are  [-2.404682875171987, 5.27125275466368, 5.649628911545729]
+===============================================================
+Episode 1000	Average Score: 225.22Episode 1001	Average Score: 244.50Episode 1002	Average Score: 227.30Episode 1003	Average Score: 236.10Episode 1004	Average Score: 241.34Episode 1005	Average Score: 240.62Episode 1006	Average Score: 251.74Episode 1007	Average Score: 253.74Episode 1008	Average Score: 251.74Episode 1009	Average Score: 245.26Episode 1010	Average Score: 203.42Episode 1011	Average Score: 192.76Episode 1012	Average Score: 202.12Episode 1013	Average Score: 174.04Episode 1014	Average Score: 155.56Episode 1015	Average Score: 166.12Episode 1016	Average Score: 173.44Episode 1017	Average Score: 171.24Episode 1018	Average Score: 197.16Episode 1019	Average Score: 219.58Episode 1020	Average Score: 214.86Episode 1021	Average Score: 216.48Episode 1022	Average Score: 198.58Episode 1023	Average Score: 205.94Episode 1024	Average Score: 215.14
+
+Initial Position is [-0.16414647  0.0128636 ]
+===============================================================
+Target Position is [-0.15485151 -0.08521074]
+===============================================================
+Initial Kappas are  [6.905238429210106, 15.769636307427877, 8.65543884411749]
+===============================================================
+Goal Kappas are  [15.899897852748975, 10.872911500823795, 7.181199793268037]
+===============================================================
+Episode 1025	Average Score: 209.70Episode 1026	Average Score: 198.72Episode 1027	Average Score: 179.92Episode 1028	Average Score: 175.36Episode 1029	Average Score: 178.48Episode 1030	Average Score: 172.92Episode 1031	Average Score: 150.28Episode 1032	Average Score: 164.52Episode 1033	Average Score: 168.84Episode 1034	Average Score: 161.56Episode 1035	Average Score: 193.98Episode 1036	Average Score: 218.32Episode 1037	Average Score: 225.76Episode 1038	Average Score: 244.94Episode 1039	Average Score: 230.46Episode 1040	Average Score: 209.04Episode 1041	Average Score: 193.16Episode 1042	Average Score: 174.50Episode 1043	Average Score: 161.14Episode 1044	Average Score: 141.66Episode 1045	Average Score: 120.86Episode 1046	Average Score: 120.28Episode 1047	Average Score: 127.50Episode 1048	Average Score: 133.34Episode 1049	Average Score: 98.06
+
+Initial Position is [-0.08010735 -0.06460748]
+===============================================================
+Target Position is [-0.04740668  0.28841016]
+===============================================================
+Initial Kappas are  [14.481971624783093, 15.904510751813046, 13.686613956052096]
+===============================================================
+Goal Kappas are  [2.2501814430451574, -3.831876618659221, 10.174987061767526]
+===============================================================
+Episode 1050	Average Score: 67.40Episode 1051	Average Score: 63.34Episode 1052	Average Score: 73.10Episode 1053	Average Score: 73.42Episode 1054	Average Score: 68.70Episode 1055	Average Score: 72.02Episode 1056	Average Score: 105.94Episode 1057	Average Score: 80.98Episode 1058	Average Score: 70.50Episode 1059	Average Score: 86.18Episode 1060	Average Score: 75.68Episode 1061	Average Score: 55.32Episode 1062	Average Score: 46.44Episode 1063	Average Score: 35.60Episode 1064	Average Score: 63.76Episode 1065	Average Score: 70.54Episode 1066	Average Score: 82.74Episode 1067	Average Score: 98.16Episode 1068	Average Score: 108.96Episode 1069	Average Score: 109.64Episode 1070	Average Score: 112.44Episode 1071	Average Score: 129.56Episode 1072	Average Score: 134.72Episode 1073	Average Score: 116.80Episode 1074	Average Score: 115.42
+
+Initial Position is [0.03238837 0.29790032]
+===============================================================
+Target Position is [-0.08702686  0.27199468]
+===============================================================
+Initial Kappas are  [-1.1628725040524466, 0.12036720108418297, -1.0443717998891664]
+===============================================================
+Goal Kappas are  [2.6842109885788403, -2.0856644045509496, 11.900553978479472]
+===============================================================
+Episode 1075	Average Score: 108.34Episode 1076	Average Score: 89.04Episode 1077	Average Score: 113.58Episode 1078	Average Score: 112.62Episode 1079	Average Score: 81.64Episode 1080	Average Score: 103.86Episode 1081	Average Score: 104.82Episode 1082	Average Score: 128.02Episode 1083	Average Score: 110.38Episode 1084	Average Score: 91.10Episode 1085	Average Score: 103.78Episode 1086	Average Score: 105.98Episode 1087	Average Score: 97.20Episode 1088	Average Score: 111.90Episode 1089	Average Score: 103.02Episode 1090	Average Score: 100.34Episode 1091	Average Score: 80.58Episode 1092	Average Score: 97.20Episode 1093	Average Score: 85.04Episode 1094	Average Score: 85.84Episode 1095	Average Score: 97.48Episode 1096	Average Score: 106.66Episode 1097	Average Score: 90.42Episode 1098	Average Score: 99.30Episode 1099	Average Score: 136.20
+
+Initial Position is [-0.23976165  0.13866414]
+===============================================================
+Target Position is [-0.1454609  -0.07001637]
+===============================================================
+Initial Kappas are  [12.770029011545226, -3.3560856598808106, 8.563519622242483]
+===============================================================
+Goal Kappas are  [15.289360637242197, 9.977018008873968, 13.001579032291442]
+===============================================================
+Episode 1100	Average Score: 161.70Episode 1101	Average Score: 188.64Episode 1102	Average Score: 185.70Episode 1103	Average Score: 187.66Episode 1104	Average Score: 225.68Episode 1105	Average Score: 207.34Episode 1106	Average Score: 211.90Episode 1107	Average Score: 208.50Episode 1108	Average Score: 229.10Episode 1109	Average Score: 237.50Episode 1110	Average Score: 240.82Episode 1111	Average Score: 239.86Episode 1112	Average Score: 241.52Episode 1113	Average Score: 256.64Episode 1114	Average Score: 263.40Episode 1115	Average Score: 255.92Episode 1116	Average Score: 262.24Episode 1117	Average Score: 246.94Episode 1118	Average Score: 238.70Episode 1119	Average Score: 238.54Episode 1120	Average Score: 241.54Episode 1121	Average Score: 214.68Episode 1122	Average Score: 224.12Episode 1123	Average Score: 227.96Episode 1124	Average Score: 196.44
+
+Initial Position is [-0.22816214 -0.03393216]
+===============================================================
+Target Position is [0.04276695 0.28724837]
+===============================================================
+Initial Kappas are  [15.328013360982162, 7.022159714562839, 1.9626938568110859]
+===============================================================
+Goal Kappas are  [-3.2902822484501923, -0.6843054575140748, 9.839289775290656]
+===============================================================
+Episode 1125	Average Score: 213.00Episode 1126	Average Score: 206.84Episode 1127	Average Score: 211.68Episode 1128	Average Score: 221.00Episode 1129	Average Score: 220.28Episode 1130	Average Score: 219.48Episode 1131	Average Score: 204.84Episode 1132	Average Score: 192.42Episode 1133	Average Score: 188.34Episode 1134	Average Score: 200.74Episode 1135	Average Score: 183.46Episode 1136	Average Score: 202.90Episode 1137	Average Score: 222.98Episode 1138	Average Score: 212.54Episode 1139	Average Score: 215.14Episode 1140	Average Score: 224.54Episode 1141	Average Score: 227.50Episode 1142	Average Score: 251.30Episode 1143	Average Score: 274.26Episode 1144	Average Score: 261.14Episode 1145	Average Score: 260.78Episode 1146	Average Score: 276.50Episode 1147	Average Score: 272.90Episode 1148	Average Score: 258.38Episode 1149	Average Score: 275.50
+
+Initial Position is [-0.224891    0.07498749]
+===============================================================
+Target Position is [-0.24828918  0.01451499]
+===============================================================
+Initial Kappas are  [11.191906430946657, 1.739664074472386, 14.90572637529981]
+===============================================================
+Goal Kappas are  [15.256865608413936, 1.7627232771448789, 7.327779785663022]
+===============================================================
+Episode 1150	Average Score: 256.78Episode 1151	Average Score: 254.26Episode 1152	Average Score: 236.38Episode 1153	Average Score: 218.94Episode 1154	Average Score: 225.10Episode 1155	Average Score: 217.78Episode 1156	Average Score: 211.04Episode 1157	Average Score: 197.04Episode 1158	Average Score: 208.40Episode 1159	Average Score: 193.84Episode 1160	Average Score: 202.16Episode 1161	Average Score: 206.56Episode 1162	Average Score: 195.96Episode 1163	Average Score: 175.60Episode 1164	Average Score: 162.00Episode 1165	Average Score: 164.68Episode 1166	Average Score: 170.52Episode 1167	Average Score: 169.42Episode 1168	Average Score: 161.74Episode 1169	Average Score: 194.22Episode 1170	Average Score: 175.32Episode 1171	Average Score: 158.70Episode 1172	Average Score: 177.86Episode 1173	Average Score: 178.18Episode 1174	Average Score: 170.90
+
+Initial Position is [-0.07933367  0.28218243]
+===============================================================
+Target Position is [-0.21067394 -0.03081911]
+===============================================================
+Initial Kappas are  [0.6387990472613456, 3.9748058207467087, 1.334375691380684]
+===============================================================
+Goal Kappas are  [13.032551504400185, 11.262504911584614, 0.4694819220867359]
+===============================================================
+Episode 1175	Average Score: 180.98Episode 1176	Average Score: 183.66Episode 1177	Average Score: 209.02Episode 1178	Average Score: 223.10Episode 1179	Average Score: 210.78Episode 1180	Average Score: 214.94Episode 1181	Average Score: 219.60Episode 1182	Average Score: 235.58Episode 1183	Average Score: 229.82Episode 1184	Average Score: 219.34Episode 1185	Average Score: 210.62Episode 1186	Average Score: 202.50Episode 1187	Average Score: 186.30Episode 1188	Average Score: 190.38Episode 1189	Average Score: 194.54Episode 1190	Average Score: 196.30Episode 1191	Average Score: 207.90Episode 1192	Average Score: 185.00Episode 1193	Average Score: 183.96Episode 1194	Average Score: 162.52Episode 1195	Average Score: 173.30Episode 1196	Average Score: 193.48Episode 1197	Average Score: 186.40Episode 1198	Average Score: 207.56Episode 1199	Average Score: 218.82
+
+Initial Position is [-0.1431766   0.25668046]
+===============================================================
+Target Position is [-0.1792465   0.13883421]
+===============================================================
+Initial Kappas are  [5.60377224433085, 2.073360246315622, -3.7815618392830173]
+===============================================================
+Goal Kappas are  [2.256737853418044, 12.899247694588603, 5.256629407192447]
+===============================================================
+Episode 1200	Average Score: 225.06Episode 1201	Average Score: 231.02Episode 1202	Average Score: 209.22Episode 1203	Average Score: 193.54Episode 1204	Average Score: 192.90Episode 1205	Average Score: 197.34Episode 1206	Average Score: 203.74Episode 1207	Average Score: 211.98Episode 1208	Average Score: 218.14Episode 1209	Average Score: 217.34Episode 1210	Average Score: 215.74Episode 1211	Average Score: 206.42Episode 1212	Average Score: 221.42Episode 1213	Average Score: 228.10Episode 1214	Average Score: 224.26Episode 1215	Average Score: 214.74Episode 1216	Average Score: 221.94Episode 1217	Average Score: 232.46Episode 1218	Average Score: 232.38Episode 1219	Average Score: 223.10Episode 1220	Average Score: 221.98Episode 1221	Average Score: 218.78Episode 1222	Average Score: 212.22Episode 1223	Average Score: 190.94Episode 1224	Average Score: 182.08
+
+Initial Position is [-0.25746924  0.09397909]
+===============================================================
+Target Position is [-0.22041635 -0.01245916]
+===============================================================
+Initial Kappas are  [13.943742644012744, 1.473663500125216, -2.056959736096838]
+===============================================================
+Goal Kappas are  [14.219669364159262, 4.875493187834911, 10.515673288658295]
+===============================================================
+Episode 1225	Average Score: 166.20Episode 1226	Average Score: 146.94Episode 1227	Average Score: 145.30Episode 1228	Average Score: 175.70Episode 1229	Average Score: 165.14Episode 1230	Average Score: 178.46Episode 1231	Average Score: 161.90Episode 1232	Average Score: 135.18Episode 1233	Average Score: 137.98Episode 1234	Average Score: 148.22Episode 1235	Average Score: 164.86Episode 1236	Average Score: 162.54Episode 1237	Average Score: 159.94Episode 1238	Average Score: 147.42Episode 1239	Average Score: 141.82Episode 1240	Average Score: 170.62Episode 1241	Average Score: 151.58Episode 1242	Average Score: 161.18Episode 1243	Average Score: 176.02Episode 1244	Average Score: 200.74Episode 1245	Average Score: 208.34Episode 1246	Average Score: 205.48Episode 1247	Average Score: 167.40Episode 1248	Average Score: 183.40Episode 1249	Average Score: 185.16
+
+Initial Position is [-0.17634264  0.04492732]
+===============================================================
+Target Position is [-0.12408062  0.25191197]
+===============================================================
+Initial Kappas are  [5.462124617089083, 14.995829020490334, 8.043217049295901]
+===============================================================
+Goal Kappas are  [0.8564979784279272, 7.512232349311143, 0.6352938350263244]
+===============================================================
+Episode 1250	Average Score: 208.78Episode 1251	Average Score: 215.24Episode 1252	Average Score: 228.04Episode 1253	Average Score: 206.16Episode 1254	Average Score: 227.32Episode 1255	Average Score: 200.40Episode 1256	Average Score: 203.34Episode 1257	Average Score: 230.94Episode 1258	Average Score: 239.66Episode 1259	Average Score: 250.34Episode 1260	Average Score: 252.34Episode 1261	Average Score: 262.58Episode 1262	Average Score: 273.22Episode 1263	Average Score: 288.22Episode 1264	Average Score: 323.10Episode 1265	Average Score: 271.92Episode 1266	Average Score: 259.12Episode 1267	Average Score: 253.38Episode 1268	Average Score: 244.62Episode 1269	Average Score: 234.30Episode 1270	Average Score: 224.62Episode 1271	Average Score: 230.08Episode 1272	Average Score: 259.92Episode 1273	Average Score: 249.84Episode 1274	Average Score: 222.56
+
+Initial Position is [-0.1896481   0.10477176]
+===============================================================
+Target Position is [-0.13586672  0.24923585]
+===============================================================
+Initial Kappas are  [3.964534809419252, 12.798397585491731, 6.301911944858048]
+===============================================================
+Goal Kappas are  [1.9696444118437553, 7.3451923042687, -2.0005075300205375]
+===============================================================
+Episode 1275	Average Score: 190.68Episode 1276	Average Score: 197.72Episode 1277	Average Score: 187.00Episode 1278	Average Score: 179.64Episode 1279	Average Score: 155.48Episode 1280	Average Score: 179.04Episode 1281	Average Score: 199.94Episode 1282	Average Score: 201.30Episode 1283	Average Score: 194.88Episode 1284	Average Score: 168.36Episode 1285	Average Score: 154.76Episode 1286	Average Score: 139.76Episode 1287	Average Score: 152.48Episode 1288	Average Score: 142.68Episode 1289	Average Score: 115.80Episode 1290	Average Score: 142.74Episode 1291	Average Score: 149.20Episode 1292	Average Score: 130.14Episode 1293	Average Score: 119.50Episode 1294	Average Score: 118.38Episode 1295	Average Score: 105.74Episode 1296	Average Score: 94.74Episode 1297	Average Score: 92.98Episode 1298	Average Score: 91.54Episode 1299	Average Score: 113.70
+
+Initial Position is [-0.18234716  0.22608744]
+===============================================================
+Target Position is [-0.16692033  0.22653589]
+===============================================================
+Initial Kappas are  [8.934000057707314, -3.357658913212954, 6.010215535930378]
+===============================================================
+Goal Kappas are  [6.360502938649516, -1.2470029128436497, 10.37225260402775]
+===============================================================
+Episode 1300	Average Score: 134.40Episode 1301	Average Score: 143.76Episode 1302	Average Score: 147.70Episode 1303	Average Score: 156.86Episode 1304	Average Score: 157.90Episode 1305	Average Score: 163.84Episode 1306	Average Score: 161.04Episode 1307	Average Score: 135.04Episode 1308	Average Score: 123.14Episode 1309	Average Score: 130.58Episode 1310	Average Score: 123.06Episode 1311	Average Score: 118.86Episode 1312	Average Score: 103.90Episode 1313	Average Score: 108.26Episode 1314	Average Score: 108.22Episode 1315	Average Score: 110.42Episode 1316	Average Score: 94.30Episode 1317	Average Score: 115.98Episode 1318	Average Score: 129.38Episode 1319	Average Score: 132.90Episode 1320	Average Score: 146.26Episode 1321	Average Score: 161.62Episode 1322	Average Score: 163.10Episode 1323	Average Score: 170.86Episode 1324	Average Score: 170.46
+
+Initial Position is [-0.22615948  0.01214419]
+===============================================================
+Target Position is [-0.21421464 -0.01901862]
+===============================================================
+Initial Kappas are  [13.689725203287107, 3.1696020710856656, 12.719012870035368]
+===============================================================
+Goal Kappas are  [13.892507889163944, 6.259769964624848, 9.655546081863228]
+===============================================================
+Episode 1325	Average Score: 154.82Episode 1326	Average Score: 148.14Episode 1327	Average Score: 125.50Episode 1328	Average Score: 110.14Episode 1329	Average Score: 107.62Episode 1330	Average Score: 94.42Episode 1331	Average Score: 82.66Episode 1332	Average Score: 98.32Episode 1333	Average Score: 96.92Episode 1334	Average Score: 109.96Episode 1335	Average Score: 106.44Episode 1336	Average Score: 125.40Episode 1337	Average Score: 92.28Episode 1338	Average Score: 80.88Episode 1339	Average Score: 71.96Episode 1340	Average Score: 62.50Episode 1341	Average Score: 76.32Episode 1342	Average Score: 40.32Episode 1343	Average Score: 21.48Episode 1344	Average Score: -9.70Episode 1345	Average Score: -28.58Episode 1346	Average Score: -32.02Episode 1347	Average Score: -19.02Episode 1348	Average Score: -31.16Episode 1349	Average Score: -29.80
+
+Initial Position is [-0.21383148  0.06303421]
+===============================================================
+Target Position is [-0.14439407  0.23310432]
+===============================================================
+Initial Kappas are  [8.29207338012352, 9.204398435842588, 7.847820156197601]
+===============================================================
+Goal Kappas are  [4.115863679219473, 0.41038567083358046, 12.329704941225963]
+===============================================================
+Episode 1350	Average Score: -18.86Episode 1351	Average Score: -33.70Episode 1352	Average Score: -24.84Episode 1353	Average Score: -30.84Episode 1354	Average Score: -28.12Episode 1355	Average Score: -32.06Episode 1356	Average Score: -25.38Episode 1357	Average Score: -0.64Episode 1358	Average Score: -9.88Episode 1359	Average Score: -22.36Episode 1360	Average Score: -33.90Episode 1361	Average Score: -42.98Episode 1362	Average Score: 10.78Episode 1363	Average Score: 18.06Episode 1364	Average Score: 32.30Episode 1365	Average Score: 34.86Episode 1366	Average Score: 11.00Episode 1367	Average Score: 56.36Episode 1368	Average Score: 60.44Episode 1369	Average Score: 91.86Episode 1370	Average Score: 116.06Episode 1371	Average Score: 128.54Episode 1372	Average Score: 131.82Episode 1373	Average Score: 130.80Episode 1374	Average Score: 134.08
+
+Initial Position is [-0.15817101  0.21498872]
+===============================================================
+Target Position is [-0.14813007  0.00478391]
+===============================================================
+Initial Kappas are  [5.525159084442656, -1.2640301460041967, 15.678447445486562]
+===============================================================
+Goal Kappas are  [8.121772860315366, 14.063782334988566, 14.523280055461491]
+===============================================================
+Episode 1375	Average Score: 119.64Episode 1376	Average Score: 144.04Episode 1377	Average Score: 172.84Episode 1378	Average Score: 184.76Episode 1379	Average Score: 198.28Episode 1380	Average Score: 208.88Episode 1381	Average Score: 198.76Episode 1382	Average Score: 187.24Episode 1383	Average Score: 207.96Episode 1384	Average Score: 228.12Episode 1385	Average Score: 265.66Episode 1386	Average Score: 250.20Episode 1387	Average Score: 208.56Episode 1388	Average Score: 197.00Episode 1389	Average Score: 186.14Episode 1390	Average Score: 206.28Episode 1391	Average Score: 243.38Episode 1392	Average Score: 235.54Episode 1393	Average Score: 242.50Episode 1394	Average Score: 242.74Episode 1395	Average Score: 261.98Episode 1396	Average Score: 240.50Episode 1397	Average Score: 236.58Episode 1398	Average Score: 225.26Episode 1399	Average Score: 240.06
+
+Initial Position is [-0.01728803  0.28116605]
+===============================================================
+Target Position is [-0.11454486  0.1718713 ]
+===============================================================
+Initial Kappas are  [-3.742440295120991, 5.084170876973269, 7.504532906097758]
+===============================================================
+Goal Kappas are  [-3.0259469531918324, 14.066719814915587, 11.731052940573198]
+===============================================================
+Episode 1400	Average Score: 238.24Episode 1401	Average Score: 221.00Episode 1402	Average Score: 198.80Episode 1403	Average Score: 220.88Episode 1404	Average Score: 229.84Episode 1405	Average Score: 201.32Episode 1406	Average Score: 231.56Episode 1407	Average Score: 231.16Episode 1408	Average Score: 214.04Episode 1409	Average Score: 201.48Episode 1410	Average Score: 163.32Episode 1411	Average Score: 162.32Episode 1412	Average Score: 165.56Episode 1413	Average Score: 180.64Episode 1414	Average Score: 190.46Episode 1415	Average Score: 170.34Episode 1416	Average Score: 166.46Episode 1417	Average Score: 159.26Episode 1418	Average Score: 150.22Episode 1419	Average Score: 163.34Episode 1420	Average Score: 122.94Episode 1421	Average Score: 143.78Episode 1422	Average Score: 127.62Episode 1423	Average Score: 127.02Episode 1424	Average Score: 89.08
+
+Initial Position is [-0.02206005  0.2864142 ]
+===============================================================
+Target Position is [-0.16477692  0.24182475]
+===============================================================
+Initial Kappas are  [-0.6439218582688708, -1.042657060518085, 11.378829565786624]
+===============================================================
+Goal Kappas are  [7.2696611804751825, 1.1254168200366284, -3.952621385348508]
+===============================================================
+Episode 1425	Average Score: 78.44Episode 1426	Average Score: 96.72Episode 1427	Average Score: 114.76Episode 1428	Average Score: 98.88Episode 1429	Average Score: 83.52Episode 1430	Average Score: 105.96Episode 1431	Average Score: 90.16Episode 1432	Average Score: 66.64Episode 1433	Average Score: 71.44Episode 1434	Average Score: 58.08Episode 1435	Average Score: 76.64Episode 1436	Average Score: 80.50Episode 1437	Average Score: 89.78Episode 1438	Average Score: 100.50Episode 1439	Average Score: 107.94Episode 1440	Average Score: 112.86Episode 1441	Average Score: 121.50Episode 1442	Average Score: 119.10Episode 1443	Average Score: 139.42Episode 1444	Average Score: 121.46Episode 1445	Average Score: 137.10Episode 1446	Average Score: 131.98Episode 1447	Average Score: 148.78Episode 1448	Average Score: 156.82Episode 1449	Average Score: 183.80
+
+Initial Position is [-0.25207523  0.09048095]
+===============================================================
+Target Position is [0.02446867 0.29438972]
+===============================================================
+Initial Kappas are  [12.314086317659257, 3.2531480113900386, 1.0015969011443984]
+===============================================================
+Goal Kappas are  [-1.8798890821682521, -0.8465632892424466, 7.031827584094787]
+===============================================================
+Episode 1450	Average Score: 215.88Episode 1451	Average Score: 206.60Episode 1452	Average Score: 207.56Episode 1453	Average Score: 201.04Episode 1454	Average Score: 196.32Episode 1455	Average Score: 212.20Episode 1456	Average Score: 203.76Episode 1457	Average Score: 206.20Episode 1458	Average Score: 193.86Episode 1459	Average Score: 198.82Episode 1460	Average Score: 200.26Episode 1461	Average Score: 212.50Episode 1462	Average Score: 216.58Episode 1463	Average Score: 208.90Episode 1464	Average Score: 212.10Episode 1465	Average Score: 213.06Episode 1466	Average Score: 206.42Episode 1467	Average Score: 177.86Episode 1468	Average Score: 146.90Episode 1469	Average Score: 135.90Episode 1470	Average Score: 128.76Episode 1471	Average Score: 111.24Episode 1472	Average Score: 96.44Episode 1473	Average Score: 113.56Episode 1474	Average Score: 111.48
+
+Initial Position is [-0.15470847  0.05242332]
+===============================================================
+Target Position is [-0.05886262  0.27923706]
+===============================================================
+Initial Kappas are  [3.897035455278054, 15.912774285954075, 11.49946376706509]
+===============================================================
+Goal Kappas are  [0.5000726140251723, -0.18021353863782652, 11.007367095091757]
+===============================================================
+Episode 1475	Average Score: 103.48Episode 1476	Average Score: 94.60Episode 1477	Average Score: 62.28Episode 1478	Average Score: 63.64Episode 1479	Average Score: 70.84Episode 1480	Average Score: 49.36Episode 1481	Average Score: 43.28Episode 1482	Average Score: 59.44Episode 1483	Average Score: 76.74Episode 1484	Average Score: 85.86Episode 1485	Average Score: 88.26Episode 1486	Average Score: 98.10Episode 1487	Average Score: 100.02Episode 1488	Average Score: 118.42Episode 1489	Average Score: 103.66Episode 1490	Average Score: 109.74Episode 1491	Average Score: 96.46Episode 1492	Average Score: 120.18Episode 1493	Average Score: 153.98Episode 1494	Average Score: 166.22Episode 1495	Average Score: 182.36Episode 1496	Average Score: 199.08Episode 1497	Average Score: 208.20Episode 1498	Average Score: 197.00Episode 1499	Average Score: 198.72
+
+Initial Position is [-0.12886614  0.2555748 ]
+===============================================================
+Target Position is [-0.15095985  0.20419331]
+===============================================================
+Initial Kappas are  [5.512292018975856, -3.5759056351279015, 11.519180263398306]
+===============================================================
+Goal Kappas are  [0.8695562234445466, 9.380427864128757, 6.307780316396752]
+===============================================================
+Episode 1500	Average Score: 196.00
