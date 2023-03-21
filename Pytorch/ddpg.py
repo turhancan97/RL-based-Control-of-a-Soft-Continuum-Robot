@@ -19,7 +19,7 @@ env.seed(10)
 agent = Agent(state_size=4, action_size=3, random_seed=10)
 
 # %%
-def ddpg(n_episodes=250, max_t=1000, print_every=50):
+def ddpg(n_episodes=1500, max_t=750, print_every=25):
     global scores
     global avg_reward_list
     scores_deque = deque(maxlen=print_every)
@@ -31,6 +31,7 @@ def ddpg(n_episodes=250, max_t=1000, print_every=50):
         agent.reset()
         score = 0
         if i_episode % print_every == 0:
+            print('\n')
             print("Initial Position is",state[0:2])
             print("===============================================================")
             print("Target Position is",state[2:4])
@@ -43,9 +44,9 @@ def ddpg(n_episodes=250, max_t=1000, print_every=50):
         
         for t in range(max_t):
             action = agent.act(state)
-            next_state, reward, done, _ = env.step_minus_euclidean_square(action) # -e^2
+            # next_state, reward, done, _ = env.step_minus_euclidean_square(action) # -e^2
+            next_state, reward, done, _ = env.step_error_comparison(action) # reward is -1.00 or -0.50 or 1.00
             # next_state, reward, done, _ = env.step_minus_weighted_euclidean(action) # -0.7*e
-            # next_state, reward, done, _ = env.step_error_comparison(action) # reward is -1.00 or -0.50 or 1.00
             # next_state, reward, done, _ = env.step_distance_based(action) # reward is du-1 - du
             agent.step(state, action, reward, next_state, done) 
             state = next_state
@@ -65,15 +66,11 @@ def ddpg(n_episodes=250, max_t=1000, print_every=50):
                 break 
         scores_deque.append(score)
         scores.append(score)
-        # Mean of 50 episodes
-        avg_reward_list.append(np.mean(scores[-50:]))
+        # Mean of 100 episodes
+        avg_reward_list.append(np.mean(scores[-100:]))
         print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque)), end="")
-        # time.sleep(2)
-        torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
-        torch.save(agent.critic_local.state_dict(), 'checkpoint_critic.pth')
-        if i_episode % print_every == 0:
-            print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque)))
-            time.sleep(2)
+        torch.save(agent.actor_local.state_dict(), 'experiment/checkpoint_actor.pth')
+        torch.save(agent.critic_local.state_dict(), 'experiment/checkpoint_critic.pth')
             
     return scores
 
@@ -84,7 +81,7 @@ plt.subplot(1, 2, 1)
 plt.plot(np.arange(1, len(scores)+1), scores)
 plt.ylabel('Reward')
 plt.xlabel('Episode #')
-with open('scores.pickle', 'wb') as f:
+with open('experiment/scores.pickle', 'wb') as f:
     # Pickle the 'data' dictionary using the highest protocol available.
     pickle.dump(scores, f, pickle.HIGHEST_PROTOCOL)
 
@@ -93,7 +90,7 @@ plt.plot(np.arange(1, len(avg_reward_list)+1), avg_reward_list)
 plt.ylabel('Average Reward')
 plt.xlabel('Episode #')
 plt.show()
-with open('avg_reward_list.pickle', 'wb') as f:
+with open('experiment/avg_reward_list.pickle', 'wb') as f:
     # Pickle the 'data' dictionary using the highest protocol available.
     pickle.dump(avg_reward_list, f, pickle.HIGHEST_PROTOCOL)
 
