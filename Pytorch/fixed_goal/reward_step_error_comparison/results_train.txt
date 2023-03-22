@@ -1,0 +1,58 @@
+no change     /home/tkargin/miniconda3/condabin/conda
+no change     /home/tkargin/miniconda3/bin/conda
+no change     /home/tkargin/miniconda3/bin/conda-env
+no change     /home/tkargin/miniconda3/bin/activate
+no change     /home/tkargin/miniconda3/bin/deactivate
+no change     /home/tkargin/miniconda3/etc/profile.d/conda.sh
+no change     /home/tkargin/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/tkargin/miniconda3/shell/condabin/Conda.psm1
+no change     /home/tkargin/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/tkargin/miniconda3/lib/python3.9/site-packages/xontrib/conda.xsh
+no change     /home/tkargin/miniconda3/etc/profile.d/conda.csh
+no change     /home/tkargin/.bashrc
+No action taken.
+cuda:0
+Using device: cuda:0
+
+1 Number of Devices Exists
+Episode 1	Average Score: -182.00Episode 2	Average Score: -449.00Episode 3	Average Score: -450.67Episode 4	Average Score: -517.00Episode 5	Average Score: -532.90Episode 6	Average Score: -410.75Episode 7	Average Score: -318.64Episode 8	Average Score: -285.38Episode 9	Average Score: -286.61Episode 10	Average Score: -267.25Episode 11	Average Score: -248.18Episode 12	Average Score: -248.75Episode 13	Average Score: -259.19Episode 14	Average Score: -235.50Episode 15	Average Score: -232.80Episode 16	Average Score: -223.28Episode 17	Average Score: -221.94Episode 18	Average Score: -225.78Episode 19	Average Score: -224.66Episode 20	Average Score: -219.60Episode 21	Average Score: -212.50Episode 22	Average Score: -213.95Episode 23	Average Score: -195.35Episode 24	Average Score: -190.62
+
+Initial Position is [-0.25840768  0.04958361]
+===============================================================
+Target Position is [-0.20728856  0.15459214]
+===============================================================
+Initial Kappas are  [14.41524471100081, 2.784463273217609, 0.6810164233109823]
+===============================================================
+Goal Kappas are  [6.2, 6.2, 6.2]
+===============================================================
+Episode 25	Average Score: -173.32Episode 26	Average Score: -169.00Episode 27	Average Score: -161.52Episode 28	Average Score: -170.24Episode 29	Average Score: -120.24Episode 30	Average Score: -97.14Episode 31	Average Score: -107.02Episode 32	Average Score: -126.22Episode 33	Average Score: -138.06Episode 34	Average Score: -113.64Episode 35	Average Score: -101.60Episode 36	Average Score: -91.06Episode 37	Average Score: -59.34Episode 38	Average Score: -40.76Episode 39	Average Score: -36.86Episode 40	Average Score: -26.82Episode 41	Average Score: -22.28Episode 42	Average Score: -4.50Episode 43	Average Score: 17.46Episode 44	Average Score: 23.80Episode 45	Average Score: 20.74Episode 46	Average Score: 33.48Episode 47	Average Score: 45.42Episode 48	Average Score: 35.74Episode 49	Average Score: 45.46
+
+Initial Position is [-0.23086284  0.00257991]
+===============================================================
+Target Position is [-0.20728856  0.15459214]
+===============================================================
+Initial Kappas are  [15.310717273564187, 0.8973028619850449, 13.786426368926193]
+===============================================================
+Goal Kappas are  [6.2, 6.2, 6.2]
+===============================================================
+Episode 50	Average Score: 42.98Episode 51	Average Score: 42.74Episode 52	Average Score: 64.34Episode 53	Average Score: 92.54Episode 54	Average Score: 76.62Episode 55	Average Score: 81.58Episode 56	Average Score: 88.02Episode 57	Average Score: 99.06Episode 58	Average Score: 117.48Episode 59	Average Score: 106.68Episode 60	Average Score: 95.80Episode 61	Average Score: 85.24Episode 62	Average Score: 64.44Episode 63	Average Score: 57.80Episode 64	Average Score: 59.64Episode 65	Average Score: 71.80Episode 66	Average Score: 71.60Episode 67	Average Score: 48.80Episode 68	Average Score: 25.60Episode 69	Average Score: 22.96Episode 70	Average Score: 20.08Episode 71	Average Score: 18.96Episode 72	Average Score: 29.12Episode 73	Average Score: 34.36Episode 74	Average Score: 37.08
+
+Initial Position is [-0.1426088  0.2310603]
+===============================================================
+Target Position is [-0.20728856  0.15459214]
+===============================================================
+Initial Kappas are  [2.409418152097082, 4.333934359393442, 8.725569959368784]
+===============================================================
+Goal Kappas are  [6.2, 6.2, 6.2]
+===============================================================
+Episode 75	Average Score: 33.40Episode 76	Average Score: 39.00Episode 77	Average Score: 54.40Episode 78	Average Score: 59.00Episode 79	Average Score: 51.48Episode 80	Average Score: 55.44Episode 81	Average Score: 73.68Episode 82	Average Score: 76.40Episode 83	Average Score: 74.96Episode 84	Average Score: 93.12Episode 85	Average Score: 104.68Episode 86	Average Score: 109.36Episode 87	Average Score: 118.52Episode 88	Average Score: 139.08Episode 89	Average Score: 132.92Episode 90	Average Score: 130.12Episode 91	Average Score: 148.76Episode 92	Average Score: 177.40Episode 93	Average Score: 201.72Episode 94	Average Score: 221.08Episode 95	Average Score: 251.96Episode 96	Average Score: 245.16Episode 97	Average Score: 244.16Episode 98	Average Score: 247.80Episode 99	Average Score: 253.92
+
+Initial Position is [-0.09381622  0.2486247 ]
+===============================================================
+Target Position is [-0.20728856  0.15459214]
+===============================================================
+Initial Kappas are  [0.7373492457497797, 1.4653134991499286, 15.333142423390694]
+===============================================================
+Goal Kappas are  [6.2, 6.2, 6.2]
+===============================================================
+Episode 100	Average Score: 257.36

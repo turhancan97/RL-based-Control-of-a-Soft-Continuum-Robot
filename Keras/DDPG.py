@@ -1,12 +1,13 @@
 import sys
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Reinforcement Learning')
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Functions')
-sys.path.append('C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Tests')
+sys.path.append('../')
+sys.path.append('../Reinforcement Learning')
+sys.path.append('../Tests')
 
 # import gym
 import tensorflow as tf
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 from tensorflow.keras import layers
+import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 import time
@@ -16,7 +17,7 @@ from env import continuumEnv
 
 env = continuumEnv()
 
-num_states = env.observation_space.shape[0]
+num_states = env.observation_space.shape[0] * 2 # multiply by 2 because we have also goal state
 print("Size of State Space ->  {}".format(num_states))
 num_actions = env.action_space.shape[0]
 print("Size of Action Space ->  {}".format(num_actions))
@@ -26,7 +27,7 @@ lower_bound = env.action_space.low[0]
 
 print("Max Value of Action ->  {}".format(upper_bound))
 print("Min Value of Action ->  {}".format(lower_bound))
-
+start_time = time.time()
 # %%
 class OUActionNoise:
     """
@@ -171,13 +172,13 @@ def get_actor():
     inputs = layers.Input(shape=(num_states,))
     # inputs = layers.Dropout(0.2)(inputs) # delete
     # inputs = layers.BatchNormalization()(inputs)  # delete
-    out = layers.Dense(512, activation="relu")(inputs) # 256
+    out = layers.Dense(256, activation="relu")(inputs) # 256
     # out = layers.BatchNormalization()(out)  # delete
-    out = layers.Dense(512, activation="relu")(out) # 256
+    out = layers.Dense(256, activation="relu")(out) # 256
     # out = layers.BatchNormalization()(out)  # delete
-    out = layers.Dense(256, activation="relu")(out) # delete
+    # out = layers.Dense(256, activation="relu")(out) # delete
     # out = layers.BatchNormalization()(out)  # delete
-    out = layers.Dense(256, activation="relu")(out) # delete
+    # out = layers.Dense(512, activation="relu")(out) # delete
     # out = layers.BatchNormalization()(out) # delete
     # out = layers.Dense(256, activation="relu")(out) # delete
     
@@ -196,30 +197,30 @@ def get_critic():
     state_input = layers.Input(shape=(num_states))
     # state_input = layers.Dropout(0.2)(state_input) # delete
     # state_input = layers.BatchNormalization()(state_input) # delete
-    state_out = layers.Dense(32, activation="relu")(state_input) # 16
+    state_out = layers.Dense(16, activation="relu")(state_input) # 16
     # state_out = layers.BatchNormalization()(state_out) # delete
-    state_out = layers.Dense(64, activation="relu")(state_out) # 32
+    state_out = layers.Dense(32, activation="relu")(state_out) # 32
     # state_out = layers.BatchNormalization()(state_out) # delete
-    state_out = layers.Dense(32, activation="relu")(state_out) # delete
+    # state_out = layers.Dense(128, activation="relu")(state_out) # delete
 
     # Action as input
     action_input = layers.Input(shape=(num_actions))
     # action_input = layers.Dropout(0.2)(action_input) # delete
     # action_input = layers.BatchNormalization()(action_input) # delete
-    action_out = layers.Dense(128, activation="relu")(action_input) # 32
+    action_out = layers.Dense(32, activation="relu")(action_input) # 32
     # action_out = layers.BatchNormalization()(action_out) # delete
-    action_out = layers.Dense(128, activation="relu")(action_out) # delete
+    # action_out = layers.Dense(64, activation="relu")(action_out) # delete
     # action_out = layers.BatchNormalization()(action_out) # delete
-    action_out = layers.Dense(64, activation="relu")(action_out) # delete
+    # action_out = layers.Dense(32, activation="relu")(action_out) # delete
     
     # Both are passed through seperate layer before concatenating
     concat = layers.Concatenate()([state_out, action_out])
 
-    out = layers.Dense(512, activation="relu")(concat) # 256
+    out = layers.Dense(256, activation="relu")(concat) # 256
     # out = layers.BatchNormalization()(out) # delete
     out = layers.Dense(256, activation="relu")(out) # 256
     # out = layers.BatchNormalization()(out)  # delete
-    out = layers.Dense(128, activation="relu")(out) # delete
+    # out = layers.Dense(128, activation="relu")(out) # delete
     # out = layers.BatchNormalization()(out) # delete
     # out = layers.Dense(256, activation="relu")(out) # delete
     # out = layers.BatchNormalization()(out)  # delete
@@ -261,19 +262,19 @@ target_critic.set_weights(critic_model.get_weights())
 # target_critic.load_weights("continuum_target_critic.h5")
 
 # Learning rate for actor-critic models
-critic_lr = 3e-4        # learning rate of the critic
+critic_lr = 1e-3        # learning rate of the critic
 actor_lr = 1e-4         # learning rate of the actor
 
 critic_optimizer = tf.keras.optimizers.Adam(critic_lr)
 actor_optimizer = tf.keras.optimizers.Adam(actor_lr)
 
-total_episodes = 3000
+total_episodes = 250
 # Discount factor for future rewards
 gamma = 0.99            # discount factor
 # Used to update target networks
-tau = 1e-3              # for soft update of target parameters
+tau = 5e-3              # for soft update of target parameters
 
-buffer = Buffer(int(1e6), 128) # Buffer(50000, 64)
+buffer = Buffer(int(5e5), 128) # Buffer(50000, 64)
 
 # %% Train or Evaluate
 # To store reward history of each episode
@@ -296,16 +297,18 @@ if TRAIN:
         # high = np.array([0.18, 0.3], dtype=np.float32)
         # low = np.array([-0.25, -0.1], dtype=np.float32)
         # env.q_goal = np.random.uniform(low=low, high=high)
-        print("Initial Position is",prev_state[0:2])
-        print("===============================================================")
-        print("Target Position is",prev_state[2:4])
-        print("===============================================================")
-        print("Initial Kappas are ",[env.kappa1,env.kappa2,env.kappa3])
-        print("===============================================================")
-        print("Goal Kappas are ",[env.target_k1,env.target_k2,env.target_k3])
-        print("===============================================================")
+        if ep % 100 == 0:
+            print('Episode Number',ep)
+            print("Initial Position is",prev_state[0:2])
+            print("===============================================================")
+            print("Target Position is",prev_state[2:4])
+            print("===============================================================")
+            print("Initial Kappas are ",[env.kappa1,env.kappa2,env.kappa3])
+            print("===============================================================")
+            print("Goal Kappas are ",[env.target_k1,env.target_k2,env.target_k3])
+            print("===============================================================")
         
-        time.sleep(2)
+        # time.sleep(2) # uncomment when training in local computer
         episodic_reward = 0
     
         # while True:
@@ -318,8 +321,10 @@ if TRAIN:
             action = policy(tf_prev_state, ou_noise)
     
             # Recieve state and reward from environment.
-            # state, reward, done, info = env.step_1(action) # reward is -1 or 0 or 1
-            state, reward, done, info = env.step_2(action[0]) # reward is -(e^2)
+            state, reward, done, info = env.step_minus_euclidean_square(action[0]) # -e^2
+            # state, reward, done, info = env.step_minus_weighted_euclidean(action[0]) # -0.7*e
+            # state, reward, done, info = env.step_error_comparison(action[0]) # reward is -1.00 or -0.50 or 1.00
+            # state, reward, done, info = env.step_distance_based(action[0]) # reward is du-1 - du
             
             buffer.record((prev_state, action, reward, state))
             episodic_reward += reward
@@ -335,30 +340,37 @@ if TRAIN:
     
             prev_state = state
             # print(prev_state)
-            print("Episode Number {0} and {1}th action".format(ep,i))
-            print("Goal Position",prev_state[2:4])
-            # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
-            print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), prev_state)) # for step_2
-            print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
-            print("Reward is ", reward)
-            print("{0} times robot reached to the target".format(counter))
-            print("Avg Reward is {0}, Episodic Reward is {1}".format(avg_reward,episodic_reward))
-            print("--------------------------------------------------------------------------------")
+            # # Uncomment below when training in local computer
+            # print("Episode Number {0} and {1}th action".format(ep,i))
+            # print("Goal Position",prev_state[2:4])
+            # # print("Previous Error: {0}, Error: {1}, Current State: {2}".format(env.previous_error, env.error, prev_state)) # for step_1
+            # print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), prev_state)) # for step_2
+            # print("Action: {0},  Kappas {1}".format(action, [env.kappa1,env.kappa2,env.kappa3]))
+            # print("Reward is ", reward)
+            # print("{0} times robot reached to the target".format(counter))
+            # print("Avg Reward is {0}, Episodic Reward is {1}".format(avg_reward,episodic_reward))
+            # print("--------------------------------------------------------------------------------")
     
         ep_reward_list.append(episodic_reward)
     
-        # Mean of 300 episodes
-        avg_reward = np.mean(ep_reward_list[-300:])
-        print("Episode * {} * Avg Reward is ==> {}".format(ep, avg_reward))
-        time.sleep(1.5)
+        # Mean of 250 episodes
+        avg_reward = np.mean(ep_reward_list[-100:])
+        if ep % 100 == 0:
+            print("Episode * {} * Avg Reward is ==> {}".format(ep, avg_reward))
+            time.sleep(0.5)
         avg_reward_list.append(avg_reward)
     
+    print(f'{counter} times robot reached the target point in total {total_episodes} episodes')
     # Plotting graph
     # Episodes versus Avg. Rewards
     plt.subplot(1, 2, 1)
     plt.plot(np.arange(1, len(avg_reward_list)+1), avg_reward_list)
     plt.xlabel("Episode")
     plt.ylabel("Avg. Epsiodic Reward")
+
+    with open('avg_reward_list.pickle', 'wb') as f:
+        # Pickle the 'data' dictionary using the highest protocol available.
+        pickle.dump(avg_reward_list, f, pickle.HIGHEST_PROTOCOL)
     
     # Episodes versus Rewards
     plt.subplot(1, 2, 2)
@@ -366,18 +378,25 @@ if TRAIN:
     plt.xlabel('Episode')
     plt.ylabel('Average Reward')
     plt.show()
+
+    with open('ep_reward_list.pickle', 'wb') as f:
+        # Pickle the 'data' dictionary using the highest protocol available.
+        pickle.dump(ep_reward_list, f, pickle.HIGHEST_PROTOCOL)
     
     # Save Weights
     actor_model.save_weights("continuum_actor.h5")
     critic_model.save_weights("continuum_critic.h5")
     target_actor.save_weights("continuum_target_actor.h5")
     target_critic.save_weights("continuum_target_critic.h5")
-
+    end_time = time.time() - start_time
+    print('Total Overshoot 0: ', env.overshoot0)
+    print('Total Overshoot 1: ', env.overshoot1)
+    print('Total Elapsed Time is:',int(end_time)/60)
 else:
-    actor_model.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_actor.h5")
-    critic_model.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_critic.h5")
-    target_actor.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_target_actor.h5")
-    target_critic.load_weights("C:/Users/Asus/Desktop/Master-Lectures/3rd Semester/Thesis/Githubs/my_project/Thesis-Project/RL-based-Control-of-a-Soft-Continuum-Robot/Keras/Weights_better/continuum_target_critic.h5")
+    actor_model.load_weights("../Keras/fixed_goal/reward_step_minus_weighted_euclidean/model/continuum_actor.h5")
+    critic_model.load_weights("../Keras/fixed_goal/reward_step_minus_weighted_euclidean/model/continuum_critic.h5")
+    target_actor.load_weights("../Keras/fixed_goal/reward_step_minus_weighted_euclidean/model/continuum_target_actor.h5")
+    target_critic.load_weights("../Keras/fixed_goal/reward_step_minus_weighted_euclidean/model/continuum_target_critic.h5")
     
     # state = env.reset() # generate random starting point for the robot and random target point.
     # env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas

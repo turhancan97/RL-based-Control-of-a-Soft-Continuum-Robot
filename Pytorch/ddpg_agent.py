@@ -9,15 +9,36 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-BUFFER_SIZE = int(1e6)  # replay buffer size
-BATCH_SIZE = 128        # minibatch size
+BUFFER_SIZE = int(5e4)  # replay buffer size
+BATCH_SIZE = 64         # minibatch size
 GAMMA = 0.99            # discount factor
 TAU = 1e-3              # for soft update of target parameters
-LR_ACTOR = 1e-4         # learning rate of the actor 
-LR_CRITIC = 3e-4        # learning rate of the critic
-WEIGHT_DECAY = 0.0001   # L2 weight decay
+LR_ACTOR = 1e-3         # learning rate of the actor
+LR_CRITIC = 1e-2        # learning rate of the critic
+WEIGHT_DECAY = 1e-4     # L2 weight decay / 0.0001
+
+# BUFFER_SIZE = int(5e5)  # replay buffer size
+# BATCH_SIZE = 128        # minibatch size
+# GAMMA = 0.99            # discount factor
+# TAU = 5e-3              # for soft update of target parameters
+# LR_ACTOR = 1e-4         # learning rate of the actor 
+# LR_CRITIC = 1e-3        # learning rate of the critic
+# WEIGHT_DECAY = 0.0001   # L2 weight decay
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+if device == 'cpu':
+    print('GPU is not available')
+print('Using device:', device)
+print()
+#Additional Info when using cuda
+if device.type == 'cuda:0':
+    print(torch.cuda.get_device_name(0))
+    print('Memory Usage:')
+    print('Allocated:', round(torch.cuda.memory_allocated(0)/1024**3,1), 'GB')
+    print('Cached:   ', round(torch.cuda.memory_reserved(0)/1024**3,1), 'GB')
+    
+devices = torch.cuda.device_count()
+print(f'{devices} Number of Devices Exists')
 
 class Agent():
     """Interacts with and learns from the environment."""

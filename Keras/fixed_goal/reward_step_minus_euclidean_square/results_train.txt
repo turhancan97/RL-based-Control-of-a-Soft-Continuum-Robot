@@ -1,0 +1,52 @@
+no change     /home/tkargin/miniconda3/condabin/conda
+no change     /home/tkargin/miniconda3/bin/conda
+no change     /home/tkargin/miniconda3/bin/conda-env
+no change     /home/tkargin/miniconda3/bin/activate
+no change     /home/tkargin/miniconda3/bin/deactivate
+no change     /home/tkargin/miniconda3/etc/profile.d/conda.sh
+no change     /home/tkargin/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/tkargin/miniconda3/shell/condabin/Conda.psm1
+no change     /home/tkargin/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/tkargin/miniconda3/lib/python3.9/site-packages/xontrib/conda.xsh
+no change     /home/tkargin/miniconda3/etc/profile.d/conda.csh
+no change     /home/tkargin/.bashrc
+No action taken.
+Num GPUs Available:  1
+Size of State Space ->  4
+Size of Action Space ->  3
+Max Value of Action ->  1.0
+Min Value of Action ->  -1.0
+Episode Number 0
+Initial Position is [-0.25392175  0.11340792]
+===============================================================
+Target Position is [-0.20728856  0.15459214]
+===============================================================
+Initial Kappas are  [14.663057846386337, -0.37862881647116353, -3.983363104923435]
+===============================================================
+Goal Kappas are  [6.2, 6.2, 6.2]
+===============================================================
+Episode * 0 * Avg Reward is ==> -13.22747946620098
+Episode Number 100
+Initial Position is [-0.0744708   0.27212206]
+===============================================================
+Target Position is [-0.20728856  0.15459214]
+===============================================================
+Initial Kappas are  [-1.8669334497875831, 8.055376474364575, 1.2423460802038662]
+===============================================================
+Goal Kappas are  [6.2, 6.2, 6.2]
+===============================================================
+Episode * 100 * Avg Reward is ==> -7.585814075609924
+Episode Number 200
+Initial Position is [-0.17867476  0.13107598]
+===============================================================
+Target Position is [-0.20728856  0.15459214]
+===============================================================
+Initial Kappas are  [3.6021367675639784, 9.605234087838713, 11.681443149525782]
+===============================================================
+Goal Kappas are  [6.2, 6.2, 6.2]
+===============================================================
+Episode * 200 * Avg Reward is ==> -2.618162800475263
+96 times robot reached the target point in total 250 episodes
+Total Overshoot 0:  6952
+Total Overshoot 1:  0
+Total Elapsed Time is: 22.366666666666667
