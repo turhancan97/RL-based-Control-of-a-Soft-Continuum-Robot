@@ -246,3 +246,16 @@ Some of the results can be seen in this section. Each demonstration has a differ
 <p align="center">
 <img src="docs/videos/result3.gif" alt="drawing" width="750"/>
 </p>
+
+# Conclusion
+
+This project discusses the use of reinforcement learning algorithms to solve the control problem of continuum robots, which have high degrees of freedom and unmodelable dynamics. The superiority of reinforcement learning over classical model-based approaches is that the reward function is created specifically for the problem. The project focuses on the curvature control problem of the continuum robot, which is solved using the Deep Deterministic Policy Gradient Algorithm, a model-free deep reinforcement learning algorithm. 
+
+# TODOs
+
+* [ ] Add more reward functions
+* [ ] For high-level control, the problem of the robot creating a path planning in the environment by adding obstacles to its environment can be solved with this algorithm.
+* [ ] A moving target point can be designed and tracked.
+* [ ] A real continuum robot can be designed and the same algorithm can be tested on this robot.
+
+** Please feel free to contribute to this project. **
