@@ -258,4 +258,17 @@ This project discusses the use of reinforcement learning algorithms to solve the
 * [ ] A moving target point can be designed and tracked.
 * [ ] A real continuum robot can be designed and the same algorithm can be tested on this robot.
 
+# Final Words
+
+You can check my thesis report, presentation and LaTeX files in [here](/Thesis/).
+
+---
+
+You can also click on the image below if you want to see my thesis defense presentation video.
+
+<p align="center">
+<a href=https://www.youtube.com/watch?v=sX2tksdRogQ>
+<img src="docs/images/presentation_main.png" alt="drawing"/></a>
+</p>
+
 ** Please feel free to contribute to this project. **
