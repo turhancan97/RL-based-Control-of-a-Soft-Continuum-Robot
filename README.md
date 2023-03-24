@@ -253,7 +253,7 @@ This project discusses the use of reinforcement learning algorithms to solve the
 
 # TODOs
 
-* [ ] Add more reward functions
+* [ ] Add more reward functions such as $r = d_{u-1} - d_u$
 * [ ] For high-level control, the problem of the robot creating a path planning in the environment by adding obstacles to its environment can be solved with this algorithm.
 * [ ] A moving target point can be designed and tracked.
 * [ ] A real continuum robot can be designed and the same algorithm can be tested on this robot.
