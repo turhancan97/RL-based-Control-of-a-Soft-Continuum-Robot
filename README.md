@@ -21,6 +21,8 @@
 4. Run `cd RL-based-Control-of-a-Soft-Continuum-Robot/Tests` on the terminal
 5. Run `python DDPG_keras_test.py` or `python DDPG_pytorch_test.py` on the terminal
 
+**Note:** Another way is to create your own environemnt and `pip install -r requirements.txt`
+
 # About the Project
 
 This project was prepared for my thesis project in the Automatic Control and Robotics master program at Poznan University of Technology. 
