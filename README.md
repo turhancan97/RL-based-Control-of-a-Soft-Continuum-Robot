@@ -232,7 +232,21 @@ r_4 = \left\{\begin{matrix}
 \end{equation} $$
 
 
-## Simulations and Results
+## Simulations
+
+### Diagram of Training Process
+
+<p align="center">
+<img src="docs/images/ddpg-scheme.png" alt="drawing" width="500" />
+</p>
+
+### Diagram of Testing Process
+
+<p align="center">
+<img src="docs/images/control_scheme.png" alt="drawing" width="500" />
+</p>
+
+### Results
 
 Some of the results can be seen in this section. Each demonstration has a different reward function implemented.
 
