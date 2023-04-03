@@ -2,20 +2,21 @@ import pickle
 import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator
 import numpy as np
-############----------------###############
-## Adjust the Figure Size at the beginning ##
+
+# ############----------------###############
+# ## Adjust the Figure Size at the beginning ##
 plt.style.use('ggplot') # ggplot sytle plots
-plt.rcParams["figure.figsize"] = (20,10)
-plt.rcParams['legend.fontsize'] = 'large'
-plt.rcParams['xtick.labelsize'] = 25 
-plt.rcParams['ytick.labelsize'] = 25 
-plt.rcParams['font.family'] = 'monospace'
+plt.rcParams["figure.figsize"] = (14,7)
+plt.rcParams['legend.fontsize'] = 'x-large'
+plt.rcParams["xtick.labelsize"] = 15
+plt.rcParams["ytick.labelsize"] = 15
+# plt.rcParams['font.family'] = 'monospace'
 plt.rcParams['figure.constrained_layout.use'] = True
 plt.rcParams["axes.titlesize"] = 'xx-large'
 plt.rcParams["axes.labelsize"] = 'xx-large'
 # plt.rcParams['animation.ffmpeg_path'] = '/home/tkargin/miniconda3/envs/continuum-rl/bin/ffmpeg' 
-## plt.rcParams.keys() ## To see the plot adjustment parameters
-############----------------###############
+# ## plt.rcParams.keys() ## To see the plot adjustment parameters
+# ############----------------###############
 
 def load_pickle_file(data):
     with open(f'{data}.pickle', 'rb') as f:

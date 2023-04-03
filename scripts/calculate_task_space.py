@@ -8,18 +8,9 @@ import sys # to include the path of the package
 sys.path.append('../')
 import numpy as np
 from kinematics.forward_velocity_kinematics import trans_mat_cc, coupletransformations
-############----------------###############
-## Adjust the Figure Size at the beginning ##
 import matplotlib.pyplot as plt
-plt.style.use('ggplot') # ggplot sytle plots
-plt.rcParams["figure.figsize"] = (10,8)
-plt.rcParams["xtick.labelsize"] = 7
-plt.rcParams["ytick.labelsize"] = 10
-plt.rcParams['font.family'] = 'monospace'
-plt.rcParams['figure.constrained_layout.use'] = True
-plt.rcParams["figure.titlesize"] = 'x-large'
-## plt.rcParams.keys() ## To see the plot adjustment parameters
-############----------------###############
+plt.style.use('../continuum_robot/plot.mplstyle')
+from continuum_robot.utils import *
 
 # from configuration space (kappa, length) to task space (x,y)
 # %% Section 1: With known kappa values

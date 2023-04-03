@@ -13,6 +13,7 @@ import time
 import random
 from env import continuumEnv
 from DDPG import OUActionNoise, policy
+plt.style.use('../continuum_robot/plot.mplstyle')
 from continuum_robot.utils import *
 from matplotlib import animation
 # %matplotlib notebook
