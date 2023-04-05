@@ -269,9 +269,13 @@ This project discusses the use of reinforcement learning algorithms to solve the
 
 # TODOs
 
-* [ ] Add more reward functions such as $r = d_{u-1} - d_u$
+* [ ] Add different reward functions than distance based.
+* [ ] Take into account the robot's orientation.
 * [ ] For high-level control, the problem of the robot creating a path planning in the environment by adding obstacles to its environment can be solved with this algorithm.
-* [ ] A moving target point can be designed and tracked.
+* [ ] 2D moving target point can be designed and tracked.
+* [ ] 3D position reaching problem can be solved.
+* [ ] 3D position tracking problem can be solved.
+* [ ] Try different RL algorithms, such as Trust Region Policy Optimization (TRPO) or Proximal Policy Optimization (PPO).
 * [ ] A real continuum robot can be designed and the same algorithm can be tested on this robot.
 
 # Final Words
