@@ -271,7 +271,7 @@ def sub_plot_various_results(error_store,error_x,error_y,pos_x,pos_y,kappa_1,kap
         ax.grid(which='minor',linewidth=0.5)
         ax.minorticks_on()
 
-def plot_average_error(error_x, error_y, error_store, N = 1000):
+def plot_average_error(error_x, error_y, error_store, N = 1000,episode_number=10):
     theList_x = error_x
     subList_x = [theList_x[n:n+N] for n in range(0, len(theList_x), N)]
     error_x_np = np.array(subList_x)
@@ -293,17 +293,17 @@ def plot_average_error(error_x, error_y, error_store, N = 1000):
     # X Error
     plt.plot(range(len(error_x_mean)),error_x_mean,c = 'blue',linewidth=3)
     plt.fill_between(range(len(error_x_mean)),error_x_mean-error_x_std,error_x_mean+error_x_std,alpha=0.2,color='b')
-    plt.title("10 episodes of Distance Error on the X Axis with Confidence Band")
+    plt.title(f"{episode_number} episodes of Distance Error on the X Axis with Confidence Band")
     plt.xlabel("Step")
-    plt.ylabel("Error")
+    plt.ylabel("Distance Error")
     plt.show()
 
     # # Y Error
     plt.plot(range(len(error_y_mean)),error_y_mean,c = 'red',linewidth=3)
     plt.fill_between(range(len(error_y_mean)),error_y_mean-error_y_std,error_y_mean+error_y_std,alpha=0.2,color ="r")
-    plt.title("10 episodes of Distance Error on the Y Axis with Confidence Band")
+    plt.title(f"{episode_number} episodes of Distance Error on the Y Axis with Confidence Band")
     plt.xlabel("Step")
-    plt.ylabel("Error")
+    plt.ylabel("Distance Error")
     plt.show()
 
     # X-Y Error
@@ -311,16 +311,16 @@ def plot_average_error(error_x, error_y, error_store, N = 1000):
     plt.fill_between(range(len(error_x_mean)),error_x_mean-error_x_std,error_x_mean+error_x_std,alpha=0.3,color='b')
     plt.plot(range(len(error_y_mean)),error_y_mean,c = 'red',linewidth=2, label = "Y Axis")
     plt.fill_between(range(len(error_y_mean)),error_y_mean-error_y_std,error_y_mean+error_y_std,alpha=0.1,color ="r")
-    plt.title("10 episodes of Distance Error on the X-Y Axis with Confidence Band")
+    plt.title(f"{episode_number} episodes of Distance Error on the X-Y Axis with Confidence Band")
     plt.xlabel("Step")
-    plt.ylabel("Error")
+    plt.ylabel("Distance Error")
     plt.legend()
     plt.show()
 
     # Combined Error
     plt.plot(range(len(error_combined_mean)),error_combined_mean,c = 'black',linewidth=3)
     plt.fill_between(range(len(error_combined_mean)),error_combined_mean-error_combined_std,error_combined_mean+error_combined_std,alpha=0.2,color ="k")
-    plt.title("10 episodes of Total Distance Error with Confidence Band")
+    plt.title(f"{episode_number} episodes of Total Distance Error with Confidence Band")
     plt.xlabel("Step")
-    plt.ylabel("Error")
+    plt.ylabel("Distance Error")
     plt.show()

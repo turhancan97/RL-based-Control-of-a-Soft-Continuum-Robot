@@ -42,7 +42,8 @@ print('Press 3 for minus_weighted_euclidean\n')
 print('Press 4 for distance_based\n')
 reward_selection = int(input("Please Enter Your Reward Selection: "))
 
-for _ in range(5):
+episode_number = 5
+for _ in range(episode_number):
     env = continuumEnv() # initialize environment
 
     std_dev = 0.2
@@ -159,7 +160,8 @@ plot_various_results(plot_choice = plot_choice,
 plot_average_error(error_x = storage['error']['x'], 
                    error_y = storage['error']['y'], 
                    error_store = storage['error']['error_store'], 
-                   N = N)
+                   N = N, 
+                   episode_number=episode_number)
 # %% Plot Rewards
 plt.plot(storage['reward']['value'],linewidth=4)
 plt.xlabel("Step")
