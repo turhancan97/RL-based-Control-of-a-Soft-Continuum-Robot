@@ -1,0 +1,4 @@
+goal_type: 'fixed_goal'
+reward:
+  function: 'step_minus_weighted_euclidean'
+  file: 'reward_step_minus_weighted_euclidean'
