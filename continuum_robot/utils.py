@@ -270,6 +270,7 @@ def sub_plot_various_results(error_store,error_x,error_y,pos_x,pos_y,kappa_1,kap
         ax.grid(which='major',linewidth=0.7)
         ax.grid(which='minor',linewidth=0.5)
         ax.minorticks_on()
+    plt.show()
 
 def plot_average_error(error_x, error_y, error_store, N = 1000,episode_number=10):
     theList_x = error_x
