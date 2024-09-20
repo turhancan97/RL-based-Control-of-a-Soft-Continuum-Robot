@@ -100,179 +100,17 @@ class continuumEnv(gym.Env): #TODO: Change it to 'ContinuumEnv' to follow standa
         self.position_dic = {'Section1': {'x':[],'y':[]}, 'Section2': {'x':[],'y':[]}, 'Section3': {'x':[],'y':[]}}
         # Define the observation and action space from OpenAI Gym
         high = np.array([0.2, 0.3, 0.16, 0.3], dtype=np.float32) # [0.16, 0.3, 0.16, 0.3]
-        low  = np.array([-0.3, -0.15, -0.27, -0.11], dtype=np.float32) # [-0.27, -0.11, -0.27, -0.11]
+        low = np.array([-0.3, -0.15, -0.27, -0.11], dtype=np.float32) # [-0.27, -0.11, -0.27, -0.11]
         self.action_space = spaces.Box(low=-1*self.kappa_dot_max, high=self.kappa_dot_max,shape=(3,), dtype=np.float32)
         ########
         
         # TODO: Add better environment observation space (more circle or algorithm that make automatically)
         self.observation_space = AmorphousSpace()
-        
-    def step_error_comparison(self,u): # reward is -1.00 or -0.50 or 1.00
-        
+
+    def step(self, u, reward_function:str = 'step_minus_euclidean_square'):
+
         x,y,goal_x,goal_y = self.state # Get the current state as x,y,goal_x,goal_y
-        
-        # global variables to be used in the reward function
-        global new_x 
-        global new_y
-        global new_goal_x
-        global new_goal_y
 
-        dt =  self.dt # Time step
-        
-        u = np.clip(u, -self.kappa_dot_max, self.kappa_dot_max) # Clip the input to the range of the -1,1
-        
-        self.error = math.sqrt(((goal_x-x)**2)+((goal_y-y)**2)) # Calculate the error squared
-        
-        # Just to show if the robot is moving along the goal or not
-        if self.error < self.previous_error:
-            #self.costs -= 1
-            # UNCOMMENT HERE !!!!!!!
-            pass
-            # print("=========================POSITIVE MOVE=========================")
-        
-        if self.error < self.previous_error:
-            self.costs = 1.00
-        elif self.error == self.previous_error:
-            self.costs = -0.50
-        else:
-            self.costs = -1.0
-        
-        self.previous_error = self.error
-        
-        # if the error is less than 0.01, the robot is close to the goal and returns done
-        if self.error <= 0.010:
-            done = True
-        else :
-            done = False
-         
-        
-        # This if and else statement is to avoid the robot to move if the kappas are at the limits
-        if self.stop == 0:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ u
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 1:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append([0],u[1:3])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-        
-        elif self.stop == 2:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append(np.append(u[0],[0]),u[2])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 3:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append(u[0:2],[0])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 4:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append([0,0],u[2])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-        
-        elif self.stop == 5:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @  np.append(np.append([0],u[1]),[0])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-        
-        elif self.stop == 6:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append(u[0],[0,0])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 7:
-            pass
-            # # UNCOMMENT HERE!!!!!!!
-            # print("Robot is not moving")
-            # time.sleep(1)
-        
-        # Update the curvatures
-        self.kappa1 += u[0] * dt 
-        self.kappa2 += u[1] * dt
-        self.kappa3 += u[2] * dt
-
-        # TODO -> Solve the situation when kappas are zero in Homogenous matrix
-        # Maybe when it is Zero try except and Raise an error
-        self.kappa1 = np.clip(self.kappa1, self.kappa_min, self.kappa_max)
-        self.kappa2 = np.clip(self.kappa2, self.kappa_min, self.kappa_max)
-        self.kappa3 = np.clip(self.kappa3, self.kappa_min, self.kappa_max)
-
-        # To check which curvature value are at the limits
-        self.stop = 0
-        # self.stop1 = 0
-        # self.stop2 = 0
-        # self.stop3 = 0
-        k1 = self.kappa1 <= self.kappa_min or self.kappa1 >= self.kappa_max
-        k2 = self.kappa2 <= self.kappa_min or self.kappa2 >= self.kappa_max
-        k3 = self.kappa3 <= self.kappa_min or self.kappa3 >= self.kappa_max
-        
-        if k1:
-            self.stop = 1
-            
-        elif k2:
-            self.stop = 2
-            
-        elif k3:
-            self.stop = 3
-        
-        if k1 and k2:
-            self.stop = 4
-        
-        elif k1 and k3:
-            self.stop = 5
-        
-        elif k2 and k3:
-            self.stop = 6
-            
-        if k1 and k2 and k3:
-            self.stop = 7
-        
-        if self.observation_space.contains([new_x, new_y]):
-            pass
-        else:
-            # Clip the states to avoid the robot to go out of the workspace
-            self.overshoot0 += 1
-            #print(new_x, new_y)
-            new_x, new_y = self.observation_space.clip([new_x,new_y])
-            #print(new_x, new_y)
-            # TODO: When it is clipped, then write a algorithm to fill the empy trajectory between before clip and after clip
-
-        if self.observation_space.contains([goal_x, goal_y]):
-            new_goal_x, new_goal_y = goal_x, goal_y
-        else:
-            # Clip the states to avoid the robot to go out of the workspace
-            self.overshoot1 += 1
-            #print(goal_x,goal_y)
-            new_goal_x, new_goal_y = self.observation_space.clip([goal_x,goal_y])
-            #print(new_goal_x, new_goal_y)
-            #new_goal_x = np.clip(goal_x, self.observation_space.low[2], self.observation_space.high[2])
-            #new_goal_y = np.clip(goal_y, self.observation_space.low[3], self.observation_space.high[3])
-        
-        # States of the robot in numpy array
-        self.state = np.array([new_x,new_y,new_goal_x,new_goal_y])
-        
-        return self._get_obs(), self.costs, done, {} # Return the observation, the reward (-costs) and the done flag
-
-    def step_minus_euclidean_square(self,u): # reward is -(e^2)
-        
-        x,y,goal_x,goal_y = self.state # Get the current state as x,y,goal_x,goal_y
-        
         # global variables to be used in the reward function
         global new_x 
         global new_y
@@ -284,22 +122,39 @@ class continuumEnv(gym.Env): #TODO: Change it to 'ContinuumEnv' to follow standa
         # kappa1 = self.kappa1
         # kappa2 = self.kappa2
         # kappa3 = self.kappa3
+
         dt =  self.dt # Time step
-        
+
         u = np.clip(u, -self.kappa_dot_max, self.kappa_dot_max) # Clip the input to the range of the -1,1
+
+        if reward_function == 'step_error_comparison':
+            self.error = math.sqrt(((goal_x-x)**2)+((goal_y-y)**2)) # Calculate the error squared
+
+            if self.error < self.previous_error:
+                self.costs = 1.00
+            elif self.error == self.previous_error:
+                self.costs = -0.50
+            else:
+                self.costs = -1.0
+
+            # Just to show if the robot is moving along the goal or not
+            if self.error < self.previous_error:
+                #self.costs -= 1
+                # UNCOMMENT HERE !!!!!!!
+                pass
+                # print("=========================POSITIVE MOVE=========================")
         
-        self.error = ((goal_x-x)**2)+((goal_y-y)**2) # Calculate the error squared
-        self.costs = self.error # Set the cost (reward) to the error squared
-        
-        # Just to show if the robot is moving along the goal or not
-        if self.error < self.previous_error:
-            #self.costs -= 1
-            # UNCOMMENT HERE !!!!!!!
-            pass
-            # print("=========================POSITIVE MOVE=========================")
-            
-        
-        self.previous_error = self.error # Update the previous error
+        elif reward_function == 'step_minus_euclidean_square':
+            self.error = ((goal_x-x)**2)+((goal_y-y)**2) # Calculate the error squared
+            self.costs = self.error # Set the cost (reward) to the error squared
+            # Just to show if the robot is moving along the goal or not
+            if self.error < self.previous_error:
+                #self.costs -= 1
+                # UNCOMMENT HERE !!!!!!!
+                pass
+                # print("=========================POSITIVE MOVE=========================")
+
+        # another example reward function
         #     self.costs = 1 - self.error
         # elif self.error == self.previous_error:
         #     self.costs = -0.5 - self.error
@@ -316,339 +171,58 @@ class continuumEnv(gym.Env): #TODO: Change it to 'ContinuumEnv' to follow standa
         #     self.costs = 7 - self.error
         # elif self.error < self.previous_error and self.error <= 0.08: # or 0.01
         #     self.costs = 6 - self.error
-        
         # self.previous_error = self.error
-        
-        # if the error is less than 0.01, the robot is close to the goal and returns done
-        if math.sqrt(self.costs) <= 0.01:
-            done = True
-        else :
-            done = False
-         
-        
-        # This if and else statement is to avoid the robot to move if the kappas are at the limits
-        if self.stop == 0:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ u
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 1:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append([0],u[1:3])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-        
-        elif self.stop == 2:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append(np.append(u[0],[0]),u[2])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 3:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append(u[0:2],[0])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 4:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append([0,0],u[2])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-        
-        elif self.stop == 5:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @  np.append(np.append([0],u[1]),[0])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-        
-        elif self.stop == 6:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append(u[0],[0,0])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 7:
-            pass
-            # # UNCOMMENT HERE!!!!!!!
-            # print("Robot is not moving")
-            # time.sleep(1)
-        
-        # Update the curvatures
-        self.kappa1 += u[0] * dt 
-        self.kappa2 += u[1] * dt
-        self.kappa3 += u[2] * dt
 
-        # TODO -> Solve the situation when kappas are zero in Homogenous matrix
-        # Maybe when it is Zero try except and Raise an error
-        self.kappa1 = np.clip(self.kappa1, self.kappa_min, self.kappa_max)
-        self.kappa2 = np.clip(self.kappa2, self.kappa_min, self.kappa_max)
-        self.kappa3 = np.clip(self.kappa3, self.kappa_min, self.kappa_max)
+        elif reward_function == 'step_minus_weighted_euclidean':
+            
+            self.error = math.sqrt(((goal_x-x)**2)+((goal_y-y)**2)) # Calculate the error squared
+            self.costs = 0.7 * self.error # Set the cost (reward) to the error squared
+            if self.error <= 0.01: # give extra reward if the robot is close to the goal
+                self.costs -= 0.07
+            # Just to show if the robot is moving along the goal or not
+            if self.error < self.previous_error:
+                #self.costs -= 1
+                # UNCOMMENT HERE !!!!!!!
+                pass
+                # print("=========================POSITIVE MOVE=========================")
+        
+        elif reward_function == 'step_distance_based':
+            
+            self.error = math.sqrt(((goal_x-x)**2)+((goal_y-y)**2)) # Calculate the error squared
 
-        # To check which curvature value are at the limits
-        self.stop = 0
-        # self.stop1 = 0
-        # self.stop2 = 0
-        # self.stop3 = 0
-        k1 = self.kappa1 <= self.kappa_min or self.kappa1 >= self.kappa_max
-        k2 = self.kappa2 <= self.kappa_min or self.kappa2 >= self.kappa_max
-        k3 = self.kappa3 <= self.kappa_min or self.kappa3 >= self.kappa_max
-        
-        if k1:
-            self.stop = 1
+            # Just to show if the robot is moving along the goal or not
+            if self.error < self.previous_error:
+                #self.costs -= 1
+                # UNCOMMENT HERE !!!!!!!
+                pass
+                # print("=========================POSITIVE MOVE=========================")
             
-        elif k2:
-            self.stop = 2
-            
-        elif k3:
-            self.stop = 3
-        
-        if k1 and k2:
-            self.stop = 4
-        
-        elif k1 and k3:
-            self.stop = 5
-        
-        elif k2 and k3:
-            self.stop = 6
-            
-        if k1 and k2 and k3:
-            self.stop = 7
-        
-        if self.observation_space.contains([new_x, new_y]):
-            pass
-        else:
-            # Clip the states to avoid the robot to go out of the workspace
-            self.overshoot0 += 1
-            # print(new_x, new_y)
-            new_x, new_y = self.observation_space.clip([new_x,new_y])
-            # print(new_x, new_y)
-            # TODO: When it is clipped, then write a algorithm to fill the empy trajectory between before clip and after clip
-
-        if self.observation_space.contains([goal_x, goal_y]):
-            new_goal_x, new_goal_y = goal_x, goal_y
-        else:
-            # Clip the states to avoid the robot to go out of the workspace
-            self.overshoot1 += 1
-            # print(goal_x,goal_y)
-            new_goal_x, new_goal_y = self.observation_space.clip([goal_x,goal_y])
-            # print(new_goal_x, new_goal_y)
-            #new_goal_x = np.clip(goal_x, self.observation_space.low[2], self.observation_space.high[2])
-            #new_goal_y = np.clip(goal_y, self.observation_space.low[3], self.observation_space.high[3])
-        
-        # States of the robot in numpy array
-        self.state = np.array([new_x,new_y,new_goal_x,new_goal_y])
-        
-        return self._get_obs(), -1*self.costs, done, {} # Return the observation, the reward (-costs) and the done flag
-    
-    def step_minus_weighted_euclidean(self,u): # reward is -(e^2)
-        
-        x,y,goal_x,goal_y = self.state # Get the current state as x,y,goal_x,goal_y
-        
-        # global variables to be used in the reward function
-        global new_x 
-        global new_y
-        global new_goal_x
-        global new_goal_y
-
-        dt =  self.dt # Time step
-        
-        u = np.clip(u, -self.kappa_dot_max, self.kappa_dot_max) # Clip the input to the range of the -1,1
-        
-        self.error = math.sqrt(((goal_x-x)**2)+((goal_y-y)**2)) # Calculate the error squared
-        self.costs = 0.7 * self.error # Set the cost (reward) to the error squared
-        
-        # Just to show if the robot is moving along the goal or not
-        if self.error < self.previous_error:
-            #self.costs -= 1
-            # UNCOMMENT HERE !!!!!!!
-            pass
-            # print("=========================POSITIVE MOVE=========================")
-            
-        
-        self.previous_error = self.error # Update the previous error
-        
-        # if the error is less than 0.01, the robot is close to the goal and returns done
-        if self.error <= 0.01:
-            done = True
-        else :
-            done = False
-         
-        
-        # This if and else statement is to avoid the robot to move if the kappas are at the limits
-        if self.stop == 0:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ u
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 1:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append([0],u[1:3])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-        
-        elif self.stop == 2:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append(np.append(u[0],[0]),u[2])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 3:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append(u[0:2],[0])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 4:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append([0,0],u[2])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-        
-        elif self.stop == 5:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @  np.append(np.append([0],u[1]),[0])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-        
-        elif self.stop == 6:
-            self.J = jacobian_matrix(self.delta_kappa, self.kappa1, self.kappa2, self.kappa3, self.l)
-            x_vel = self.J @ np.append(u[0],[0,0])
-            state_update = x_vel * dt
-            new_x = x + state_update[0]
-            new_y = y + state_update[1]
-            
-        elif self.stop == 7:
-            pass
-            # # UNCOMMENT HERE!!!!!!!
-            # print("Robot is not moving")
-            # time.sleep(1)
-        
-        # Update the curvatures
-        self.kappa1 += u[0] * dt 
-        self.kappa2 += u[1] * dt
-        self.kappa3 += u[2] * dt
-
-        # TODO -> Solve the situation when kappas are zero in Homogenous matrix
-        # Maybe when it is Zero try except and Raise an error
-        self.kappa1 = np.clip(self.kappa1, self.kappa_min, self.kappa_max)
-        self.kappa2 = np.clip(self.kappa2, self.kappa_min, self.kappa_max)
-        self.kappa3 = np.clip(self.kappa3, self.kappa_min, self.kappa_max)
-
-        # To check which curvature value are at the limits
-        self.stop = 0
-        # self.stop1 = 0
-        # self.stop2 = 0
-        # self.stop3 = 0
-        k1 = self.kappa1 <= self.kappa_min or self.kappa1 >= self.kappa_max
-        k2 = self.kappa2 <= self.kappa_min or self.kappa2 >= self.kappa_max
-        k3 = self.kappa3 <= self.kappa_min or self.kappa3 >= self.kappa_max
-        
-        if k1:
-            self.stop = 1
-            
-        elif k2:
-            self.stop = 2
-            
-        elif k3:
-            self.stop = 3
-        
-        if k1 and k2:
-            self.stop = 4
-        
-        elif k1 and k3:
-            self.stop = 5
-        
-        elif k2 and k3:
-            self.stop = 6
-            
-        if k1 and k2 and k3:
-            self.stop = 7
-        
-        if self.observation_space.contains([new_x, new_y]):
-            pass
-        else:
-            # Clip the states to avoid the robot to go out of the workspace
-            self.overshoot0 += 1
-            # print(new_x, new_y)
-            new_x, new_y = self.observation_space.clip([new_x,new_y])
-            # print(new_x, new_y)
-            # TODO: When it is clipped, then write a algorithm to fill the empy trajectory between before clip and after clip
-
-        if self.observation_space.contains([goal_x, goal_y]):
-            new_goal_x, new_goal_y = goal_x, goal_y
-        else:
-            # Clip the states to avoid the robot to go out of the workspace
-            self.overshoot1 += 1
-            # print(goal_x,goal_y)
-            new_goal_x, new_goal_y = self.observation_space.clip([goal_x,goal_y])
-            # print(new_goal_x, new_goal_y)
-            #new_goal_x = np.clip(goal_x, self.observation_space.low[2], self.observation_space.high[2])
-            #new_goal_y = np.clip(goal_y, self.observation_space.low[3], self.observation_space.high[3])
-        
-        # States of the robot in numpy array
-        self.state = np.array([new_x,new_y,new_goal_x,new_goal_y])
-        
-        return self._get_obs(), -1*self.costs, done, {} # Return the observation, the reward (-costs) and the done flag
-
-    def step_distance_based(self,u): # reward is du-1 - du
-        
-        x,y,goal_x,goal_y = self.state # Get the current state as x,y,goal_x,goal_y
-        
-        # global variables to be used in the reward function
-        global new_x 
-        global new_y
-        global new_goal_x
-        global new_goal_y
-
-        dt =  self.dt # Time step
-        
-        u = np.clip(u, -self.kappa_dot_max, self.kappa_dot_max) # Clip the input to the range of the -1,1
-        
-        self.error = math.sqrt(((goal_x-x)**2)+((goal_y-y)**2)) # Calculate the error squared
-        
-        # Just to show if the robot is moving along the goal or not
-        if self.error < self.previous_error:
-            #self.costs -= 1
-            # UNCOMMENT HERE !!!!!!!
-            pass
-            # print("=========================POSITIVE MOVE=========================")
-        
-        if self.error == self.previous_error:
-            self.costs = -100
-        else:
-            if self.error <= 0.025:
-                self.costs = 200
-            elif self.error <= 0.05:
-                self.costs = 150
-            elif self.error <= 0.1:
-                self.costs = 100
+            if self.error == self.previous_error:
+                self.costs = -100
             else:
-                self.costs = 1000*(self.previous_error - self.error) # Set the cost (reward) du-1 - du
+                if self.error <= 0.025:
+                    self.costs = 200
+                elif self.error <= 0.05:
+                    self.costs = 150
+                elif self.error <= 0.1:
+                    self.costs = 100
+                else:
+                    self.costs = 1000*(self.previous_error - self.error) # Set the cost (reward) du-1 - du
         
         self.previous_error = self.error
-        
-        # if the error is less than 0.01, the robot is close to the goal and returns done
-        if self.error <= 0.010:
-            done = True
-        else :
-            done = False
-         
+
+        if reward_function == 'step_minus_euclidean_square':
+            # if the error is less than 0.01, the robot is close to the goal and returns done
+            if math.sqrt(self.costs) <= 0.005:
+                done = True
+            else:
+                done = False
+        else:
+            # if the error is less than 0.01, the robot is close to the goal and returns done
+            if self.error <= 0.005:
+                done = True
+            else:
+                done = False
         
         # This if and else statement is to avoid the robot to move if the kappas are at the limits
         if self.stop == 0:
@@ -771,7 +345,10 @@ class continuumEnv(gym.Env): #TODO: Change it to 'ContinuumEnv' to follow standa
         # States of the robot in numpy array
         self.state = np.array([new_x,new_y,new_goal_x,new_goal_y])
         
-        return self._get_obs(), self.costs, done, {} # Return the observation, the reward (-costs) and the done flag
+        if reward_function == 'step_minus_euclidean_square' or reward_function == 'step_minus_weighted_euclidean':
+            return self._get_obs(), -self.costs, done, {} # Return the observation, the reward (-costs) and the done flag
+        elif reward_function == 'step_error_comparison' or reward_function == 'step_distance_based':
+            return self._get_obs(), self.costs, done, {} # Return the observation, the reward (-costs) and the done flag
    
     def reset(self):
        # self.overshoot0 = 0
@@ -787,9 +364,9 @@ class continuumEnv(gym.Env): #TODO: Change it to 'ContinuumEnv' to follow standa
        
        # Random target point
        # (Random curvatures are given so that forward kinematics equation will generate random target position)
-       self.target_k1 = np.random.uniform(low=-4, high=16) # 6.2 # np.random.uniform(low=-4, high=16)
-       self.target_k2 = np.random.uniform(low=-4, high=16) # 6.2 # np.random.uniform(low=-4, high=16)
-       self.target_k3 = np.random.uniform(low=-4, high=16) # 6.2 # np.random.uniform(low=-4, high=16)
+       self.target_k1 = 6.2 # np.random.uniform(low=-4, high=16)
+       self.target_k2 = 6.2 # np.random.uniform(low=-4, high=16)
+       self.target_k3 = 6.2 # np.random.uniform(low=-4, high=16)
        
        T3_target = three_section_planar_robot(self.target_k1,self.target_k2,self.target_k3, self.l) # Generate the target point for the robot
        goal_x,goal_y = np.array([T3_target[0,3],T3_target[1,3]]) # Extract the x and y coordinates of the target

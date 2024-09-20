@@ -270,23 +270,24 @@ def sub_plot_various_results(error_store,error_x,error_y,pos_x,pos_y,kappa_1,kap
         ax.grid(which='major',linewidth=0.7)
         ax.grid(which='minor',linewidth=0.5)
         ax.minorticks_on()
+    plt.show()
 
 def plot_average_error(error_x, error_y, error_store, N = 1000,episode_number=10):
     theList_x = error_x
     subList_x = [theList_x[n:n+N] for n in range(0, len(theList_x), N)]
-    error_x_np = np.array(subList_x)
+    error_x_np = np.array(subList_x, dtype=np.float32).reshape(-1, N)
     error_x_mean = error_x_np.mean(axis=0)
     error_x_std = error_x_np.std(axis=0)
 
     theList_y = error_y
     subList_y = [theList_y[n:n+N] for n in range(0, len(theList_y), N)]
-    error_y_np = np.array(subList_y)
+    error_y_np = np.array(subList_y, dtype=np.float32).reshape(-1, N)
     error_y_mean = error_y_np.mean(axis=0)
     error_y_std = error_y_np.std(axis=0)
 
     theList_combined = error_store
     subList_combined = [theList_combined[n:n+N] for n in range(0, len(theList_combined), N)]
-    error_combined_np = np.array(subList_combined)
+    error_combined_np = np.array(subList_combined, dtype=np.float32).reshape(-1, N)
     error_combined_mean = error_combined_np.mean(axis=0)
     error_combined_std = error_combined_np.std(axis=0)
 

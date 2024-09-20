@@ -3,6 +3,8 @@ sys.path.append('../')
 sys.path.append('../Reinforcement Learning')
 sys.path.append('../Tests')
 
+import os
+import yaml
 # import gym
 import tensorflow as tf
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
@@ -14,6 +16,16 @@ import time
 import math
 # from forward_velocity_kinematics import three_section_planar_robot
 from env import continuumEnv
+
+
+# * Read the config file
+# Get the absolute path to the directory containing this script
+dir_path = os.path.dirname(os.path.realpath(__file__))
+# Construct the absolute path to the file
+file_path = os.path.join(dir_path, "config.yaml")
+# load config file
+with open(file_path, "r") as file:
+    config = yaml.safe_load(file)
 
 env = continuumEnv()
 
@@ -113,11 +125,11 @@ class Buffer:
 		# Calculate de/dA as = de/dC * dC/dA, where e is error, C critic, A act #
 		# ===================================================================== #
         with tf.GradientTape() as tape:
-            target_actions = target_actor(next_state_batch, training=True)
+            target_actions = target_actor(next_state_batch, training=TRAIN)
             y = reward_batch + gamma * target_critic(
-                [next_state_batch, target_actions], training=True
+                [next_state_batch, target_actions], training=TRAIN
             )
-            critic_value = critic_model([state_batch, action_batch], training=True)
+            critic_value = critic_model([state_batch, action_batch], training=TRAIN)
             critic_loss = tf.math.reduce_mean(tf.math.square(y - critic_value))
 
         critic_grad = tape.gradient(critic_loss, critic_model.trainable_variables)
@@ -126,8 +138,8 @@ class Buffer:
         )
 
         with tf.GradientTape() as tape:
-            actions = actor_model(state_batch, training=True)
-            critic_value = critic_model([state_batch, actions], training=True)
+            actions = actor_model(state_batch, training=TRAIN)
+            critic_value = critic_model([state_batch, actions], training=TRAIN)
             # Used `-value` as we want to maximize the value given
             # by the critic for our actions
             actor_loss = -tf.math.reduce_mean(critic_value)
@@ -172,11 +184,11 @@ def get_actor():
     inputs = layers.Input(shape=(num_states,))
     # inputs = layers.Dropout(0.2)(inputs) # delete
     # inputs = layers.BatchNormalization()(inputs)  # delete
-    out = layers.Dense(256, activation="relu")(inputs) # 512
+    out = layers.Dense(512, activation="relu")(inputs) # 512
     # out = layers.BatchNormalization()(out)  # delete
     out = layers.Dense(256, activation="relu")(out) # 256
     # out = layers.BatchNormalization()(out)  # delete
-    # out = layers.Dense(256, activation="relu")(out) # 256
+    out = layers.Dense(128, activation="relu")(out) # 256
     # out = layers.BatchNormalization()(out)  # delete
     # out = layers.Dense(512, activation="relu")(out) # 512
     # out = layers.BatchNormalization()(out) # delete
@@ -197,11 +209,11 @@ def get_critic():
     state_input = layers.Input(shape=(num_states))
     # state_input = layers.Dropout(0.2)(state_input) # delete
     # state_input = layers.BatchNormalization()(state_input) # delete
-    state_out = layers.Dense(16, activation="relu")(state_input) # 32
+    state_out = layers.Dense(64, activation="relu")(state_input) # 32
     # state_out = layers.BatchNormalization()(state_out) # delete
     state_out = layers.Dense(32, activation="relu")(state_out) # 64
     # state_out = layers.BatchNormalization()(state_out) # delete
-    # state_out = layers.Dense(128, activation="relu")(state_out) # 128
+    state_out = layers.Dense(32, activation="relu")(state_out) # 128
 
     # Action as input
     action_input = layers.Input(shape=(num_actions))
@@ -268,7 +280,7 @@ actor_lr = 1e-4         # learning rate of the actor
 critic_optimizer = tf.keras.optimizers.Adam(critic_lr)
 actor_optimizer = tf.keras.optimizers.Adam(actor_lr)
 
-total_episodes = 250
+total_episodes = 400
 # Discount factor for future rewards
 gamma = 0.99            # discount factor
 # Used to update target networks
@@ -297,7 +309,7 @@ if TRAIN:
         # high = np.array([0.18, 0.3], dtype=np.float32)
         # low = np.array([-0.25, -0.1], dtype=np.float32)
         # env.q_goal = np.random.uniform(low=low, high=high)
-        if ep % 100 == 0:
+        if ep % 50 == 0:
             print('Episode Number',ep)
             print("Initial Position is",prev_state[0:2])
             print("===============================================================")
@@ -312,7 +324,7 @@ if TRAIN:
         episodic_reward = 0
     
         # while True:
-        for i in range(1000):
+        for i in range(500):
             # Uncomment this to see the Actor in action
             # But not in a python notebook.
             # env.render()
@@ -321,10 +333,11 @@ if TRAIN:
             action = policy(tf_prev_state, ou_noise)
     
             # Recieve state and reward from environment.
-            state, reward, done, info = env.step_minus_euclidean_square(action[0]) # -e^2
-            # state, reward, done, info = env.step_minus_weighted_euclidean(action[0]) # -0.7*e
-            # state, reward, done, info = env.step_error_comparison(action[0]) # reward is -1.00 or -0.50 or 1.00
-            # state, reward, done, info = env.step_distance_based(action[0]) # reward is du-1 - du
+            # 'step_minus_euclidean_square' is e^2
+            # 'step_minus_weighted_euclidean' is 0.7*e
+            # 'step_error_comparison' is -1.00 or -0.50 or 1.00
+            # 'step_distance_based' is du-1 - du
+            state, reward, done, info = env.step(action[0], reward_function = config['reward']['function'])
             
             buffer.record((prev_state, action, reward, state))
             episodic_reward += reward
@@ -355,7 +368,7 @@ if TRAIN:
     
         # Mean of 250 episodes
         avg_reward = np.mean(ep_reward_list[-100:])
-        if ep % 100 == 0:
+        if ep % 1 == 0:
             print("Episode * {} * Avg Reward is ==> {}".format(ep, avg_reward))
             time.sleep(0.5)
         avg_reward_list.append(avg_reward)
@@ -384,19 +397,19 @@ if TRAIN:
         pickle.dump(ep_reward_list, f, pickle.HIGHEST_PROTOCOL)
     
     # Save Weights
-    actor_model.save_weights("continuum_actor.h5")
-    critic_model.save_weights("continuum_critic.h5")
-    target_actor.save_weights("continuum_target_actor.h5")
-    target_critic.save_weights("continuum_target_critic.h5")
+    actor_model.save_weights("experiment/continuum_actor.h5")
+    critic_model.save_weights("experiment/continuum_critic.h5")
+    target_actor.save_weights("experiment/continuum_target_actor.h5")
+    target_critic.save_weights("experiment/continuum_target_critic.h5")
     end_time = time.time() - start_time
     print('Total Overshoot 0: ', env.overshoot0)
     print('Total Overshoot 1: ', env.overshoot1)
-    print('Total Elapsed Time is:',int(end_time)/60)
+    print(f'Total Elapsed Time is {int(end_time)/60} minutes')
 else:
-    actor_model.load_weights("../Keras/fixed_goal/reward_step_minus_weighted_euclidean/model/continuum_actor.h5")
-    critic_model.load_weights("../Keras/fixed_goal/reward_step_minus_weighted_euclidean/model/continuum_critic.h5")
-    target_actor.load_weights("../Keras/fixed_goal/reward_step_minus_weighted_euclidean/model/continuum_target_actor.h5")
-    target_critic.load_weights("../Keras/fixed_goal/reward_step_minus_weighted_euclidean/model/continuum_target_critic.h5")
+    actor_model.load_weights(f"../Keras/{config['goal_type']}/{config['reward']['file']}/model/continuum_actor.h5")
+    critic_model.load_weights(f"../Keras/{config['goal_type']}/{config['reward']['file']}/model/continuum_critic.h5")
+    target_actor.load_weights(f"../Keras/{config['goal_type']}/{config['reward']['file']}/model/continuum_target_actor.h5")
+    target_critic.load_weights(f"../Keras/{config['goal_type']}/{config['reward']['file']}/model/continuum_target_critic.h5")
     
     # state = env.reset() # generate random starting point for the robot and random target point.
     # env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas

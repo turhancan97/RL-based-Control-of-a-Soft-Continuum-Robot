@@ -7,18 +7,19 @@ sys.path.append('../Pytorch')
 import torch
 import matplotlib.pyplot as plt
 from ddpg_agent import Agent
+from ddpg import config
 from env import continuumEnv
 import math
 import time
 
 # %% Evaluation
 env = continuumEnv()
-env.seed(10)
+# env.seed(10)
 agent = Agent(state_size=4, action_size=3, random_seed=10)
 
 #### Change the directory for your file structure
-agent.actor_local.load_state_dict(torch.load('../Pytorch/reward_step_error_comparison/model/checkpoint_actor.pth',map_location=torch.device('cpu')))
-agent.critic_local.load_state_dict(torch.load('../Pytorch/reward_step_error_comparison/model/checkpoint_critic.pth',map_location=torch.device('cpu')))
+agent.actor_local.load_state_dict(torch.load(f"../Pytorch/{config['goal_type']}/{config['reward']['file']}/model/checkpoint_actor.pth",map_location=torch.device('cpu')))
+agent.critic_local.load_state_dict(torch.load(f"../Pytorch/{config['goal_type']}/{config['reward']['file']}/model/checkpoint_critic.pth",map_location=torch.device('cpu')))
  
 state = env.reset() # generate random starting point for the robot and random target point.
 env.start_kappa = [env.kappa1, env.kappa2, env.kappa3] # save starting kappas
@@ -30,7 +31,11 @@ for t in range(750):
     start = time.time()
     action = agent.act(state, add_noise=False)
     
-    state, reward, done, _ = env.step_error_comparison(action) # -e^2
+    # 'step_minus_euclidean_square' is e^2
+    # 'step_minus_weighted_euclidean' is 0.7*e
+    # 'step_error_comparison' is -1.00 or -0.50 or 1.00
+    # 'step_distance_based' is du-1 - du
+    state, reward, done, _ = env.step(action, reward_function = config['reward']['function'])
     x_pos.append(state[0])
     y_pos.append(state[1])
     # env.render() # uncomment for instant animation

@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import time
 import random
 from env import continuumEnv
-from DDPG import OUActionNoise, policy
+from DDPG import OUActionNoise, policy, config
 plt.style.use('../continuum_robot/plot.mplstyle')
 from continuum_robot.utils import *
 from matplotlib import animation
@@ -36,13 +36,7 @@ storage['kappa']['kappa3'] = []
 storage['reward']['value'] = []
 storage['reward']['effectiveness'] = []
 
-print('Press 1 for minus_euclidean_square\n')
-print('Press 2 for error_comparison\n')
-print('Press 3 for minus_weighted_euclidean\n')
-print('Press 4 for distance_based\n')
-reward_selection = int(input("Please Enter Your Reward Selection: "))
-
-episode_number = 5
+episode_number = 1
 for _ in range(episode_number):
     env = continuumEnv() # initialize environment
 
@@ -56,22 +50,20 @@ for _ in range(episode_number):
 
     env.render_init() # uncomment for animation
 
-    N = 1000
+    N = 500
     step = 0
     for step in range(N): # or while True:
         start = time.time()
         tf_prev_state = tf.expand_dims(tf.convert_to_tensor(state), 0)
         action = policy(tf_prev_state, ou_noise, add_noise = False) # policyde noise'i evaluate ederken 0 yap
 
-        # Recieve state and reward from environment.        
-        if reward_selection == 1:
-            state, reward, done, info = env.step_minus_euclidean_square(action[0]) # -e^2
-        elif reward_selection == 2:
-            state, reward, done, info = env.step_error_comparison(action[0]) # reward is -1.00 or -0.50 or 1.00
-        elif reward_selection == 3:
-            state, reward, done, info = env.step_minus_weighted_euclidean(action[0]) # -0.7*e
-        elif reward_selection == 4:
-            state, reward, done, info = env.step_distance_based(action[0]) # reward is du-1 - du
+        # Recieve state and reward from environment.
+        # 'step_minus_euclidean_square' is e^2
+        # 'step_minus_weighted_euclidean' is 0.7*e
+        # 'step_error_comparison' is -1.00 or -0.50 or 1.00
+        # 'step_distance_based' is du-1 - du
+
+        state, reward, done, info = env.step(action[0], reward_function = config['reward']['function'])
         
         storage['pos']['x'].append(state[0])
         storage['pos']['y'].append(state[1])
@@ -79,7 +71,7 @@ for _ in range(episode_number):
 
         print("{}th action".format(step))
         print("Goal Position",state[2:4])
-        if reward_selection == 1:
+        if config['reward']['function'] == 'step_minus_euclidean_square':
             print("Error: {0}, Current State: {1}".format(math.sqrt(-1*reward), state)) # for step_minus_euclidean_square
         else:
             print("Error: {0}, Current State: {1}".format(env.error, state)) # for other rewards
@@ -88,7 +80,7 @@ for _ in range(episode_number):
         print("--------------------------------------------------------------------------------")
         stop = time.time()
         env.time += (stop - start)
-        if reward_selection == 1:
+        if config['reward']['function'] == 'step_minus_euclidean_square':
             storage['error']['error_store'].append(math.sqrt(-1*reward)) # for step_minus_euclidean_square
         else:
             storage['error']['error_store'].append((env.error)) # for other rewards
@@ -165,5 +157,5 @@ plot_average_error(error_x = storage['error']['x'],
 # %% Plot Rewards
 plt.plot(storage['reward']['value'],linewidth=4)
 plt.xlabel("Step")
-plt.ylabel(f'Reward {reward_selection}')
+plt.ylabel(f"Reward {config['reward']['function']}")
 plt.show()
