@@ -3,7 +3,7 @@
 #SBATCH -N 1 # number of nodes
 #SBATCH -n 8
 #SBATCH --gres=gpu:01
-#SBATCH -w xeon-09
+#SBATCH -w xeon-e-v100-01
 #SBATCH --job-name=train
 #SBATCH --output=results_train.txt
 #SBATCH --error=errors.txt
